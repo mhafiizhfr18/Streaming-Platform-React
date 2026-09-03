@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="register-page">
+        <div class="box">
+            <div class="logo">
+                <img src="./Assets/Logo/Logo.png" alt="Logo">
+            </div>
+            <div class="title-form">
+                <h3>Daftar</h3>
+                <p>Selamat datang!</p>
+            </div>
+            <div class="form">
+                    <form action="">
+                        <div class="input-form">
+                            <label for="username">Username</label>
+                            <input type="text" name="username" id="username" placeholder="Masukkan username">
+                        </div>
+                        <div class="input-form">
+                            <label for="password">Kata Sandi</label>
+                            <input type="password" name="password" id="password" placeholder="Masukkan kata sandi">
+                        </div>
+                            <div class="input-form">
+                                <label for="confirm-password">Konfirmasi Kata Sandi</label>
+                                <input type="password" name="confirm-password" id="confirm-password" placeholder="Masukkan kembali kata sandi">
+                            </div>
+                        <div class="question">
+                            <p>Sudah punya akun? <a href="login-page.html">Masuk</a></p>
+                        </div>
+                        <div>
+                            <button class="login" type="submit" onclick="window.location.href='./home-page.html'">Daftar</button>
+                            <p class="choose">Atau</p>
+                            <button class="google-login" type="button">
+                                <img src="./Assets/Logo/Google.svg" alt="Google Logo">Daftar dengan Google
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    </div>
+</body>
+</html>
