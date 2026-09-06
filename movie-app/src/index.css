@@ -130,7 +130,7 @@ p {
 .input-form label {
     margin-top: 10px;
 }
-.form button {
+.login {
     padding: 14px 20px;
     border-radius: 24px;
     background: #3D4142;
@@ -143,12 +143,12 @@ p {
     margin-bottom: 10px;
     width: 100%;
 }
-.form button:hover {
+.login:hover {
     background: #2f3233;
     color: white;
     border: 1px solid #E7E3FC3B;
 }
-.form button.google-login {
+.login.google-login {
     display: flex;
     margin-top: 10px;
     margin-bottom: 10px;

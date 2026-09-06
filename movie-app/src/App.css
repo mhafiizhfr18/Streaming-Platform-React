@@ -18,6 +18,10 @@ body {
 ::-webkit-scrollbar-thumb:hover{
     background: #777;
 }
+
+.material-symbols-outlined.footer-arrow{
+    display:none;
+}
 /* NAV SECTION */
 
 .navbar {
@@ -246,7 +250,7 @@ body {
     flex-shrink: 0;
     transition: 0.3s;
 }
-.movie-card--potrait {
+.movie-card--portrait {
     position: relative;
     width: 234px;
     height: 365px;
@@ -256,12 +260,12 @@ body {
     transition: 0.3s;
 }
 .movie-card--landscape:hover, 
-.movie-card--potrait:hover{
+.movie-card--portrait:hover{
     transform: scale(1.05);
 }
 
 .movie-card--landscape img,
-.movie-card--potrait img{
+.movie-card--portrait img{
     width: 100%;
     height: 100%;
     cursor: pointer;
@@ -370,12 +374,7 @@ footer ul a{
     font-weight:700;
 }
 
-.material-symbols-outlined.footer-arrow{
-    display:none;
-}
-::-webkit-scrollbar-thumb{
-    display: none;
-}
+
 
 
 /* RESPONSIVE MEDIA */
