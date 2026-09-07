@@ -33,7 +33,7 @@ function FormLogin () {
   let navigate = useNavigate();
   function masuk(event) {
     event.preventDefault();
-    navigate("/homepage");
+    navigate("/home");
   }
   return (
     <div className="form">

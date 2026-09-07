@@ -27,7 +27,7 @@ const router = createBrowserRouter([
         Component: LoginPage
       },
       {
-        path: "homepage",
+        path: "home",
         Component: HomePage
       },
     ]
