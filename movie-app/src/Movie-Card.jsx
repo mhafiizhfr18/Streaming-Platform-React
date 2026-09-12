@@ -1,5 +1,5 @@
 import './App.css'
-import { imagesBanner, imagesCard } from './image.jsx'
+import { imagesBanner, imagesCard } from './Images.jsx'
 
 export function MovieCardLandscape (props) {
     return (
