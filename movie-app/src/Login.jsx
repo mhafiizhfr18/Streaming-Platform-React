@@ -1,6 +1,6 @@
 import './index.css'
-import Logo from './Assets/Logo/Logo.png'
-import GoogleLogo from './Assets/Logo/Google.svg'
+import Logo from './assets/Logo/Logo.png'
+import GoogleLogo from './assets/Logo/Google.svg'
 import InputField from './InputField.jsx'
 import { NavLink, useNavigate } from 'react-router'
 
