@@ -50,7 +50,7 @@
 
                 <div className="dropdown-menu">
 
-                    <NavLink to="/profile">
+                    <NavLink to="/login">
                         <span className="material-symbols-outlined">person</span>
                         Profil Saya
                     </NavLink>
