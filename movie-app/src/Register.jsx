@@ -2,7 +2,7 @@ import './index.css'
 import Logo from './assets/Logo/Logo.png'
 import GoogleLogo from './assets/Logo/Google.svg'
 import InputField from './InputField.jsx'
-import { NavLink } from 'react-router'
+import { NavLink, useNavigate } from 'react-router'
 
 
 export function RegisterPage () {
@@ -31,9 +31,14 @@ function TitleForm (props) {
 }
 
 function FormRegister () {
+  let navigate = useNavigate();
+  function daftar(event) {
+    event.preventDefault();
+    navigate("/login");
+  }
   return (
     <div className="form">
-        <form action="">
+        <form onSubmit={daftar}>
           <InputField 
             type="text"
             name="username" 
