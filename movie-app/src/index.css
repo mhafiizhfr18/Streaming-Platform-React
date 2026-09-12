@@ -163,7 +163,7 @@ p {
 }
 
 /* Responsive */
-@media (max-width: 360px) {
+@media (max-width: 440px) {
     * {
         font-size: 10px;
     }
