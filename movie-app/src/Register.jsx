@@ -35,8 +35,8 @@ function FormRegister () {
     <div className="form">
         <form action="">
           <InputField 
-            type="text" n
-            ame="username" 
+            type="text"
+            name="username" 
             label="Username" 
             placeholder="Masukkan username" />
           <InputField 
