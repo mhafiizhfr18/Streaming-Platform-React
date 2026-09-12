@@ -164,43 +164,36 @@ p {
 
 /* Responsive */
 @media (max-width: 440px) {
-    * {
-        font-size: 10px;
-    }
-    p {
-        font-size: 10px;
-    }
-    h3 {
-        font-size: 20px;
-    }
-    h4 {
-        font-size: 24px;
-    }
-    
-    a{
-        font-size: 10px;
-    }
 
+    a{
+        font-size: 14px;
+    }   
     .box {
-        width: 306px;
+        width: 90%;
         height: auto;
         padding: 24px;
         gap: 20px;
         align-items: center;
     }
     .logo {
-        width: 94px;
-        height: 24px;
+        width: 104px;
+        height: 34px;
         margin-top: 0;
     }
     .title-form h3 {
+        font-size: 28px;
+    }
+     .title-form p{
         font-size: 18px;
     }
+    .input-form label {
+        font-size: 16px;
+    }
     .input-form input::placeholder {
-    font-size: 10px;
+    font-size: 14px;
     }
     .form button {
-        font-size: 10px;
+        font-size: 16px;
     }
     .form img{
         width: 10px;
