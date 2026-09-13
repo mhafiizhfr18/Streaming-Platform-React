@@ -1,7 +1,7 @@
 import './App.css'
 // 1. Import all images from your folder
-const bannerModules = import.meta.glob ('./assets/banner/*.{png,jpg,jpeg,svg}', { eager: true });
-const cardModules = import.meta.glob ('./assets/movie/*.{png,jpg,jpeg,svg}', { eager: true });
+const bannerModules = import.meta.glob ('./assets/Banner/*.{png,jpg,jpeg,svg}', { eager: true });
+const cardModules = import.meta.glob ('./assets/Movie/*.{png,jpg,jpeg,svg}', { eager: true });
 
 // 2. Create a clean object mapping filenames to their URLs
 function formatImagesObject(modules) {
