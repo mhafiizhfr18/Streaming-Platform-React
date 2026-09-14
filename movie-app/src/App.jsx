@@ -1,12 +1,12 @@
 import './App.css'
 import './index.css'
 
-import { LoginPage } from './Login.jsx'
+import { RegisterPage } from './Register.jsx'
 
 
 function App () {
   return (
-    <LoginPage />
+    <RegisterPage />
   )
 }
 
