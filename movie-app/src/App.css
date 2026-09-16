@@ -120,7 +120,7 @@ body {
 /* BANNER SECTION */
 
 .hero {
-  background-image: url('./assets/banner/avatar.png');
+  background-image: url('./assets/Banner/avatar.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
