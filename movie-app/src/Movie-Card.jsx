@@ -11,7 +11,7 @@ export function MovieCardLandscape (props) {
                 <span>★ {props.rating}/5</span>
             </div>
             <div> 
-                <MovieHover folder={props.folder} id={props.id} />
+                <MovieHover folder={props.folder} id={props.id} age={props.age} progress={props.progress} duration={props.duration} episode={props.episode} genre1={props.genre1} genre2={props.genre2} genre3={props.genre3}/>
             </div>
         </div>
     )
@@ -22,7 +22,7 @@ export function MovieCardPortrait (props) {
             <img src={props.folder === 'imagesBanner' ? imagesBanner[`${props.id}.png`] : imagesCard[`${props.id}.png`]} alt=""></img>
             
             <div>
-                <MovieHover folder={props.folder} id={props.id} />
+                <MovieHover folder={props.folder} id={props.id} age={props.age} progress={props.progress} duration={props.duration} episode={props.episode} genre1={props.genre1} genre2={props.genre2} genre3={props.genre3}/>
             </div>
         </div>
         
@@ -33,7 +33,7 @@ function MovieHover(props) {
     return (
         <div className="movie-hover">
             <div className="hover-image">
-                <img src={props.folder === 'imagesBanner' ? imagesBanner[`${props.id}.png`] : imagesBanner[`${props.id}.png`]} alt=""></img>
+                <img src={props.folder === 'imagesBanner' ? imagesBanner[`${props.id}.png`] : imagesCard[`${props.id}.png`]} alt=""></img>
             </div>
             <div className="hover-buttons">
                 <div className='hover-buttons-left'>
@@ -42,16 +42,36 @@ function MovieHover(props) {
                 </div>
                 <button className="material-symbols-outlined">keyboard_arrow_down</button>
             </div>
+
+            {props.age !== undefined && props.episode !== undefined &&(
             <div className="hover-info">
-                <span className='hover-age'>13+</span>
-                <span>16 Episode</span>
+                {props.age !== undefined && (
+                <span className='hover-age'>{props.age}</span>
+                )}
+                {props.episode !== undefined && (
+                <span>{props.episode}</span>
+                )}
             </div>
+            )}
+            
+            {props.progress !== undefined && (
+                <div className="watch-progress">
+                    <div className="watch-progress-track">
+                        <div className="watch-progress-bar" 
+                        style={{ width: `${props.progress}%` }}></div>
+                    </div>
+
+                    <span className="duration">{props.duration}</span>
+                </div>
+
+            )}
+
             <div className="hover-genre">
-                <span>Misteri</span>
+                <span>{props.genre1}</span>
                 <span>•</span>
-                <span>Kriminal</span>
+                <span>{props.genre2}</span>
                 <span>•</span>
-                <span>Fantasi</span>
+                <span>{props.genre3}</span>
             </div>
         </div>
     )

@@ -1,5 +1,5 @@
 import './App.css'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 import Logo1 from './assets/Logo/Logo.svg'
 import Logo2 from './assets/Logo/Logo-icon.svg'
@@ -23,7 +23,46 @@ return (
 )
 }
 
-function Navbar () {
+export function MyList () {
+return (
+<>
+<Navbar />
+<MovieMyList />
+<Footer />
+</>
+)
+}
+export function SeriesPage () {
+return (
+<>
+<Navbar />
+<MovieBanner />
+<SeriesChill />
+<MovieChill />
+<MovieContinue />
+<MovieTopRated />
+<MovieTrending />
+<MovieNewRelease />
+<Footer />
+</>
+)
+}
+export function MoviesPage () {
+return (
+<>
+<Navbar />
+<MovieBanner />
+<MovieChill />
+<MovieContinue />
+<MovieTopRated />
+<MovieTrending />
+<MovieNewRelease />
+<Footer />
+</>
+)
+}
+
+export function Navbar () {
 return (
 <div className="navbar">
 
@@ -34,9 +73,9 @@ return (
         </NavLink>
 
         <ul className="nav-menu">
-            <li><NavLink to="/home">Beranda</NavLink></li>
+            <li><NavLink to="/series">Series</NavLink></li>
             <li><NavLink to="/movies">Film</NavLink></li>
-            <li><NavLink to="/watchlist">Daftar Saya</NavLink></li> 
+            <li><NavLink to="/myList">Daftar Saya</NavLink></li> 
         </ul>
     </div>
 
@@ -92,46 +131,79 @@ return (
 </div>
 )
 }
+function MovieRow({ children }) {
+    const scrollRef = useRef(null)
+
+    function scrollLeft() {
+        scrollRef.current.scrollBy({
+            left: -500,
+            behavior: 'smooth'
+        })
+    }
+
+    function scrollRight() {
+        scrollRef.current.scrollBy({
+            left: 500,
+            behavior: 'smooth'
+        })
+    }
+
+    return (
+        <div className="movie-wrapper">
+
+            <button
+                className="css-arrow left material-symbols-outlined"
+                onClick={scrollLeft}
+            >
+                arrow_back_ios
+            </button>
+
+            <div className="movie-scroll" ref={scrollRef}>
+                <div className="movie-card">
+                    {children}
+                </div>
+            </div>
+
+            <button
+                className="css-arrow right material-symbols-outlined"
+                onClick={scrollRight}
+            >
+                arrow_forward_ios
+            </button>
+
+        </div>
+    )
+}
+
 function MovieContinue () {
 return (
     <section className="movie-section">
         <h3>Melanjutkan Tonton Film</h3>
-        <div className="movie-wrapper">  
-            <button className="css-arrow left material-symbols-outlined">arrow_back_ios</button>
-        
-            <div className="movie-card">
-                <MovieCardLandscape folder="imagesBanner" id="dontlookup" title="Don't Look Up" rating="4.5" />
-                <MovieCardLandscape folder="imagesBanner" id="shazam" title="Shazam" rating="4.2" />
-                <MovieCardLandscape folder="imagesBanner" id="avatar" title="Avatar" rating="4.8" />
-                <MovieCardLandscape folder="imagesBanner" id="fastx" title="Fast Furious X" rating="4.7" />
-                <MovieCardLandscape folder="imagesBanner" id="bluelock" title="Blue Lock" rating="4.9" />
-                <MovieCardLandscape folder="imagesBanner" id="thelittlemermaid" title="Little Mermaid" rating="4.6" />
-            </div>
-            
-            <button className="css-arrow right material-symbols-outlined">arrow_forward_ios</button>
-        </div>
+        <MovieRow>
+            <MovieCardLandscape folder="imagesBanner" id="dontlookup" title="Don't Look Up" rating="4.5" episode="" progress={60} duration="2j 18m" genre1="Dark Comedy" genre2="Fantasy" genre3="Drama" />
+            <MovieCardLandscape folder="imagesBanner" id="allofusdead" title="All of Us are Dead" progress={30} duration="2j 33m" rating="4.9" episode="Episode 1" genre1="Dark Comedy" genre2="Fantasy" genre3="Drama" />
+            <MovieCardLandscape folder="imagesBanner" id="shazam" title="Shazam" rating="4.2" progress={55} duration="2j 12m" genre1="Action" genre2="Comedy" genre3="Pahlawan Super" />
+            <MovieCardLandscape folder="imagesBanner" id="avatar" title="Avatar" rating="4.8" progress={29} duration="2j 41m" genre1="Sci-Fi" genre2="Action" genre3="Adventure" />
+            <MovieCardLandscape folder="imagesBanner" id="fastx" title="Fast Furious X" rating="4.7" progress={29} duration="2j 21m" genre1="Aksi" genre2="Petualangan" genre3="Kriminal" />
+            <MovieCardLandscape folder="imagesBanner" id="thelittlemermaid" title="Little Mermaid" rating="4.6" progress={29} duration="2j 15m" genre1="Musikal" genre2="Fantasi" genre3="Keluarga" />
+        </MovieRow>
     </section>
-)
+)  
 }
 function MovieTopRated () {
 return (
     <section className="movie-section">
         <h3>Top Rating Film dan Series Hari Ini</h3>
-        <div className="movie-wrapper">  
-            <button className="css-arrow left material-symbols-outlined">arrow_back_ios</button>
-        
-            <div className="movie-card">
-                <MovieCardPortrait folder="imagesCard" id="thetomorrowwar" />
-                <MovieCardPortrait folder="imagesCard" id="thebatman" />
-                <MovieCardPortrait folder="imagesCard" id="amancalledotto" />
-                <MovieCardPortrait folder="imagesCard" id="bighero6" />
-                <MovieCardPortrait folder="imagesCard" id="suzume" />
-                <MovieCardPortrait folder="imagesCard" id="antmanwasp" />
-                <MovieCardPortrait folder="imagesCard" id="myheroacademia" />
-            </div>
-            
-            <button className="css-arrow right material-symbols-outlined">arrow_forward_ios</button>
-        </div>
+        <MovieRow>
+            <MovieCardPortrait folder="imagesCard" id="thetomorrowwar" age="13+" episode="2j 18m" genre1="Aksi" genre2="Fiksi Ilmiah" genre3="Militer" />
+            <MovieCardPortrait folder="imagesCard" id="thebatman" age="13+" episode="2j 47m" genre1="Aksi" genre2="Kejahatan" genre3="Drama" />
+            <MovieCardPortrait folder="imagesCard" id="amancalledotto" age="13+" episode="2j 6m" genre1="Drama" genre2="Komedi" genre3="Psikologikal" />
+            <MovieCardPortrait folder="imagesCard" id="bighero6" age="13+" episode="1j 42m" genre1="Animasi" genre2="Aksi" genre3="Keluarga" />
+            <MovieCardPortrait folder="imagesCard" id="suzume" age="10+" episode="2j 2m" genre1="Petualangan" genre2="Animasi" genre3="Fantasi" />
+            <MovieCardPortrait folder="imagesCard" id="antmanwasp" age="13+" episode="2j 4m" genre1="Petualangan" genre2="Pahlawan Super" genre3="Aksi" />
+            <MovieCardPortrait folder="imagesCard" id="myheroacademia" age="13+" episode="8 Musim" genre1="Aksi" genre2="Fantasi" genre3="Pahlawan Super" />
+        </MovieRow>
+
     </section>
 )
 }
@@ -143,13 +215,13 @@ return (
             <button className="css-arrow left material-symbols-outlined">arrow_back_ios</button>
         
             <div className="movie-card">
-                <MovieCardPortrait folder="imagesCard" id="doctorstrange" />
-                <MovieCardPortrait folder="imagesCard" id="blackadam" />
-                <MovieCardPortrait folder="imagesCard" id="tedlasso" />
-                <MovieCardPortrait folder="imagesCard" id="spiderman" />
-                <MovieCardPortrait folder="imagesCard" id="jurassicworld" />
-                <MovieCardPortrait folder="imagesCard" id="baymax" />
-                <MovieCardPortrait folder="imagesCard" id="myheroacademia" />
+                <MovieCardPortrait folder="imagesCard" id="doctorstrange" age="13+" episode="2j 6m" genre1="Aksi" genre2="Petualangan" genre3="Horor" />
+                <MovieCardPortrait folder="imagesCard" id="blackadam" age="13+" episode="2j 5m" genre1="Petualangan" genre2="Fantasi" genre3="Aksi" />
+                <MovieCardPortrait folder="imagesCard" id="tedlasso" age="17+" episode="3 Musim" genre1="Komedi" genre2="Drama" genre3="Olahraga" />
+                <MovieCardPortrait folder="imagesCard" id="spiderman" age="SU" episode="2j 20m" genre1="Animasi" genre2="Pahlawan Super" genre3="Aksi" />
+                <MovieCardPortrait folder="imagesCard" id="jurassicworld" age="13+" episode="2j 26m" genre1="Fiksi Ilmiah" genre2="Petualangan" genre3="Aksi" />
+                <MovieCardPortrait folder="imagesCard" id="baymax" age="SU" episode="1j 42m" genre1="Petualangan" genre2="Fiksi Sains" genre3="Aksi" />
+                <MovieCardPortrait folder="imagesCard" id="myheroacademia" age="13+" episode="8 Musim" genre1="Aksi" genre2="Fantasi" genre3="Pahlawan Super" />
             </div>
             
             <button className="css-arrow right material-symbols-outlined">arrow_forward_ios</button>
@@ -165,13 +237,13 @@ return (
             <button className="css-arrow left material-symbols-outlined">arrow_back_ios</button>
         
             <div className="movie-card">
-                <MovieCardPortrait folder="imagesCard" id="myheroacademia" />
-                <MovieCardPortrait folder="imagesCard" id="sonic2" />
-                <MovieCardPortrait folder="imagesCard" id="guardianofthegalaxy" />
-                <MovieCardPortrait folder="imagesCard" id="spiderman" />
-                <MovieCardPortrait folder="imagesCard" id="thelittlemermaid" />
-                <MovieCardPortrait folder="imagesCard" id="amancalledotto" />
-                <MovieCardPortrait folder="imagesCard" id="thetomorrowwar" />
+                <MovieCardPortrait folder="imagesCard" id="myheroacademia" age="13+" episode="8 Musim" genre1="Aksi" genre2="Fantasi" genre3="Pahlawan Super" />
+                <MovieCardPortrait folder="imagesCard" id="sonic2" age="13+" episode="2j 2m" genre1="Petualangan" genre2="Komedi" genre3="Aksi" />
+                <MovieCardPortrait folder="imagesCard" id="guardianofthegalaxy" age="13+" episode="2j 30m" genre1="Petualangan" genre2="Fiksi Sains" genre3="Aksi" />
+                <MovieCardPortrait folder="imagesCard" id="spiderman" age="SU" episode="2j 20m" genre1="Animasi" genre2="Pahlawan Super" genre3="Aksi" />
+                <MovieCardPortrait folder="imagesCard" id="thelittlemermaid" age="SU" episode="2j 15m" genre1="Musikal" genre2="Fantasi" genre3="Keluarga" />
+                <MovieCardPortrait folder="imagesCard" id="amancalledotto" age="13+" episode="2j 6m" genre1="Drama" genre2="Komedi" genre3="Psikologikal" />
+                <MovieCardPortrait folder="imagesCard" id="thetomorrowwar" age="13+" episode="2j 18m" genre1="Aksi" genre2="Fiksi Ilmiah" genre3="Militer" />
             </div>
             
             <button className="css-arrow right material-symbols-outlined">arrow_forward_ios</button>
@@ -179,7 +251,60 @@ return (
     </section>
 )
 }
-function Footer () {
+
+function MovieChill () {
+return (
+    <section className="movie-section">
+        <h3>Film Persembahan Chill</h3>
+        <MovieRow>
+            <MovieCardLandscape folder="imagesBanner" id="dontlookup" title="Don't Look Up" rating="4.5" episode="" progress={60} duration="2j 18m" genre1="Dark Comedy" genre2="Fantasy" genre3="Drama" />
+            <MovieCardLandscape folder="imagesBanner" id="allofusdead" title="All of Us are Dead" progress={30} duration="2j 33m" rating="4.9" episode="Episode 1" genre1="Dark Comedy" genre2="Fantasy" genre3="Drama" />
+            <MovieCardLandscape folder="imagesBanner" id="shazam" title="Shazam" rating="4.2" progress={55} duration="2j 12m" genre1="Action" genre2="Comedy" genre3="Pahlawan Super" />
+            <MovieCardLandscape folder="imagesBanner" id="avatar" title="Avatar" rating="4.8" progress={29} duration="2j 41m" genre1="Sci-Fi" genre2="Action" genre3="Adventure" />
+            <MovieCardLandscape folder="imagesBanner" id="fastx" title="Fast Furious X" rating="4.7" progress={29} duration="2j 21m" genre1="Aksi" genre2="Petualangan" genre3="Kriminal" />
+            <MovieCardLandscape folder="imagesBanner" id="thelittlemermaid" title="Little Mermaid" rating="4.6" progress={29} duration="2j 15m" genre1="Musikal" genre2="Fantasi" genre3="Keluarga" />
+        </MovieRow>
+    </section>
+)
+}
+function SeriesChill () {
+return (
+    <section className="movie-section">
+        <h3>Series Persembahan Chill</h3>
+        <MovieRow>
+            <MovieCardLandscape folder="imagesBanner" id="dontlookup" title="Don't Look Up" rating="4.5" episode="" progress={60} duration="2j 18m" genre1="Dark Comedy" genre2="Fantasy" genre3="Drama" />
+            <MovieCardLandscape folder="imagesBanner" id="allofusdead" title="All of Us are Dead" progress={30} duration="2j 33m" rating="4.9" episode="Episode 1" genre1="Dark Comedy" genre2="Fantasy" genre3="Drama" />
+            <MovieCardLandscape folder="imagesBanner" id="shazam" title="Shazam" rating="4.2" progress={55} duration="2j 12m" genre1="Action" genre2="Comedy" genre3="Pahlawan Super" />
+            <MovieCardLandscape folder="imagesBanner" id="avatar" title="Avatar" rating="4.8" progress={29} duration="2j 41m" genre1="Sci-Fi" genre2="Action" genre3="Adventure" />
+            <MovieCardLandscape folder="imagesBanner" id="fastx" title="Fast Furious X" rating="4.7" progress={29} duration="2j 21m" genre1="Aksi" genre2="Petualangan" genre3="Kriminal" />
+            <MovieCardLandscape folder="imagesBanner" id="thelittlemermaid" title="Little Mermaid" rating="4.6" progress={29} duration="2j 15m" genre1="Musikal" genre2="Fantasi" genre3="Keluarga" />
+        </MovieRow>
+    </section>
+)
+}
+
+function MovieMyList () {
+return (
+    <section className="movie-section">
+        <h3>Daftar Saya</h3>
+        <div className="movie-list">  
+        
+            <div className="movie-card">
+                <MovieCardPortrait folder="imagesCard" id="myheroacademia" age="13+" episode="8 Musim" genre1="Aksi" genre2="Fantasi" genre3="Pahlawan Super" />
+                <MovieCardPortrait folder="imagesCard" id="sonic2" age="13+" episode="2j 2m" genre1="Petualangan" genre2="Komedi" genre3="Aksi" />
+                <MovieCardPortrait folder="imagesCard" id="guardianofthegalaxy" age="13+" episode="2j 30m" genre1="Petualangan" genre2="Fiksi Sains" genre3="Aksi" />
+                <MovieCardPortrait folder="imagesCard" id="spiderman" age="SU" episode="2j 20m" genre1="Animasi" genre2="Pahlawan Super" genre3="Aksi" />
+                <MovieCardPortrait folder="imagesCard" id="thelittlemermaid" age="SU" episode="2j 15m" genre1="Musikal" genre2="Fantasi" genre3="Keluarga" />
+                <MovieCardPortrait folder="imagesCard" id="amancalledotto" age="13+" episode="2j 6m" genre1="Drama" genre2="Komedi" genre3="Psikologikal" />
+                <MovieCardPortrait folder="imagesCard" id="thetomorrowwar" age="13+" episode="2j 18m" genre1="Aksi" genre2="Fiksi Ilmiah" genre3="Militer" />
+            </div>
+            
+        </div>
+    </section>
+)
+}
+
+export function Footer () {
 const [genreOpen, setGenreOpen] = useState(false)
 const [helpOpen, setHelpOpen] = useState(false)
 
