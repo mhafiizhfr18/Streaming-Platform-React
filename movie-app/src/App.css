@@ -226,25 +226,38 @@ body {
 }
 .movie-list{
   box-sizing: border-box;
-  display: flex;
+  width: 100%;
 }
-.movie-wrapper{
-  position: relative;  
+.movie-list .movie-card{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  width: 100%;
 }
-.movie-scroll{
+.movie-list .movie-card--portrait {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 234 / 365;
+}
+.movie-wrapper {
+  position: relative;
+  overflow: visible;
+}
+.movie-scroll {
   overflow-x: auto;
-  overflow-y: visible;
+  overflow-y: hidden;
   scroll-behavior: smooth;
   scrollbar-width: none;
 }
 .movie-scroll::-webkit-scrollbar {
   display: none;
 }
+
 .movie-card {
   display: flex;
   gap: 16px;
   align-items: flex-start;
-  scroll-behavior: smooth;
+  width: max-content;
 }
 .movie-card::-webkit-scrollbar{
   display: none;
@@ -257,6 +270,7 @@ body {
   border-radius: 8px;
   flex-shrink: 0;
   transition: transform 0.3s;
+  overflow: hidden;
 }
 .movie-card--portrait {
   position: relative;
@@ -265,6 +279,7 @@ body {
   border-radius: 8px;
   flex-shrink: 0;
   transition: transform 0.3s;
+  overflow: hidden;
 }
 
 .movie-card--landscape img,
@@ -306,26 +321,37 @@ body {
 
 .movie-hover{
   position: absolute;
-  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
   align-items: center;
   justify-content: center;
-  background: #1F2123;
-  border-radius: 16px;
-  padding-bottom: 16px;
+  border-radius: 0 0 8px 8px;
+  padding: 45px 0 16px;
   display: none;
-  box-shadow: 0 10px 30px rgba(0,0,0,.5);
   z-index: 2;
   font-size: 13px;
+  background: linear-gradient(
+    to bottom,
+    rgba(31, 33, 35, 0),
+    rgba(31, 33, 35, 0.85) 30%,
+    #1F2123 55%
+  );
 }
 
 .movie-card--landscape:hover .movie-hover,
-.movie-card--portrait:hover .movie-hover{
-  display:block;
+.movie-card--portrait:hover .movie-hover {
+  display: block;
 }
-
-.movie-card--landscape:hover,
+.movie-card--landscape:hover{
+  transform:scale(1.05) translateY(-3px);
+  z-index: 2;
+}
 .movie-card--portrait:hover{
-  transform:scale(1.1);
+  transform:scale(1.05) translateY(-9px);
+  z-index: 2;
 }
 
 .hover-buttons {
@@ -379,8 +405,9 @@ body {
 }
 .hover-genre{
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  gap: 15px;
+  gap: 6px 10px;
   margin: 0 20px;
 }
 
@@ -546,7 +573,14 @@ body {
       width: 95px;
       height: 145px;
   }
-  
+  .movie-list .movie-card {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+  .movie-list .movie-card--portrait {
+    width: 100%;
+}
   .copyright{
       color:#C1C2C4;
   }
