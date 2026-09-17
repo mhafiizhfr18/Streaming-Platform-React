@@ -47,7 +47,8 @@ export function SeriesPage() {
         banner="myheroacademia.png"
         title="My Hero Academia"
         desription="Society is devastated by recent battles, and a mysterious, massive fortress suddenly appears. 
-      A man bearing a striking resemblance to 'All Might'—dubbed Dark Might-emerges, claiming to be the new symbol of a twisted order, forcing Class 1-A into action."
+        A man bearing a striking resemblance to 'All Might'—dubbed Dark Might-emerges, claiming to be the new symbol of a twisted order, forcing Class 1-A into action."
+        showGenre
       />
       <SeriesContinue />
       <MovieChill type="Series" />
@@ -66,6 +67,7 @@ export function MoviesPage() {
         banner="thelittlemermaid.png"
         title="The Little Mermaid"
         desription="“The Little Mermaid” is the beloved story of Ariel, a beautiful and spirited young mermaid with a thirst for adventure. The youngest of King Triton’s daughters and the most defiant, Ariel longs to find out more about the world beyond the sea and, while visiting the surface, falls for the dashing Prince Eric."
+        showGenre
       />
       <MovieContinue />
       <MovieChill type="Film" />
@@ -140,13 +142,13 @@ export function Navbar() {
     </div>
   );
 }
-function MovieBanner({ banner, title, desription }) {
+function MovieBanner({ banner, title, desription, showGenre }) {
   return (
     <div
       className="hero"
-      style={{ backgroundImage: `url(${imagesBanner[banner]}` }}
+      style={{ backgroundImage: `url(${imagesBanner[banner]})` }}
     >
-      <BannerHover />
+      {showGenre && <BannerHover />}
 
       <div className="hero-content">
         <div className="hero-left">
