@@ -14,9 +14,9 @@ export function HomePage() {
     <>
       <Navbar />
       <MovieBanner />
-      <MovieContinue type="Film"/>
-      <MovieTopRated />
-      <MovieTrending />
+      <MovieContinue type="Film" />
+      <MovieTopRated type="Film dan Series" />
+      <MovieTrending type="Film" />
       <MovieNewRelease />
       <Footer />
     </>
@@ -37,10 +37,10 @@ export function SeriesPage() {
     <>
       <Navbar />
       <MovieBanner />
-      <MovieContinue type="Series" />
+      <SeriesContinue />
       <SeriesChill />
-      <MovieTopRated />
-      <MovieTrending />
+      <MovieTopRated type="Series" />
+      <MovieTrending type="Series" />
       <MovieNewRelease />
       <Footer />
     </>
@@ -51,10 +51,10 @@ export function MoviesPage() {
     <>
       <Navbar />
       <MovieBanner />
-      <MovieContinue type="Film" />
+      <MovieContinue />
       <MovieChill />
-      <MovieTopRated />
-      <MovieTrending />
+      <MovieTopRated type="Film" />
+      <MovieTrending type="Film" />
       <MovieNewRelease />
       <Footer />
     </>
@@ -197,10 +197,10 @@ function MovieRow({ children }) {
   );
 }
 
-function MovieContinue(props) {
+function MovieContinue() {
   return (
     <section className="movie-section">
-      <h3>Melanjutkan Tonton {props.type}</h3>
+      <h3>Melanjutkan Tonton Film</h3>
       <MovieRow>
         <MovieCardLandscape
           folder="imagesBanner"
@@ -218,6 +218,7 @@ function MovieContinue(props) {
           folder="imagesBanner"
           id="allofusdead"
           title="All of Us are Dead"
+          new="Episode Baru"
           progress={30}
           duration="2j 33m"
           rating="4.9"
@@ -283,11 +284,21 @@ function MovieContinue(props) {
     </section>
   );
 }
-function MovieTopRated() {
+function MovieTopRated(props) {
   return (
     <section className="movie-section">
-      <h3>Top Rating Film dan Series Hari Ini</h3>
+      <h3>Top Rating {props.type} Hari Ini</h3>
       <MovieRow>
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="suzume"
+          new="New Episode"
+          age="10+"
+          episode="2j 2m"
+          genre1="Petualangan"
+          genre2="Animasi"
+          genre3="Fantasi"
+        />
         <MovieCardPortrait
           folder="imagesCard"
           id="thetomorrowwar"
@@ -335,15 +346,6 @@ function MovieTopRated() {
         />
         <MovieCardPortrait
           folder="imagesCard"
-          id="suzume"
-          age="10+"
-          episode="2j 2m"
-          genre1="Petualangan"
-          genre2="Animasi"
-          genre3="Fantasi"
-        />
-        <MovieCardPortrait
-          folder="imagesCard"
           id="antmanwasp"
           age="13+"
           episode="2j 4m"
@@ -364,85 +366,92 @@ function MovieTopRated() {
     </section>
   );
 }
-function MovieTrending() {
+function MovieTrending(props) {
   return (
     <section className="movie-section">
-      <h3>Film Trending</h3>
+      <h3>{props.type} Trending</h3>
       <MovieRow>
-        <div className="movie-card">
-          <MovieCardPortrait
-            folder="imagesCard"
-            id="doctorstrange"
-            age="13+"
-            episode="2j 6m"
-            genre1="Aksi"
-            genre2="Petualangan"
-            genre3="Horor"
-          />
-          <MovieCardPortrait
-            folder="imagesCard"
-            id="blackadam"
-            age="13+"
-            episode="2j 5m"
-            genre1="Petualangan"
-            genre2="Fantasi"
-            genre3="Aksi"
-          />
-          <MovieCardPortrait
-            folder="imagesCard"
-            id="tedlasso"
-            age="17+"
-            episode="3 Musim"
-            genre1="Komedi"
-            genre2="Drama"
-            genre3="Olahraga"
-          />
-          <MovieCardPortrait
-            folder="imagesCard"
-            id="spiderman"
-            age="SU"
-            episode="2j 20m"
-            genre1="Animasi"
-            genre2="Pahlawan Super"
-            genre3="Aksi"
-          />
-          <MovieCardPortrait
-            folder="imagesCard"
-            id="jurassicworld"
-            age="13+"
-            episode="2j 26m"
-            genre1="Fiksi Ilmiah"
-            genre2="Petualangan"
-            genre3="Aksi"
-          />
-          <MovieCardPortrait
-            folder="imagesCard"
-            id="baymax"
-            age="SU"
-            episode="1j 42m"
-            genre1="Petualangan"
-            genre2="Fiksi Sains"
-            genre3="Aksi"
-          />
-          <MovieCardPortrait
-            folder="imagesCard"
-            id="myheroacademia"
-            age="13+"
-            episode="8 Musim"
-            genre1="Aksi"
-            genre2="Fantasi"
-            genre3="Pahlawan Super"
-          />
-          <MovieCardPortrait
-            folder="imagesCard"
-            id="thelittlemermaid"
-            age="SU"
-            episode="2j 15m"
-            genre1="Musikal"
-            genre2="Fantasi"
-            genre3="Keluarga"
-          />
-        </div>
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="doctorstrange"
+          top="Top 10"
+          age="13+"
+          episode="2j 6m"
+          genre1="Aksi"
+          genre2="Petualangan"
+          genre3="Horor"
+        />
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="blackadam"
+          top="Top 10"
+          age="13+"
+          episode="2j 5m"
+          genre1="Petualangan"
+          genre2="Fantasi"
+          genre3="Aksi"
+        />
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="tedlasso"
+          top="Top 10"
+          new="Episode Baru"
+          age="17+"
+          episode="3 Musim"
+          genre1="Komedi"
+          genre2="Drama"
+          genre3="Olahraga"
+        />
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="spiderman"
+          top="Top 10"
+          age="SU"
+          episode="2j 20m"
+          genre1="Animasi"
+          genre2="Pahlawan Super"
+          genre3="Aksi"
+        />
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="jurassicworld"
+          top="Top 10"
+          age="13+"
+          episode="2j 26m"
+          genre1="Fiksi Ilmiah"
+          genre2="Petualangan"
+          genre3="Aksi"
+        />
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="baymax"
+          top="Top 10"
+          age="SU"
+          episode="1j 42m"
+          genre1="Petualangan"
+          genre2="Fiksi Sains"
+          genre3="Aksi"
+        />
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="myheroacademia"
+          top="Top 10"
+          age="13+"
+          episode="8 Musim"
+          genre1="Aksi"
+          genre2="Fantasi"
+          genre3="Pahlawan Super"
+        />
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="thelittlemermaid"
+          top="Top 10"
+          age="SU"
+          episode="2j 15m"
+          genre1="Musikal"
+          genre2="Fantasi"
+          genre3="Keluarga"
+        />
       </MovieRow>
     </section>
   );
@@ -450,84 +459,87 @@ function MovieTrending() {
 function MovieNewRelease() {
   return (
     <section className="movie-section">
-      <h3>Film Rilis Baru</h3>
+      <h3>Rilis Baru</h3>
 
       <MovieRow>
-        <div className="movie-card">
-          <MovieCardPortrait
-            folder="imagesCard"
-            id="myheroacademia"
-            age="13+"
-            episode="8 Musim"
-            genre1="Aksi"
-            genre2="Fantasi"
-            genre3="Pahlawan Super"
-          />
-          <MovieCardPortrait
-            folder="imagesCard"
-            id="sonic2"
-            age="13+"
-            episode="2j 2m"
-            genre1="Petualangan"
-            genre2="Komedi"
-            genre3="Aksi"
-          />
-          <MovieCardPortrait
-            folder="imagesCard"
-            id="guardianofthegalaxy"
-            age="13+"
-            episode="2j 30m"
-            genre1="Petualangan"
-            genre2="Fiksi Sains"
-            genre3="Aksi"
-          />
-          <MovieCardPortrait
-            folder="imagesCard"
-            id="spiderman"
-            age="SU"
-            episode="2j 20m"
-            genre1="Animasi"
-            genre2="Pahlawan Super"
-            genre3="Aksi"
-          />
-          <MovieCardPortrait
-            folder="imagesCard"
-            id="thelittlemermaid"
-            age="SU"
-            episode="2j 15m"
-            genre1="Musikal"
-            genre2="Fantasi"
-            genre3="Keluarga"
-          />
-          <MovieCardPortrait
-            folder="imagesCard"
-            id="amancalledotto"
-            age="13+"
-            episode="2j 6m"
-            genre1="Drama"
-            genre2="Komedi"
-            genre3="Psikologikal"
-          />
-          <MovieCardPortrait
-            folder="imagesCard"
-            id="doctorstrange"
-            age="13+"
-            episode="2j 6m"
-            genre1="Aksi"
-            genre2="Petualangan"
-            genre3="Horor"
-          />
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="myheroacademia"
+          top="Top 10"
+          age="13+"
+          episode="8 Musim"
+          genre1="Aksi"
+          genre2="Fantasi"
+          genre3="Pahlawan Super"
+        />
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="sonic2"
+          age="13+"
+          episode="2j 2m"
+          genre1="Petualangan"
+          genre2="Komedi"
+          genre3="Aksi"
+        />
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="guardianofthegalaxy"
+          age="13+"
+          episode="2j 30m"
+          genre1="Petualangan"
+          genre2="Fiksi Sains"
+          genre3="Aksi"
+        />
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="spiderman"
+          top="Top 10"
+          age="SU"
+          episode="2j 20m"
+          genre1="Animasi"
+          genre2="Pahlawan Super"
+          genre3="Aksi"
+        />
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="thelittlemermaid"
+          premium="Premium"
+          top="Top 10"
+          age="SU"
+          episode="2j 15m"
+          genre1="Musikal"
+          genre2="Fantasi"
+          genre3="Keluarga"
+        />
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="amancalledotto"
+          age="13+"
+          episode="2j 6m"
+          genre1="Drama"
+          genre2="Komedi"
+          genre3="Psikologikal"
+        />
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="doctorstrange"
+          top="Top 10"
+          age="13+"
+          episode="2j 6m"
+          genre1="Aksi"
+          genre2="Petualangan"
+          genre3="Horor"
+        />
 
-          <MovieCardPortrait
-            folder="imagesCard"
-            id="thetomorrowwar"
-            age="13+"
-            episode="2j 18m"
-            genre1="Aksi"
-            genre2="Fiksi Ilmiah"
-            genre3="Militer"
-          />
-        </div>
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="thetomorrowwar"
+          age="13+"
+          episode="2j 18m"
+          genre1="Aksi"
+          genre2="Fiksi Ilmiah"
+          genre3="Militer"
+        />
       </MovieRow>
     </section>
   );
@@ -541,71 +553,150 @@ function MovieChill() {
       <MovieRow>
         <MovieCardPortrait
           folder="imagesCard"
-          id="dontlookup"
-          title="Don't Look Up"
-          rating="4.5"
-          episode=""
-          progress={60}
-          duration="2j 18m"
-          genre1="Dark Comedy"
-          genre2="Fantasy"
-          genre3="Drama"
+          id="myheroacademia"
+          age="13+"
+          episode="8 Musim"
+          genre1="Aksi"
+          genre2="Fantasi"
+          genre3="Pahlawan Super"
         />
         <MovieCardPortrait
           folder="imagesCard"
+          id="sonic2"
+          age="13+"
+          episode="2j 2m"
+          genre1="Petualangan"
+          genre2="Komedi"
+          genre3="Aksi"
+        />
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="guardianofthegalaxy"
+          age="13+"
+          episode="2j 30m"
+          genre1="Petualangan"
+          genre2="Fiksi Sains"
+          genre3="Aksi"
+        />
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="spiderman"
+          age="SU"
+          episode="2j 20m"
+          genre1="Animasi"
+          genre2="Pahlawan Super"
+          genre3="Aksi"
+        />
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="thelittlemermaid"
+          age="SU"
+          episode="2j 15m"
+          genre1="Musikal"
+          genre2="Fantasi"
+          genre3="Keluarga"
+        />
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="amancalledotto"
+          age="13+"
+          episode="2j 6m"
+          genre1="Drama"
+          genre2="Komedi"
+          genre3="Psikologikal"
+        />
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="doctorstrange"
+          age="13+"
+          episode="2j 6m"
+          genre1="Aksi"
+          genre2="Petualangan"
+          genre3="Horor"
+        />
+
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="thetomorrowwar"
+          age="13+"
+          episode="2j 18m"
+          genre1="Aksi"
+          genre2="Fiksi Ilmiah"
+          genre3="Militer"
+        />
+      </MovieRow>
+    </section>
+  );
+}
+function SeriesContinue() {
+  return (
+    <section className="movie-section">
+      <h3>Melanjutkan Tonton Series</h3>
+      <MovieRow>
+        <MovieCardLandscape
+          folder="imagesBanner"
+          id="aliceinborderland"
+          title="Alice in Borderland"
+          new="Episode Baru"
+          rating="4.5"
+          episode="Episode 5"
+          progress={60}
+          duration="23m"
+          genre1="Aksi"
+          genre2="Petualangan"
+          genre3="Survival"
+        />
+        <MovieCardLandscape
+          folder="imagesBanner"
           id="allofusdead"
           title="All of Us are Dead"
-          progress={30}
-          duration="2j 33m"
+          new="Episode Baru"
+          progress={60}
+          duration="33m"
           rating="4.9"
           episode="Episode 1"
           genre1="Dark Comedy"
           genre2="Fantasy"
           genre3="Drama"
         />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="shazam"
-          title="Shazam"
+        <MovieCardLandscape
+          folder="imagesBanner"
+          id="myperfectstranger"
+          title="My Perfect Stranger"
+          new="Episode Baru"
+          episode="Episode 3"
           rating="4.2"
           progress={55}
-          duration="2j 12m"
-          genre1="Action"
-          genre2="Comedy"
-          genre3="Pahlawan Super"
+          duration="49m"
+          genre1="Misteri"
+          genre2="Kriminal"
+          genre3="Romansa"
         />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="avatar"
-          title="Avatar"
+        <MovieCardLandscape
+          folder="imagesBanner"
+          id="tedlasso"
+          title="Ted Lasso"
+          new="Episode Baru"
+          episode="Episode 6"
           rating="4.8"
-          progress={29}
-          duration="2j 41m"
-          genre1="Sci-Fi"
-          genre2="Action"
-          genre3="Adventure"
+          progress={30}
+          duration="22m"
+          genre1="Komedi"
+          genre2="Drama"
+          genre3="Olahraga"
         />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="fastx"
-          title="Fast Furious X"
+        <MovieCardLandscape
+          folder="imagesBanner"
+          id="myheroacademia"
+          title="My Hero Academia"
+          new="Episode Baru"
+          episode="Episode 9"
           rating="4.7"
-          progress={29}
-          duration="2j 21m"
+          progress={80}
+          duration="8m"
           genre1="Aksi"
-          genre2="Petualangan"
-          genre3="Kriminal"
-        />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="thelittlemermaid"
-          title="Little Mermaid"
-          rating="4.6"
-          progress={29}
-          duration="2j 15m"
-          genre1="Musikal"
           genre2="Fantasi"
-          genre3="Keluarga"
+          genre3="Pahlawan Super"
         />
       </MovieRow>
     </section>
@@ -619,71 +710,83 @@ function SeriesChill() {
       <MovieRow>
         <MovieCardPortrait
           folder="imagesCard"
-          id="dontlookup"
-          title="Don't Look Up"
-          rating="4.5"
-          episode=""
-          progress={60}
-          duration="2j 18m"
-          genre1="Dark Comedy"
-          genre2="Fantasy"
-          genre3="Drama"
-        />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="allofusdead"
-          title="All of Us are Dead"
-          progress={30}
-          duration="2j 33m"
-          rating="4.9"
-          episode="Episode 1"
-          genre1="Dark Comedy"
-          genre2="Fantasy"
-          genre3="Drama"
-        />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="shazam"
-          title="Shazam"
-          rating="4.2"
-          progress={55}
-          duration="2j 12m"
-          genre1="Action"
-          genre2="Comedy"
+          id="thelittlemermaid"
+          premium="Premium"
+          age="13+"
+          episode="8 Musim"
+          genre1="Aksi"
+          genre2="Fantasi"
           genre3="Pahlawan Super"
         />
         <MovieCardPortrait
           folder="imagesCard"
-          id="avatar"
-          title="Avatar"
-          rating="4.8"
-          progress={29}
-          duration="2j 41m"
-          genre1="Sci-Fi"
-          genre2="Action"
-          genre3="Adventure"
+          id="dutyafterschool"
+          premium="Premium"
+          age="13+"
+          episode="2j 2m"
+          genre1="Petualangan"
+          genre2="Komedi"
+          genre3="Aksi"
         />
         <MovieCardPortrait
           folder="imagesCard"
-          id="fastx"
-          title="Fast Furious X"
-          rating="4.7"
-          progress={29}
-          duration="2j 21m"
-          genre1="Aksi"
-          genre2="Petualangan"
-          genre3="Kriminal"
+          id="bighero6"
+          premium="Premium"
+          age="13+"
+          episode="2j 30m"
+          genre1="Petualangan"
+          genre2="Fiksi Sains"
+          genre3="Aksi"
         />
         <MovieCardPortrait
           folder="imagesCard"
-          id="thelittlemermaid"
-          title="Little Mermaid"
-          rating="4.6"
-          progress={29}
-          duration="2j 15m"
+          id="allofusdead"
+          premium="Premium"
+          age="SU"
+          episode="2j 20m"
+          genre1="Animasi"
+          genre2="Pahlawan Super"
+          genre3="Aksi"
+        />
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="tedlasso"
+          premium="Premium"
+          age="SU"
+          episode="2j 15m"
           genre1="Musikal"
           genre2="Fantasi"
           genre3="Keluarga"
+        />
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="aliceinborderland"
+          new="New Episode"
+          age="13+"
+          episode="2j 6m"
+          genre1="Drama"
+          genre2="Komedi"
+          genre3="Psikologikal"
+        />
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="doctorstrange"
+          top="Top 10"
+          age="13+"
+          episode="2j 6m"
+          genre1="Aksi"
+          genre2="Petualangan"
+          genre3="Horor"
+        />
+
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="thetomorrowwar"
+          age="13+"
+          episode="2j 18m"
+          genre1="Aksi"
+          genre2="Fiksi Ilmiah"
+          genre3="Militer"
         />
       </MovieRow>
     </section>
@@ -760,24 +863,24 @@ function MovieMyList() {
             genre3="Militer"
           />
           <MovieCardPortrait
-          folder="imagesCard"
-          id="bighero6"
-          age="13+"
-          episode="1j 42m"
-          genre1="Animasi"
-          genre2="Aksi"
-          genre3="Keluarga"
-        />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="doctorstrange"
-          age="13+"
-          episode="2j 6m"
-          genre1="Aksi"
-          genre2="Petualangan"
-          genre3="Horor"
-        />
-        <MovieCardPortrait
+            folder="imagesCard"
+            id="bighero6"
+            age="13+"
+            episode="1j 42m"
+            genre1="Animasi"
+            genre2="Aksi"
+            genre3="Keluarga"
+          />
+          <MovieCardPortrait
+            folder="imagesCard"
+            id="doctorstrange"
+            age="13+"
+            episode="2j 6m"
+            genre1="Aksi"
+            genre2="Petualangan"
+            genre3="Horor"
+          />
+          <MovieCardPortrait
             folder="imagesCard"
             id="jurassicworld"
             age="13+"
@@ -796,16 +899,16 @@ function MovieMyList() {
             genre3="Aksi"
           />
           <MovieCardPortrait
-          folder="imagesCard"
-          id="shazam"
-          title="Shazam"
-          rating="4.2"
-          progress={55}
-          duration="2j 12m"
-          genre1="Action"
-          genre2="Comedy"
-          genre3="Pahlawan Super"
-        />
+            folder="imagesCard"
+            id="shazam"
+            title="Shazam"
+            rating="4.2"
+            progress={55}
+            duration="2j 12m"
+            genre1="Action"
+            genre2="Comedy"
+            genre3="Pahlawan Super"
+          />
         </div>
       </div>
     </section>

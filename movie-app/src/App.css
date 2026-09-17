@@ -290,6 +290,44 @@ body {
   object-fit: cover;
   border-radius: 8px;
 }
+.top-label{
+  position: absolute;
+  background-color: #B71F1D;
+  border: 1px solid #B71F1D;
+  top: 0;
+  right: 5px;
+  padding: 4px;
+  gap: 10px;
+  font-size: 14px;
+  align-items: center;
+  border-radius: 0 4px 0 4px;
+}
+.episode-label{
+  position: absolute;
+  background-color: #0F1E93;
+  border: 1px solid #0F1E93;
+  top: 10px;
+  left: 10px;
+  padding: 4px 10px;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  align-items: center;
+  border-radius: 24px;
+}
+.premium-label{
+  position: absolute;
+  background-color: #B7A207;
+  border: 1px solid #B7A207;
+  top: 10px;
+  left: 10px;
+  padding: 4px 10px;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  align-items: center;
+  border-radius: 24px;
+}
 
 .movie-info{
   display:flex;

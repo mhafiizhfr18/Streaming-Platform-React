@@ -13,6 +13,26 @@ export function MovieCardLandscape(props) {
         alt=""
       ></img>
 
+      <div className="movie-label">
+        <div>
+          {props.top !== undefined && (
+            <span className="top-label">{props.top}</span>
+          )}
+        </div>
+          
+        <div>
+          {props.new !== undefined && (
+            <span className="episode-label">{props.new}</span>
+          )}
+        </div>
+
+        <div>
+          {props.premium !== undefined && (
+            <span className="premium-label">{props.premium}</span>
+          )}
+        </div>
+      </div>
+      
       <div className="movie-info">
         <span>{props.title}</span>
         <span>★ {props.rating}/5</span>
@@ -44,6 +64,26 @@ export function MovieCardPortrait(props) {
         alt=""
       />
 
+      <div className="movie-label">
+        <div>
+          {props.top !== undefined && (
+            <span className="top-label">{props.top}</span>
+          )}
+        </div>
+          
+        <div>
+          {props.new !== undefined && (
+            <span className="episode-label">{props.new}</span>
+          )}
+        </div>
+
+        <div>
+          {props.premium !== undefined && (
+            <span className="premium-label">{props.premium}</span>
+          )}
+        </div>
+      </div>
+
       <MovieHover
         folder={props.folder}
         id={props.id}
@@ -72,12 +112,13 @@ function MovieHover(props) {
         </button>
       </div>
 
-      {props.age !== undefined && props.episode !== undefined && (
+      {(props.age !== undefined || props.episode !== undefined) && (
         <div className="hover-info">
           {props.age !== undefined && (
             <span className="hover-age">{props.age}</span>
           )}
-          {props.episode !== undefined && <span>{props.episode}</span>}
+          {props.episode !== undefined && 
+          <span>{props.episode}</span>}
         </div>
       )}
 
