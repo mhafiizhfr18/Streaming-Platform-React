@@ -134,14 +134,16 @@ function MovieHover(props) {
           <span className="duration">{props.duration}</span>
         </div>
       )}
-
-      <div className="hover-genre">
-        <span>{props.genre1}</span>
-        <span>•</span>
-        <span>{props.genre2}</span>
-        <span>•</span>
-        <span>{props.genre3}</span>
-      </div>
+      
+      {props.genre1 !== undefined && (
+        <div className="hover-genre">
+          <span>{props.genre1}</span>
+          <span>•</span>
+          <span>{props.genre2}</span>
+          <span>•</span>
+          <span>{props.genre3}</span>
+        </div>
+      )}
     </div>
   );
 }

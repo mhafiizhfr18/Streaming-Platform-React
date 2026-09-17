@@ -5,6 +5,7 @@ import Logo1 from "./assets/Logo/Logo.svg";
 import Logo2 from "./assets/Logo/Logo-icon.svg";
 import Profile from "./assets/Image/profile.png";
 import VolumeOff from "./assets/Icon/volume_off.svg";
+import { imagesBanner } from './Images.jsx'
 
 import { MovieCardLandscape, MovieCardPortrait } from "./Movie-Card.jsx";
 import { NavLink } from "react-router";
@@ -13,7 +14,13 @@ export function HomePage() {
   return (
     <>
       <Navbar />
-      <MovieBanner />
+      <MovieBanner 
+      banner="avatar.png"
+      title="Avatar The Way of Water"
+      desription="Set decades after the events of the first film, the story follows
+            the Na'vi people and their struggle for survival against human
+            invaders."
+      />
       <MovieContinue type="Film" />
       <MovieTopRated type="Film dan Series" />
       <MovieTrending type="Film" />
@@ -36,9 +43,14 @@ export function SeriesPage() {
   return (
     <>
       <Navbar />
-      <MovieBanner />
+      <MovieBanner 
+      banner="myheroacademia.png" 
+      title="My Hero Academia"
+      desription="Society is devastated by recent battles, and a mysterious, massive fortress suddenly appears. 
+      A man bearing a striking resemblance to 'All Might'—dubbed Dark Might-emerges, claiming to be the new symbol of a twisted order, forcing Class 1-A into action."
+      />
       <SeriesContinue />
-      <SeriesChill />
+      <MovieChill type="Series"/>
       <MovieTopRated type="Series" />
       <MovieTrending type="Series" />
       <MovieNewRelease />
@@ -50,9 +62,13 @@ export function MoviesPage() {
   return (
     <>
       <Navbar />
-      <MovieBanner />
+      <MovieBanner 
+      banner="thelittlemermaid.png"
+      title="The Little Mermaid"
+      desription="“The Little Mermaid” is the beloved story of Ariel, a beautiful and spirited young mermaid with a thirst for adventure. The youngest of King Triton’s daughters and the most defiant, Ariel longs to find out more about the world beyond the sea and, while visiting the surface, falls for the dashing Prince Eric."
+      />
       <MovieContinue />
-      <MovieChill />
+      <MovieChill type="Film"/>
       <MovieTopRated type="Film" />
       <MovieTrending type="Film" />
       <MovieNewRelease />
@@ -125,16 +141,15 @@ export function Navbar() {
     </div>
   );
 }
-function MovieBanner() {
+function MovieBanner({ banner, title, desription }) {
   return (
-    <div className="hero">
+    <div className="hero" 
+    style={{backgroundImage: `url(${imagesBanner[banner]}`}}>
       <div className="hero-content">
         <div className="hero-left">
-          <h1>Avatar : The Way of Water</h1>
+          <h1>{title}</h1>
           <p>
-            Set decades after the events of the first film, the story follows
-            the Na'vi people and their struggle for survival against human
-            invaders.
+            {desription}
           </p>
           <div className="hero-button">
             <button className="btn-primary">Mulai</button>
@@ -207,7 +222,6 @@ function MovieContinue() {
           id="dontlookup"
           title="Don't Look Up"
           rating="4.5"
-          episode=""
           progress={60}
           duration="2j 18m"
           genre1="Dark Comedy"
@@ -216,16 +230,14 @@ function MovieContinue() {
         />
         <MovieCardLandscape
           folder="imagesBanner"
-          id="allofusdead"
-          title="All of Us are Dead"
-          new="Episode Baru"
-          progress={30}
-          duration="2j 33m"
+          id="bluelock"
+          title="Blue Lock"
+          progress={69}
+          duration="1j 31m"
           rating="4.9"
-          episode="Episode 1"
-          genre1="Dark Comedy"
-          genre2="Fantasy"
-          genre3="Drama"
+          genre1="Olahraga"
+          genre2="Drama"
+          genre3="Aksi"
         />
         <MovieCardLandscape
           folder="imagesBanner"
@@ -275,7 +287,7 @@ function MovieContinue() {
           folder="imagesBanner"
           id="spiderman"
           progress={39}
-          episode="2j 20m"
+          duration="2j 20m"
           genre1="Animasi"
           genre2="Pahlawan Super"
           genre3="Aksi"
@@ -544,90 +556,6 @@ function MovieNewRelease() {
     </section>
   );
 }
-
-function MovieChill() {
-  return (
-    <section className="movie-section">
-      <h3>Film Persembahan Chill</h3>
-
-      <MovieRow>
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="myheroacademia"
-          age="13+"
-          episode="8 Musim"
-          genre1="Aksi"
-          genre2="Fantasi"
-          genre3="Pahlawan Super"
-        />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="sonic2"
-          age="13+"
-          episode="2j 2m"
-          genre1="Petualangan"
-          genre2="Komedi"
-          genre3="Aksi"
-        />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="guardianofthegalaxy"
-          age="13+"
-          episode="2j 30m"
-          genre1="Petualangan"
-          genre2="Fiksi Sains"
-          genre3="Aksi"
-        />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="spiderman"
-          age="SU"
-          episode="2j 20m"
-          genre1="Animasi"
-          genre2="Pahlawan Super"
-          genre3="Aksi"
-        />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="thelittlemermaid"
-          age="SU"
-          episode="2j 15m"
-          genre1="Musikal"
-          genre2="Fantasi"
-          genre3="Keluarga"
-        />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="amancalledotto"
-          age="13+"
-          episode="2j 6m"
-          genre1="Drama"
-          genre2="Komedi"
-          genre3="Psikologikal"
-        />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="doctorstrange"
-          age="13+"
-          episode="2j 6m"
-          genre1="Aksi"
-          genre2="Petualangan"
-          genre3="Horor"
-        />
-
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="thetomorrowwar"
-          age="13+"
-          episode="2j 18m"
-          genre1="Aksi"
-          genre2="Fiksi Ilmiah"
-          genre3="Militer"
-        />
-      </MovieRow>
-    </section>
-  );
-}
 function SeriesContinue() {
   return (
     <section className="movie-section">
@@ -702,10 +630,10 @@ function SeriesContinue() {
     </section>
   );
 }
-function SeriesChill() {
+function MovieChill(props) {
   return (
     <section className="movie-section">
-      <h3>Series Persembahan Chill</h3>
+      <h3>{props.type} Persembahan Chill</h3>
 
       <MovieRow>
         <MovieCardPortrait
@@ -714,9 +642,9 @@ function SeriesChill() {
           premium="Premium"
           age="13+"
           episode="8 Musim"
-          genre1="Aksi"
+          genre1="Musikal"
           genre2="Fantasi"
-          genre3="Pahlawan Super"
+          genre3="Keluarga"
         />
         <MovieCardPortrait
           folder="imagesCard"
@@ -724,9 +652,9 @@ function SeriesChill() {
           premium="Premium"
           age="13+"
           episode="2j 2m"
-          genre1="Petualangan"
-          genre2="Komedi"
-          genre3="Aksi"
+          genre1="Aksi"
+          genre2="Militer"
+          genre3="Fiksi Ilmiah"
         />
         <MovieCardPortrait
           folder="imagesCard"
@@ -734,9 +662,9 @@ function SeriesChill() {
           premium="Premium"
           age="13+"
           episode="2j 30m"
-          genre1="Petualangan"
-          genre2="Fiksi Sains"
-          genre3="Aksi"
+          genre1="Animasi"
+          genre2="Aksi"
+          genre3="Keluarga"
         />
         <MovieCardPortrait
           folder="imagesCard"
@@ -744,9 +672,9 @@ function SeriesChill() {
           premium="Premium"
           age="SU"
           episode="2j 20m"
-          genre1="Animasi"
-          genre2="Pahlawan Super"
-          genre3="Aksi"
+          genre1="Dark Comedy"
+          genre2="Fantasy"
+          genre3="Drama"
         />
         <MovieCardPortrait
           folder="imagesCard"
@@ -754,9 +682,9 @@ function SeriesChill() {
           premium="Premium"
           age="SU"
           episode="2j 15m"
-          genre1="Musikal"
-          genre2="Fantasi"
-          genre3="Keluarga"
+          genre1="Komedi"
+          genre2="Drama"
+          genre3="Olahraga"
         />
         <MovieCardPortrait
           folder="imagesCard"
@@ -764,9 +692,9 @@ function SeriesChill() {
           new="New Episode"
           age="13+"
           episode="2j 6m"
-          genre1="Drama"
-          genre2="Komedi"
-          genre3="Psikologikal"
+          genre1="Aksi"
+          genre2="Petualangan"
+          genre3="Survival"
         />
         <MovieCardPortrait
           folder="imagesCard"
@@ -792,7 +720,6 @@ function SeriesChill() {
     </section>
   );
 }
-
 function MovieMyList() {
   return (
     <section className="movie-section">

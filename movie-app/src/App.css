@@ -120,7 +120,6 @@ body {
 /* BANNER SECTION */
 
 .hero {
-  background-image: url('./assets/Banner/avatar.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -368,27 +367,36 @@ body {
   justify-content: center;
   border-radius: 0 0 8px 8px;
   padding: 45px 0 16px;
-  display: none;
   z-index: 2;
   font-size: 13px;
+
   background: linear-gradient(
     to bottom,
     rgba(31, 33, 35, 0),
-    rgba(31, 33, 35, 0.85) 30%,
-    #1F2123 55%
+    rgba(31, 33, 35, 0.85) 40%,
+    #1F2123 65%
   );
+
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  pointer-events: none;
 }
 
 .movie-card--landscape:hover .movie-hover,
 .movie-card--portrait:hover .movie-hover {
-  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 .movie-card--landscape:hover{
   transform:scale(1.05) translateY(-3px);
   z-index: 2;
 }
 .movie-card--portrait:hover{
-  transform:scale(1.05) translateY(-9px);
+  transform:scale(1.02) translateY(-9px);
   z-index: 2;
 }
 
