@@ -5,7 +5,8 @@ import Logo1 from "./assets/Logo/Logo.svg";
 import Logo2 from "./assets/Logo/Logo-icon.svg";
 import Profile from "./assets/Image/profile.png";
 import VolumeOff from "./assets/Icon/volume_off.svg";
-import { imagesBanner } from './Images.jsx'
+import { imagesBanner } from "./Images.jsx";
+import { BannerHover } from "./Movie-Card.jsx";
 
 import { MovieCardLandscape, MovieCardPortrait } from "./Movie-Card.jsx";
 import { NavLink } from "react-router";
@@ -14,10 +15,10 @@ export function HomePage() {
   return (
     <>
       <Navbar />
-      <MovieBanner 
-      banner="avatar.png"
-      title="Avatar The Way of Water"
-      desription="Set decades after the events of the first film, the story follows
+      <MovieBanner
+        banner="avatar.png"
+        title="Avatar The Way of Water"
+        desription="Set decades after the events of the first film, the story follows
             the Na'vi people and their struggle for survival against human
             invaders."
       />
@@ -29,7 +30,6 @@ export function HomePage() {
     </>
   );
 }
-
 export function MyList() {
   return (
     <>
@@ -43,14 +43,14 @@ export function SeriesPage() {
   return (
     <>
       <Navbar />
-      <MovieBanner 
-      banner="myheroacademia.png" 
-      title="My Hero Academia"
-      desription="Society is devastated by recent battles, and a mysterious, massive fortress suddenly appears. 
+      <MovieBanner
+        banner="myheroacademia.png"
+        title="My Hero Academia"
+        desription="Society is devastated by recent battles, and a mysterious, massive fortress suddenly appears. 
       A man bearing a striking resemblance to 'All Might'—dubbed Dark Might-emerges, claiming to be the new symbol of a twisted order, forcing Class 1-A into action."
       />
       <SeriesContinue />
-      <MovieChill type="Series"/>
+      <MovieChill type="Series" />
       <MovieTopRated type="Series" />
       <MovieTrending type="Series" />
       <MovieNewRelease />
@@ -62,13 +62,13 @@ export function MoviesPage() {
   return (
     <>
       <Navbar />
-      <MovieBanner 
-      banner="thelittlemermaid.png"
-      title="The Little Mermaid"
-      desription="“The Little Mermaid” is the beloved story of Ariel, a beautiful and spirited young mermaid with a thirst for adventure. The youngest of King Triton’s daughters and the most defiant, Ariel longs to find out more about the world beyond the sea and, while visiting the surface, falls for the dashing Prince Eric."
+      <MovieBanner
+        banner="thelittlemermaid.png"
+        title="The Little Mermaid"
+        desription="“The Little Mermaid” is the beloved story of Ariel, a beautiful and spirited young mermaid with a thirst for adventure. The youngest of King Triton’s daughters and the most defiant, Ariel longs to find out more about the world beyond the sea and, while visiting the surface, falls for the dashing Prince Eric."
       />
       <MovieContinue />
-      <MovieChill type="Film"/>
+      <MovieChill type="Film" />
       <MovieTopRated type="Film" />
       <MovieTrending type="Film" />
       <MovieNewRelease />
@@ -76,7 +76,6 @@ export function MoviesPage() {
     </>
   );
 }
-
 export function Navbar() {
   return (
     <div className="navbar">
@@ -143,14 +142,16 @@ export function Navbar() {
 }
 function MovieBanner({ banner, title, desription }) {
   return (
-    <div className="hero" 
-    style={{backgroundImage: `url(${imagesBanner[banner]}`}}>
+    <div
+      className="hero"
+      style={{ backgroundImage: `url(${imagesBanner[banner]}` }}
+    >
+      <BannerHover />
+
       <div className="hero-content">
         <div className="hero-left">
           <h1>{title}</h1>
-          <p>
-            {desription}
-          </p>
+          <p>{desription}</p>
           <div className="hero-button">
             <button className="btn-primary">Mulai</button>
             <button className="btn-secondary">Selengkapnya</button>
@@ -211,7 +212,6 @@ function MovieRow({ children }) {
     </div>
   );
 }
-
 function MovieContinue() {
   return (
     <section className="movie-section">

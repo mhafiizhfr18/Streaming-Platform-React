@@ -1,5 +1,6 @@
 import "./App.css";
 import { imagesBanner, imagesCard } from "./Images.jsx";
+import { NavLink } from "react-router";
 
 export function MovieCardLandscape(props) {
   return (
@@ -19,7 +20,7 @@ export function MovieCardLandscape(props) {
             <span className="top-label">{props.top}</span>
           )}
         </div>
-          
+
         <div>
           {props.new !== undefined && (
             <span className="episode-label">{props.new}</span>
@@ -32,13 +33,13 @@ export function MovieCardLandscape(props) {
           )}
         </div>
       </div>
-      
+
       <div className="movie-info">
         <span>{props.title}</span>
         <span>★ {props.rating}/5</span>
       </div>
 
-      <MovieHover
+      <CardHover
         folder={props.folder}
         id={props.id}
         age={props.age}
@@ -70,7 +71,7 @@ export function MovieCardPortrait(props) {
             <span className="top-label">{props.top}</span>
           )}
         </div>
-          
+
         <div>
           {props.new !== undefined && (
             <span className="episode-label">{props.new}</span>
@@ -84,7 +85,7 @@ export function MovieCardPortrait(props) {
         </div>
       </div>
 
-      <MovieHover
+      <CardHover
         folder={props.folder}
         id={props.id}
         age={props.age}
@@ -99,7 +100,7 @@ export function MovieCardPortrait(props) {
   );
 }
 
-function MovieHover(props) {
+function CardHover(props) {
   return (
     <div className="movie-hover">
       <div className="hover-buttons">
@@ -117,8 +118,7 @@ function MovieHover(props) {
           {props.age !== undefined && (
             <span className="hover-age">{props.age}</span>
           )}
-          {props.episode !== undefined && 
-          <span>{props.episode}</span>}
+          {props.episode !== undefined && <span>{props.episode}</span>}
         </div>
       )}
 
@@ -134,7 +134,7 @@ function MovieHover(props) {
           <span className="duration">{props.duration}</span>
         </div>
       )}
-      
+
       {props.genre1 !== undefined && (
         <div className="hover-genre">
           <span>{props.genre1}</span>
@@ -144,6 +144,64 @@ function MovieHover(props) {
           <span>{props.genre3}</span>
         </div>
       )}
+    </div>
+  );
+}
+
+export function BannerHover() {
+  return (
+    <div className="genre-button">
+      <div className="genre-header">
+        <span>Genre</span>
+        <span className="material-symbols-outlined">keyboard_arrow_down</span>
+      </div>
+
+      <div className="genre-menu">
+        <NavLink to="/mylist">
+          Aksi
+        </NavLink>
+        <NavLink to="/mylist">
+          Anak-anak
+        </NavLink>
+        <NavLink to="/mylist">
+          Anime
+        </NavLink>
+        <NavLink to="/mylist">
+          Britania
+        </NavLink>
+        <NavLink to="/mylist">
+          Drama
+        </NavLink>
+        <NavLink to="/mylist">
+          Fantasi Ilmiah & Fantasi
+        </NavLink>
+        <NavLink to="/mylist">
+          Kejahatan
+        </NavLink>
+
+        <NavLink to="/mylist">
+          KDrama
+        </NavLink>
+        <NavLink to="/mylist">
+          Komedi
+        </NavLink>
+        <NavLink to="/mylist">
+          Petualangan
+        </NavLink>
+        <NavLink to="/mylist">
+          Perang
+        </NavLink>
+        <NavLink to="/mylist">
+          Romantis
+        </NavLink>
+        <NavLink to="/mylist">
+          Sains & Alam
+        </NavLink>
+        <NavLink to="/mylist">
+          Thriller
+        </NavLink>
+
+      </div>
     </div>
   );
 }
