@@ -853,7 +853,7 @@ export function Footer() {
       <div className="footer-logo">
         <NavLink to="home-page.html">
           <img
-            src="./Assets/Logo/Logo.svg"
+            src={Logo1}
             alt=""
           ></img>
         </NavLink>

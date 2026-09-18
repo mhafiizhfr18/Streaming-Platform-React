@@ -205,3 +205,9 @@ export function BannerHover() {
     </div>
   );
 }
+
+export function MovieHover() {
+  <div>
+    
+  </div>
+}
