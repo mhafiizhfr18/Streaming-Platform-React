@@ -1,10 +1,14 @@
 import "./App.css";
 import { imagesBanner, imagesCard } from "./Images.jsx";
 import { NavLink } from "react-router";
+import VolumeOff from "./assets/Icon/volume_off.svg";
 
 export function MovieCardLandscape(props) {
   return (
-    <div className="movie-card--landscape">
+    <div
+      className="movie-card--landscape"
+      onClick={props.onClick}
+    >
       <img
         src={
           props.folder === "imagesBanner"
@@ -55,7 +59,10 @@ export function MovieCardLandscape(props) {
 }
 export function MovieCardPortrait(props) {
   return (
-    <div className="movie-card--portrait">
+    <div
+      className="movie-card--portrait"
+      onClick={props.onClick}
+    >
       <img
         src={
           props.folder === "imagesBanner"
@@ -64,7 +71,6 @@ export function MovieCardPortrait(props) {
         }
         alt=""
       />
-
       <div className="movie-label">
         <div>
           {props.top !== undefined && (
@@ -84,7 +90,6 @@ export function MovieCardPortrait(props) {
           )}
         </div>
       </div>
-
       <CardHover
         folder={props.folder}
         id={props.id}
@@ -157,57 +162,138 @@ export function BannerHover() {
       </div>
 
       <div className="genre-menu">
-        <NavLink to="/mylist">
-          Aksi
-        </NavLink>
-        <NavLink to="/mylist">
-          Anak-anak
-        </NavLink>
-        <NavLink to="/mylist">
-          Anime
-        </NavLink>
-        <NavLink to="/mylist">
-          Britania
-        </NavLink>
-        <NavLink to="/mylist">
-          Drama
-        </NavLink>
-        <NavLink to="/mylist">
-          Fantasi Ilmiah & Fantasi
-        </NavLink>
-        <NavLink to="/mylist">
-          Kejahatan
-        </NavLink>
+        <NavLink to="/mylist">Aksi</NavLink>
+        <NavLink to="/mylist">Anak-anak</NavLink>
+        <NavLink to="/mylist">Anime</NavLink>
+        <NavLink to="/mylist">Britania</NavLink>
+        <NavLink to="/mylist">Drama</NavLink>
+        <NavLink to="/mylist">Fantasi Ilmiah & Fantasi</NavLink>
+        <NavLink to="/mylist">Kejahatan</NavLink>
 
-        <NavLink to="/mylist">
-          KDrama
-        </NavLink>
-        <NavLink to="/mylist">
-          Komedi
-        </NavLink>
-        <NavLink to="/mylist">
-          Petualangan
-        </NavLink>
-        <NavLink to="/mylist">
-          Perang
-        </NavLink>
-        <NavLink to="/mylist">
-          Romantis
-        </NavLink>
-        <NavLink to="/mylist">
-          Sains & Alam
-        </NavLink>
-        <NavLink to="/mylist">
-          Thriller
-        </NavLink>
-
+        <NavLink to="/mylist">KDrama</NavLink>
+        <NavLink to="/mylist">Komedi</NavLink>
+        <NavLink to="/mylist">Petualangan</NavLink>
+        <NavLink to="/mylist">Perang</NavLink>
+        <NavLink to="/mylist">Romantis</NavLink>
+        <NavLink to="/mylist">Sains & Alam</NavLink>
+        <NavLink to="/mylist">Thriller</NavLink>
       </div>
     </div>
   );
 }
 
-export function MovieHover() {
-  <div>
-    
-  </div>
+export function MoviePopUp({
+  folder,
+  id,
+  title,
+  description,
+  year,
+  totalepisode,
+  fullage,
+  cast,
+  genre1,
+  genre2,
+  genre3,
+  pembuatfilm,
+  onClose,
+}) {
+  const movieImage =
+    folder === "imagesBanner"
+      ? imagesBanner[`${id}.png`]
+      : imagesCard[`${id}.png`];
+
+  return (
+    <div className="popup-overlay">
+      <div className="movie-popup">
+        <button
+          className="popup-close material-symbols-outlined"
+          onClick={onClose}
+        >
+          close
+        </button>
+        <div
+          className="hero"
+          style={{ backgroundImage: `url(${movieImage})` }}
+        >
+          <div className="hero-content">
+            <div className="hero-left">
+              <h1>{title}</h1>
+              <div className="hero-button">
+                <button className="btn-primary">Mulai</button>
+                <button className="btn-third material-symbols-outlined">
+                  Add
+                </button>
+              </div>
+            </div>
+
+            <div className="hero-right">
+              <button className="btn-third">
+                <img
+                  src={VolumeOff}
+                  alt="Volume Off"
+                ></img>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="movie-popup-info">
+          <div className="info-left">
+            <div className="layout-left">
+              {year !== undefined && <span className="">{year}</span>}
+              {totalepisode !== undefined && (
+                <span className="">{totalepisode}</span>
+              )}
+              {fullage !== undefined && (
+                <span className="btn-age">{fullage}</span>
+              )}
+            </div>
+            <p>{description}</p>
+          </div>
+
+          <div className="info-right">
+            {cast !== undefined && (
+              <div className="info-row">
+                <span className="info-label">Cast</span>
+                <span className="info-value">{cast}</span>
+              </div>
+            )}
+            {genre1 !== undefined && (
+              <div className="info-row">
+                <span className="info-label">Genre</span>
+                <span className="info-value">
+                  {genre1}, {genre2}, {genre3}
+                </span>
+              </div>
+            )}
+            {pembuatfilm !== undefined && (
+              <div className="info-row">
+                <span className="info-label">Pembuat Film</span>
+                <span className="info-value">{pembuatfilm}</span>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="popup-footer">
+          <h3>Rekomendasi Serupa</h3>
+
+          <div className="card-footer">
+            <MovieCardPortrait
+              folder="Banner"
+              id="guardianofthegalaxy"
+            />
+            <MovieCardPortrait
+              folder="Banner"
+              id="myheroacademia"
+            />
+            <MovieCardPortrait
+              folder="Banner"
+              id="antmanwasp"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
