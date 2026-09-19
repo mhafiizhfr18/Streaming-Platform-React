@@ -559,6 +559,49 @@ body {
   color: white;
   z-index: 99;
   padding: 20px;
+  animation: popupFadeIn 0.25s ease 
+}
+.popup-overlay.closing {
+  animation: popupFadeOut 0.3s ease forwards;
+}
+
+@keyframes popupFadeIn{
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}
+@keyframes popupFadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+@keyframes popupScaleIn {
+  from{
+    opacity: 0;
+    transform: scale(0.92) translateY(20px);
+  }
+  to{
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+@keyframes popupScaleOut {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(0.92) translateY(20px);
+  }
 }
 .movie-popup{
   flex-direction: column;
@@ -569,7 +612,11 @@ body {
   border-radius: 16px;
   overflow-y: auto;
   overflow-x: hidden;
-  box-sizing: border-box;
+  box-sizing: border-box; 
+  animation: popupScaleIn 0.30s ease;
+}
+.popup-overlay.closing .movie-popup {
+  animation: popupScaleOut 0.3s ease forwards;
 }
 .movie-popup .hero {
   position: relative;
@@ -627,8 +674,8 @@ body {
 }
 .popup-close{
   position: fixed;
-  top: 50px;
-  right: 30px;
+  top: 60px;
+  right: 40px;
   z-index: 5;
   background-color: #181A1C;
   color: #C1C2C4;
@@ -652,6 +699,48 @@ body {
   width: 100%;
   height: auto;
   aspect-ratio: 234 / 365;
+}
+
+/* EPISODE FOOTER */
+.episode-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.episode-item {
+  display: grid;
+  grid-template-columns: 30px 120px 1fr 60px;
+  gap: 12px;
+  align-items: center;
+  padding: 10px;
+  background-color: #22282A;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.episode-item img {
+  width: 120px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.episode-info {
+  min-width: 0;
+}
+.episode-info h5 {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 15px;
+}
+.episode-info span{
+  font-size: 14px;
+}
+.episode-info p {
+  margin: 0;
+  color: #C1C2C4;
+  font-size: 13px;
 }
 
 
@@ -798,6 +887,9 @@ body {
   .movie-list .movie-card--portrait {
     width: 100%;
 }
+  .movie-hover{
+    display: none;
+  }
   .movie-popup .hero {
     height: 280px;
     padding: 30px 20px;

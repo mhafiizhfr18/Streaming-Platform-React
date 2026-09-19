@@ -46,6 +46,7 @@ export function MovieCardLandscape(props) {
       <CardHover
         folder={props.folder}
         id={props.id}
+        type={props.type}
         age={props.age}
         progress={props.progress}
         duration={props.duration}
@@ -93,6 +94,7 @@ export function MovieCardPortrait(props) {
       <CardHover
         folder={props.folder}
         id={props.id}
+        type={props.type}
         age={props.age}
         progress={props.progress}
         duration={props.duration}
@@ -185,6 +187,7 @@ export function BannerHover() {
 export function MoviePopUp({
   folder,
   id,
+  type,
   title,
   description,
   year,
@@ -196,6 +199,7 @@ export function MoviePopUp({
   genre3,
   pembuatfilm,
   onClose,
+  isClosing,
 }) {
   const movieImage =
     folder === "imagesBanner"
@@ -203,7 +207,8 @@ export function MoviePopUp({
       : imagesCard[`${id}.png`];
 
   return (
-    <div className="popup-overlay">
+    <div className={`popup-overlay ${isClosing ? "closing" : ""}`}>
+      {" "}
       <div className="movie-popup">
         <button
           className="popup-close material-symbols-outlined"
@@ -275,24 +280,99 @@ export function MoviePopUp({
           </div>
         </div>
 
-        <div className="popup-footer">
-          <h3>Rekomendasi Serupa</h3>
+        {type === "series" ? <EpisodeList /> : <RecommendationList />}
 
-          <div className="card-footer">
-            <MovieCardPortrait
-              folder="Banner"
-              id="guardianofthegalaxy"
-            />
-            <MovieCardPortrait
-              folder="Banner"
-              id="myheroacademia"
-            />
-            <MovieCardPortrait
-              folder="Banner"
-              id="antmanwasp"
-            />
+      </div>
+    </div>
+  );
+}
+function RecommendationList() {
+  return (
+    <div className="popup-footer">
+      <h3>Rekomendasi Serupa</h3>
+
+      <div className="card-footer">
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="guardianofthegalaxy"
+        />
+
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="myheroacademia"
+        />
+
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="antmanwasp"
+        />
+      </div>
+    </div>
+  );
+}
+function EpisodeList() {
+  return (
+    <div className="popup-footer">
+      <h3>Episode</h3>
+
+      <div className="episode-list">
+
+        <div className="episode-item">
+          <span>1</span>
+
+          <img
+            src={imagesBanner["tedlasso3.png"]}
+            alt=""
+          />
+
+          <div className="episode-info">
+            <h5>Pilot</h5>
+            <p>
+              American football coach Ted Lasso is hired by a wealthy
+              divorcee to coach the English soccer team AFC Richmond.
+            </p>
           </div>
+
+          <span>30 min</span>
         </div>
+
+        <div className="episode-item">
+          <span>2</span>
+
+          <img
+            src={imagesBanner["tedlasso4.png"]}
+            alt=""
+          />
+
+          <div className="episode-info">
+            <h5>Biscuit</h5>
+            <p>
+              It's Ted's first day of coaching, and fans aren't happy.
+            </p>
+          </div>
+
+          <span>29 min</span>
+        </div>
+
+        <div className="episode-item">
+          <span>3</span>
+
+          <img
+            src={imagesBanner["tedlasso5.png"]}
+            alt=""
+          />
+
+          <div className="episode-info">
+            <h5>Trent Crimm: Independent</h5>
+            <p>
+              To arrange an in-depth exposé, Rebecca pairs cynical
+              journalist Trent Crimm with Ted.
+            </p>
+          </div>
+
+          <span>30 min</span>
+        </div>
+
       </div>
     </div>
   );

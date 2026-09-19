@@ -176,6 +176,7 @@ function MovieRow({ children }) {
   const scrollRef = useRef(null);
 
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [isClosing, setIsClosing] = useState(false);
 
   function scrollLeft() {
     scrollRef.current.scrollBy({
@@ -193,10 +194,20 @@ function MovieRow({ children }) {
 
   const MovieCards = React.Children.map(children, (child) => {
     return React.cloneElement(child, {
-      onClick: () => setSelectedMovie(child.props),
+      onClick: () => {
+        setIsClosing(false);
+        setSelectedMovie(child.props);
+      },
     });
   });
 
+  function handleClose() {
+    setIsClosing(true);
+
+    setTimeout(() => {
+      setSelectedMovie(null);
+    }, 300);
+  }
   return (
     <div className="movie-wrapper">
       <button
@@ -223,7 +234,8 @@ function MovieRow({ children }) {
       {selectedMovie && (
         <MoviePopUp
           {...selectedMovie}
-          onClose={() => setSelectedMovie(null)}
+          onClose={handleClose}
+          isClosing={isClosing}
         />
       )}
     </div>
@@ -237,6 +249,7 @@ function MovieContinue() {
         <MovieCardLandscape
           folder="imagesBanner"
           id="dontlookup"
+          type="film"
           title="Don't Look Up"
           rating="4.5"
           progress={60}
@@ -254,6 +267,7 @@ function MovieContinue() {
         <MovieCardLandscape
           folder="imagesBanner"
           id="bluelock"
+          type="film"
           title="Blue Lock"
           progress={69}
           duration="1j 31m"
@@ -271,6 +285,7 @@ function MovieContinue() {
         <MovieCardLandscape
           folder="imagesBanner"
           id="shazam"
+          type="film"
           title="Shazam"
           rating="4.2"
           progress={55}
@@ -288,6 +303,7 @@ function MovieContinue() {
         <MovieCardLandscape
           folder="imagesBanner"
           id="avatar"
+          type="film"
           title="Avatar"
           rating="4.8"
           progress={29}
@@ -305,6 +321,7 @@ function MovieContinue() {
         <MovieCardLandscape
           folder="imagesBanner"
           id="fastx"
+          type="film"
           title="Fast Furious X"
           rating="4.7"
           progress={29}
@@ -322,6 +339,7 @@ function MovieContinue() {
         <MovieCardLandscape
           folder="imagesBanner"
           id="thelittlemermaid"
+          type="film"
           title="Little Mermaid"
           rating="4.6"
           progress={29}
@@ -339,6 +357,7 @@ function MovieContinue() {
         <MovieCardLandscape
           folder="imagesBanner"
           id="spiderman"
+          type="film"
           progress={39}
           duration="2j 20m"
           genre1="Animasi"
@@ -363,6 +382,7 @@ function MovieTopRated(props) {
         <MovieCardPortrait
           folder="imagesCard"
           id="suzume"
+          type="film"
           new="New Episode"
           age="SU"
           episode="2j 2m"
@@ -380,6 +400,7 @@ function MovieTopRated(props) {
         <MovieCardPortrait
           folder="imagesCard"
           id="thetomorrowwar"
+          type="film"
           age="13+"
           episode="2j 18m"
           genre1="Aksi"
@@ -396,6 +417,7 @@ function MovieTopRated(props) {
         <MovieCardPortrait
           folder="imagesCard"
           id="thebatman"
+          type="film"
           age="13+"
           episode="2j 47m"
           genre1="Aksi"
@@ -412,6 +434,7 @@ function MovieTopRated(props) {
         <MovieCardPortrait
           folder="imagesCard"
           id="amancalledotto"
+          type="film"
           age="13+"
           episode="2j 6m"
           genre1="Drama"
@@ -428,6 +451,7 @@ function MovieTopRated(props) {
         <MovieCardPortrait
           folder="imagesCard"
           id="bighero6"
+          type="film"
           age="13+"
           episode="1j 42m"
           genre1="Animasi"
@@ -444,6 +468,7 @@ function MovieTopRated(props) {
         <MovieCardPortrait
           folder="imagesCard"
           id="doctorstrange"
+          type="film"
           age="13+"
           episode="2j 6m"
           genre1="Aksi"
@@ -460,6 +485,7 @@ function MovieTopRated(props) {
         <MovieCardPortrait
           folder="imagesCard"
           id="antmanwasp"
+          type="film"
           age="13+"
           episode="2j 4m"
           genre1="Petualangan"
@@ -476,6 +502,7 @@ function MovieTopRated(props) {
         <MovieCardPortrait
           folder="imagesCard"
           id="myheroacademia"
+          type="series"
           age="13+"
           episode="8 Musim"
           genre1="Aksi"
@@ -501,6 +528,7 @@ function MovieTrending(props) {
         <MovieCardPortrait
           folder="imagesCard"
           id="doctorstrange"
+          type="film"
           top="Top 10"
           age="13+"
           episode="2j 6m"
@@ -518,6 +546,7 @@ function MovieTrending(props) {
         <MovieCardPortrait
           folder="imagesCard"
           id="blackadam"
+          type="film"
           top="Top 10"
           age="13+"
           episode="2j 5m"
@@ -535,6 +564,7 @@ function MovieTrending(props) {
         <MovieCardPortrait
           folder="imagesCard"
           id="tedlasso"
+          type="series"
           top="Top 10"
           new="Episode Baru"
           age="21+"
@@ -553,6 +583,7 @@ function MovieTrending(props) {
         <MovieCardPortrait
           folder="imagesCard"
           id="spiderman"
+          type="film"
           top="Top 10"
           age="SU"
           episode="2j 20m"
@@ -570,6 +601,7 @@ function MovieTrending(props) {
         <MovieCardPortrait
           folder="imagesCard"
           id="jurassicworld"
+          type="film"
           top="Top 10"
           age="13+"
           episode="2j 26m"
@@ -587,6 +619,7 @@ function MovieTrending(props) {
         <MovieCardPortrait
           folder="imagesCard"
           id="baymax"
+          type="film"
           top="Top 10"
           age="SU"
           episode="1j 42m"
@@ -604,6 +637,7 @@ function MovieTrending(props) {
         <MovieCardPortrait
           folder="imagesCard"
           id="myheroacademia"
+          type="series"
           top="Top 10"
           age="13+"
           episode="8 Musim"
@@ -621,6 +655,7 @@ function MovieTrending(props) {
         <MovieCardPortrait
           folder="imagesCard"
           id="thelittlemermaid"
+          type="film"
           top="Top 10"
           age="SU"
           episode="2j 15m"
@@ -648,6 +683,7 @@ function MovieNewRelease() {
         <MovieCardPortrait
           folder="imagesCard"
           id="myheroacademia"
+          type="series"
           top="Top 10"
           age="13+"
           episode="8 Musim"
@@ -665,6 +701,7 @@ function MovieNewRelease() {
         <MovieCardPortrait
           folder="imagesCard"
           id="sonic2"
+          type="film"
           age="13+"
           episode="2j 2m"
           genre1="Petualangan"
@@ -681,6 +718,7 @@ function MovieNewRelease() {
         <MovieCardPortrait
           folder="imagesCard"
           id="guardianofthegalaxy"
+          type="film"
           age="13+"
           episode="2j 30m"
           genre1="Petualangan"
@@ -697,6 +735,7 @@ function MovieNewRelease() {
         <MovieCardPortrait
           folder="imagesCard"
           id="spiderman"
+          type="film"
           top="Top 10"
           age="SU"
           episode="2j 20m"
@@ -714,6 +753,7 @@ function MovieNewRelease() {
         <MovieCardPortrait
           folder="imagesCard"
           id="thelittlemermaid"
+          type="film"
           premium="Premium"
           top="Top 10"
           age="SU"
@@ -732,6 +772,7 @@ function MovieNewRelease() {
         <MovieCardPortrait
           folder="imagesCard"
           id="amancalledotto"
+          type="film"
           age="13+"
           episode="2j 6m"
           genre1="Drama"
@@ -748,6 +789,7 @@ function MovieNewRelease() {
         <MovieCardPortrait
           folder="imagesCard"
           id="doctorstrange"
+          type="film"
           top="Top 10"
           age="13+"
           episode="2j 6m"
@@ -766,6 +808,7 @@ function MovieNewRelease() {
         <MovieCardPortrait
           folder="imagesCard"
           id="thetomorrowwar"
+          type="film"
           age="13+"
           episode="2j 18m"
           genre1="Aksi"
@@ -791,6 +834,7 @@ function SeriesContinue() {
         <MovieCardLandscape
           folder="imagesBanner"
           id="aliceinborderland"
+          type="series"
           title="Alice in Borderland"
           new="Episode Baru"
           rating="4.5"
@@ -810,6 +854,7 @@ function SeriesContinue() {
         <MovieCardLandscape
           folder="imagesBanner"
           id="allofusdead"
+          type="series"
           title="All of Us are Dead"
           new="Episode Baru"
           progress={60}
@@ -829,6 +874,7 @@ function SeriesContinue() {
         <MovieCardLandscape
           folder="imagesBanner"
           id="myperfectstranger"
+          type="series"
           title="My Perfect Stranger"
           new="Episode Baru"
           episode="Episode 3"
@@ -848,6 +894,7 @@ function SeriesContinue() {
         <MovieCardLandscape
           folder="imagesBanner"
           id="tedlasso"
+          type="series"
           title="Ted Lasso"
           new="Episode Baru"
           episode="Episode 6"
@@ -867,6 +914,7 @@ function SeriesContinue() {
         <MovieCardLandscape
           folder="imagesBanner"
           id="myheroacademia"
+          type="series"
           title="My Hero Academia"
           new="Episode Baru"
           episode="Episode 9"
@@ -896,6 +944,7 @@ function MovieChill(props) {
         <MovieCardPortrait
           folder="imagesCard"
           id="thelittlemermaid"
+          type="film"
           premium="Premium"
           age="13+"
           episode="8 Musim"
@@ -913,6 +962,7 @@ function MovieChill(props) {
         <MovieCardPortrait
           folder="imagesCard"
           id="dutyafterschool"
+          type="film"
           premium="Premium"
           age="13+"
           episode="2j 2m"
@@ -930,6 +980,7 @@ function MovieChill(props) {
         <MovieCardPortrait
           folder="imagesCard"
           id="bighero6"
+          type="film"
           premium="Premium"
           age="13+"
           episode="2j 30m"
@@ -947,6 +998,7 @@ function MovieChill(props) {
         <MovieCardPortrait
           folder="imagesCard"
           id="allofusdead"
+          type="series"
           premium="Premium"
           age="SU"
           episode="2j 20m"
@@ -964,6 +1016,7 @@ function MovieChill(props) {
         <MovieCardPortrait
           folder="imagesCard"
           id="tedlasso"
+          type="series"
           premium="Premium"
           age="SU"
           episode="2j 15m"
@@ -981,6 +1034,7 @@ function MovieChill(props) {
         <MovieCardPortrait
           folder="imagesCard"
           id="aliceinborderland"
+          type="series"
           new="New Episode"
           age="13+"
           episode="2j 6m"
@@ -998,6 +1052,7 @@ function MovieChill(props) {
         <MovieCardPortrait
           folder="imagesCard"
           id="doctorstrange"
+          type="film"
           top="Top 10"
           age="13+"
           episode="2j 6m"
@@ -1016,6 +1071,7 @@ function MovieChill(props) {
         <MovieCardPortrait
           folder="imagesCard"
           id="thetomorrowwar"
+          type="film"
           age="13+"
           episode="2j 18m"
           genre1="Aksi"
@@ -1042,6 +1098,7 @@ function MovieMyList() {
           <MovieCardPortrait
             folder="imagesCard"
             id="myheroacademia"
+            type="series"
             age="13+"
             episode="8 Musim"
             genre1="Aksi"
@@ -1058,6 +1115,7 @@ function MovieMyList() {
           <MovieCardPortrait
             folder="imagesCard"
             id="sonic2"
+            type="film"
             age="13+"
             episode="2j 2m"
             genre1="Petualangan"
@@ -1074,6 +1132,7 @@ function MovieMyList() {
           <MovieCardPortrait
             folder="imagesCard"
             id="guardianofthegalaxy"
+            type="film"
             age="13+"
             episode="2j 30m"
             genre1="Petualangan"
@@ -1090,6 +1149,7 @@ function MovieMyList() {
           <MovieCardPortrait
             folder="imagesCard"
             id="spiderman"
+            type="film"
             age="SU"
             episode="2j 20m"
             genre1="Animasi"
@@ -1106,6 +1166,7 @@ function MovieMyList() {
           <MovieCardPortrait
             folder="imagesCard"
             id="thelittlemermaid"
+            type="film"
             age="SU"
             episode="2j 15m"
             genre1="Musikal"
@@ -1122,6 +1183,7 @@ function MovieMyList() {
           <MovieCardPortrait
             folder="imagesCard"
             id="amancalledotto"
+            type="film"
             age="13+"
             episode="2j 6m"
             genre1="Drama"
@@ -1138,6 +1200,7 @@ function MovieMyList() {
           <MovieCardPortrait
             folder="imagesCard"
             id="thetomorrowwar"
+            type="film"
             age="13+"
             episode="2j 18m"
             genre1="Aksi"
@@ -1154,6 +1217,7 @@ function MovieMyList() {
           <MovieCardPortrait
             folder="imagesCard"
             id="bighero6"
+            type="film"
             age="13+"
             episode="1j 42m"
             genre1="Animasi"
@@ -1170,6 +1234,7 @@ function MovieMyList() {
           <MovieCardPortrait
             folder="imagesCard"
             id="doctorstrange"
+            type="film"
             age="13+"
             episode="2j 6m"
             genre1="Aksi"
@@ -1186,6 +1251,7 @@ function MovieMyList() {
           <MovieCardPortrait
             folder="imagesCard"
             id="jurassicworld"
+            type="film"
             age="13+"
             episode="2j 26m"
             genre1="Fiksi Ilmiah"
@@ -1202,6 +1268,7 @@ function MovieMyList() {
           <MovieCardPortrait
             folder="imagesCard"
             id="baymax"
+            type="film"
             age="SU"
             episode="1j 42m"
             genre1="Petualangan"
@@ -1218,6 +1285,7 @@ function MovieMyList() {
           <MovieCardPortrait
             folder="imagesCard"
             id="shazam"
+            type="film"
             title="Shazam"
             rating="4.2"
             progress={55}
