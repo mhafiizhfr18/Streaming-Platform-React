@@ -533,11 +533,11 @@ body {
   opacity:1;
   transition:.3s;
 }
-.left{
+.css-arrow .left{
   left: 0px;
 }
 
-.right{
+.css-arrow .right{
   right: 0px;
 }
 .movie-wrapper:hover .css-arrow{
@@ -710,10 +710,10 @@ body {
 
 .episode-item {
   display: grid;
-  grid-template-columns: 30px 120px 1fr 60px;
+  grid-template-columns: 30px 120px 1fr;
   gap: 12px;
   align-items: center;
-  padding: 10px;
+  padding: 16px 24px;
   background-color: #22282A;
   border-radius: 8px;
   font-size: 14px;
@@ -724,10 +724,17 @@ body {
   height: 70px;
   object-fit: cover;
   border-radius: 6px;
+  border-bottom: 1px solid red;
 }
 
 .episode-info {
   min-width: 0;
+  padding: 10px;
+}
+.episode-info .title{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
 .episode-info h5 {
   display: block;
@@ -735,7 +742,7 @@ body {
   font-size: 15px;
 }
 .episode-info span{
-  font-size: 14px;
+  font-size: 12px;
 }
 .episode-info p {
   margin: 0;
@@ -875,6 +882,7 @@ body {
   .btn-third {
       border: none;
   }
+  /* Movie Card */
   .movie-card2{
       width: 95px;
       height: 145px;
@@ -882,11 +890,12 @@ body {
   .movie-list .movie-card {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
-}
+  }
 
   .movie-list .movie-card--portrait {
     width: 100%;
-}
+  }
+  /* Hover */
   .movie-hover{
     display: none;
   }
@@ -901,14 +910,34 @@ body {
   }
   .movie-popup .hero-button{
     margin: 0;
-}
+  }
   .card-footer {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+  /* POP UP */
   .popup-footer {
-    padding: 20px;
+    padding: 10px 19px;
+  }
+  .episode-item {
+    display: flex;
+    gap: 0;
+    padding: 5px 8px;
+  }
+  .episode-item img {
+    width: 80px;
+    height: 50px;
+    margin-left: 10px;
+  }
+  .episode-info span{
+    font-size: 11px;
+  }
+  .episode-info p{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
+  /* FOOTER */
   .copyright{
       color:#C1C2C4;
   }
@@ -928,9 +957,9 @@ body {
       margin: 0;
   }
   .footer-logo img{
-  width: 100px;
-  height: auto;
-  margin: 0 0 12px 0;
+      width: 100px;
+      height: auto;
+      margin: 0 0 12px 0;
   }
   .footer-title{
       display:flex;
@@ -951,9 +980,9 @@ body {
       margin: 20px 0;
   }
   .footer-help li{
-    margin-top: 0px;
-    margin-bottom: 0px;
-  }
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
   .footer ul a{
       font-size: 14px;
   }

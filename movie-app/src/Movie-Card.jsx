@@ -281,7 +281,6 @@ export function MoviePopUp({
         </div>
 
         {type === "series" ? <EpisodeList /> : <RecommendationList />}
-
       </div>
     </div>
   );
@@ -316,7 +315,6 @@ function EpisodeList() {
       <h3>Episode</h3>
 
       <div className="episode-list">
-
         <div className="episode-item">
           <span>1</span>
 
@@ -326,14 +324,15 @@ function EpisodeList() {
           />
 
           <div className="episode-info">
-            <h5>Pilot</h5>
+            <div className="title">
+              <h5>Pilot</h5>
+              <span>30 min</span>
+            </div>
             <p>
-              American football coach Ted Lasso is hired by a wealthy
-              divorcee to coach the English soccer team AFC Richmond.
+              American football coach Ted Lasso is hired by a wealthy divorcee
+              to coach the English soccer team AFC Richmond.
             </p>
           </div>
-
-          <span>30 min</span>
         </div>
 
         <div className="episode-item">
@@ -345,13 +344,12 @@ function EpisodeList() {
           />
 
           <div className="episode-info">
-            <h5>Biscuit</h5>
-            <p>
-              It's Ted's first day of coaching, and fans aren't happy.
-            </p>
+            <div className="title">
+              <h5>Biscuit</h5>
+              <span>29 min</span>
+            </div>
+            <p>It's Ted's first day of coaching, and fans aren't happy.</p>
           </div>
-
-          <span>29 min</span>
         </div>
 
         <div className="episode-item">
@@ -363,16 +361,17 @@ function EpisodeList() {
           />
 
           <div className="episode-info">
-            <h5>Trent Crimm: Independent</h5>
+            <div className="title">
+              <h5>Trent Crimm: Independent</h5>
+            <span>30 min</span>
+            </div>
+
             <p>
-              To arrange an in-depth exposé, Rebecca pairs cynical
-              journalist Trent Crimm with Ted.
+              To arrange an in-depth exposé, Rebecca pairs cynical journalist
+              Trent Crimm with Ted.
             </p>
           </div>
-
-          <span>30 min</span>
         </div>
-
       </div>
     </div>
   );
