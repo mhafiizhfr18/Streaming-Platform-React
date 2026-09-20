@@ -1095,6 +1095,7 @@ function MovieMyList() {
       <h3>Daftar Saya</h3>
       <div className="movie-list">
         <div className="movie-card">
+            
           <MovieCardPortrait
             folder="imagesCard"
             id="myheroacademia"
