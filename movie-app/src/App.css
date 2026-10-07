@@ -808,9 +808,6 @@ body {
 .material-symbols-outlined.footer-arrow{
   display:none;
 }
-::-webkit-scrollbar-thumb{
-  display: none;
-}
 
 
 /* RESPONSIVE MEDIA */
