@@ -119,10 +119,11 @@ p {
     background: transparent;
     border: 1px solid #E7E3FC3B;
     color: white;
+    font-size: 16px;
 }
 .input-form input::placeholder {
     color: #C1C2C4;
-    font-size: 14px;
+    font-size: 15px;
 }
 .input-form input:focus {
     outline: none;
