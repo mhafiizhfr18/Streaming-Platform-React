@@ -47,8 +47,9 @@ function FormLogin() {
       const account = response.data.find((item) => {
         return item.username === username && item.password === password;
       });
-
+      
       if (account) {
+        localStorage.setItem("isLoggedIn", "true");
         navigate("/home");
       } else {
         alert("Username atau password salah");

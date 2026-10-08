@@ -5,13 +5,13 @@ import './App.css'
 import App from './App.jsx'
 import { LoginPage } from './Login.jsx'
 import { RegisterPage } from './Register.jsx'
-import { HomePage } from './Home-Page.jsx'
-import { SeriesPage } from './Home-Page.jsx'
-import { MoviesPage } from './Home-Page.jsx'
-import { MyList } from './Home-Page.jsx'
+import { HomePage, SeriesPage, MoviesPage, MyList } from './Home-Page.jsx'
+import { ErrorPage } from './ErrorPage.jsx'
 
 import {createBrowserRouter} from 'react-router'
 import {RouterProvider} from 'react-router/dom'
+
+import ProtectedRoute from './ProtectedRoute.jsx'
 
 const router = createBrowserRouter([
   {
@@ -21,6 +21,7 @@ const router = createBrowserRouter([
         index: true,
         Component: App
       },
+      // PUBLIC ROUTES
       {
         path: "register",
         Component: RegisterPage
@@ -30,21 +31,30 @@ const router = createBrowserRouter([
         Component: LoginPage
       },
       {
-        path: "home",
-        Component: HomePage
+        path: "*",
+        Component: ErrorPage
       },
+      // PROTECTED ROUTES
       {
-        path: "series",
-        Component: SeriesPage
-      },
-      {
-        path: "movies",
-        Component: MoviesPage
-      },
-      {
-        path: "mylist",
-        Component: MyList
-      },
+        Component: ProtectedRoute,
+        children: [
+            {
+              path: "home",
+              Component: HomePage
+            },
+            {
+              path: "series",
+              Component: SeriesPage
+            },
+            {
+              path: "movies",
+              Component: MoviesPage
+            },
+            {
+              path: "mylist",
+              Component: MyList
+            },
+        ]}
     ]
   },
 ]);

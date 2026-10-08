@@ -1,15 +1,18 @@
 import "./App.css";
 import React, { useRef, useState } from "react";
+import { NavLink, useNavigate } from "react-router";
 
 import Logo1 from "./assets/Logo/Logo.svg";
 import Logo2 from "./assets/Logo/Logo-icon.svg";
 import Profile from "./assets/Image/profile.png";
 import VolumeOff from "./assets/Icon/volume_off.svg";
 import { imagesBanner } from "./Images.jsx";
-import { BannerHover, MoviePopUp } from "./Movie-Card.jsx";
-
-import { MovieCardLandscape, MovieCardPortrait } from "./Movie-Card.jsx";
-import { NavLink } from "react-router";
+import {
+  BannerHover,
+  MoviePopUp,
+  MovieCardLandscape,
+  MovieCardPortrait,
+} from "./Movie-Card.jsx";
 
 export function HomePage() {
   return (
@@ -79,23 +82,19 @@ export function MoviesPage() {
   );
 }
 export function Navbar() {
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    localStorage.removeItem("isLoggedIn");
+    navigate("/login");
+  }
+
   return (
     <div className="navbar">
       <div className="nav-left">
-        <NavLink
-          to="/home"
-          className="navbar-logo"
-        >
-          <img
-            className="logo-desktop"
-            src={Logo1}
-            alt="CHILL"
-          ></img>
-          <img
-            className="logo-mobile"
-            src={Logo2}
-            alt="CHILL"
-          ></img>
+        <NavLink to="/home" className="navbar-logo">
+          <img className="logo-desktop" src={Logo1} alt="CHILL"></img>
+          <img className="logo-mobile" src={Logo2} alt="CHILL"></img>
         </NavLink>
 
         <ul className="nav-menu">
@@ -112,31 +111,28 @@ export function Navbar() {
       </div>
 
       <div className="profile-menu">
-        <NavLink to="/login">
-          <img
-            src={Profile}
-            alt="Profile"
-          ></img>
-        </NavLink>
+        <button to="/login">
+          <img src={Profile} alt="Profile"></img>
+        </button>
         <span className="material-symbols-outlined arrow">
           keyboard_arrow_down
         </span>
 
         <div className="dropdown-menu">
-          <NavLink to="/login">
+          <button to="/login">
             <span className="material-symbols-outlined">person</span>
             Profil Saya
-          </NavLink>
+          </button>
 
-          <NavLink to="/upgrade">
+          <button to="/upgrade">
             <span className="material-symbols-outlined">star</span>
             Ubah Premium
-          </NavLink>
+          </button>
 
-          <NavLink to="/logout">
+          <button onClick={handleLogout}>
             <span className="material-symbols-outlined">logout</span>
             Keluar
-          </NavLink>
+          </button>
         </div>
       </div>
     </div>
@@ -162,10 +158,7 @@ function MovieBanner({ banner, title, description, showGenre }) {
         </div>
         <div className="hero-right">
           <button className="btn-third">
-            <img
-              src={VolumeOff}
-              alt="Volume Off"
-            ></img>
+            <img src={VolumeOff} alt="Volume Off"></img>
           </button>
         </div>
       </div>
@@ -217,10 +210,7 @@ function MovieRow({ children }) {
         arrow_back_ios
       </button>
 
-      <div
-        className="movie-scroll"
-        ref={scrollRef}
-      >
+      <div className="movie-scroll" ref={scrollRef}>
         <div className="movie-card">{MovieCards}</div>
       </div>
 
@@ -1095,7 +1085,6 @@ function MovieMyList() {
       <h3>Daftar Saya</h3>
       <div className="movie-list">
         <div className="movie-card">
-            
           <MovieCardPortrait
             folder="imagesCard"
             id="myheroacademia"
@@ -1315,19 +1304,13 @@ export function Footer() {
     <div className="footer">
       <div className="footer-logo">
         <NavLink to="home-page.html">
-          <img
-            src={Logo1}
-            alt=""
-          ></img>
+          <img src={Logo1} alt=""></img>
         </NavLink>
         <p className="copyright">@2023 Chill All Rights Reserved.</p>
       </div>
 
       <div className="footer-menu">
-        <div
-          className="footer-title"
-          onClick={() => setGenreOpen(!genreOpen)}
-        >
+        <div className="footer-title" onClick={() => setGenreOpen(!genreOpen)}>
           <p>Genre</p>
           <span className="material-symbols-outlined footer-arrow">
             chevron_right
@@ -1384,10 +1367,7 @@ export function Footer() {
       </div>
 
       <div className="footer-help">
-        <div
-          className="footer-title"
-          onClick={() => setHelpOpen(!helpOpen)}
-        >
+        <div className="footer-title" onClick={() => setHelpOpen(!helpOpen)}>
           <p>Bantuan</p>
           <span className="material-symbols-outlined footer-arrow">
             chevron_right

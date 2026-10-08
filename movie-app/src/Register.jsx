@@ -40,6 +40,11 @@ function FormRegister() {
   async function daftar(event) {
     event.preventDefault();
 
+    if (!username || !password) {
+      alert("Username dan password wajib diisi");
+      return;
+    }
+
     if (password !== confirmPassword) {
         alert("Konfirmasi password tidak sesuai");
         return;
@@ -56,6 +61,8 @@ function FormRegister() {
     );
     
     navigate("/login");
+
+    alert("Pendaftaran berhasil! Silakan masuk dengan akun Anda.");
   }
 
   return (
