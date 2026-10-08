@@ -2,6 +2,7 @@ import "./App.css";
 import React, { useRef, useState } from "react";
 import { NavLink, useNavigate } from "react-router";
 
+import Loading from "./Loading.jsx";
 import Logo1 from "./assets/Logo/Logo.svg";
 import Logo2 from "./assets/Logo/Logo-icon.svg";
 import Profile from "./assets/Image/profile.png";
@@ -82,14 +83,22 @@ export function MoviesPage() {
   );
 }
 export function Navbar() {
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   function handleLogout() {
+    setLoading(true);
     localStorage.removeItem("isLoggedIn");
-    navigate("/login");
+
+    setTimeout(() => {
+      navigate("/login");
+    }, 500);
   }
 
   return (
+    <>
+      {loading && <Loading />}
+
     <div className="navbar">
       <div className="nav-left">
         <NavLink to="/home" className="navbar-logo">
@@ -136,6 +145,7 @@ export function Navbar() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 function MovieBanner({ banner, title, description, showGenre }) {

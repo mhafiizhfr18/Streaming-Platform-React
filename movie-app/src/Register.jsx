@@ -2,9 +2,11 @@ import "./index.css";
 import Logo from "./assets/Logo/Logo.png";
 import GoogleLogo from "./assets/Logo/Google.svg";
 import InputField from "./InputField.jsx";
-import { NavLink, useNavigate } from "react-router";
-import { useState } from "react";
+import { NavLink } from "react-router";
+import { useState, useEffect } from "react";
 import Axios from "axios";
+import Loading from "./Loading.jsx";
+import Notification from "./Notification.jsx";
 
 export function RegisterPage() {
   return (
@@ -30,73 +32,117 @@ function TitleForm(props) {
 }
 
 function FormRegister() {
-  
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [notification, setNotification] = useState(false);
+  const [closingNotification, setClosingNotification] = useState(false);
+
+  useEffect(() => {
+    if (!notification) return;
+    const timer = setTimeout(() => {
+      setClosingNotification(true);
+
+      setTimeout(() => {
+        setNotification(false);
+        setClosingNotification(false);
+      }, 300);
+    }, 2700);
+
+    return () => clearTimeout(timer);
+  }, [notification]);
 
   async function daftar(event) {
     event.preventDefault();
 
-    if (!username || !password) {
-      alert("Username dan password wajib diisi");
-      return;
-    }
+    try {
+      // Ambil semua akun yang sudah terdaftar
+      const response = await Axios.get(import.meta.env.VITE_API_URL);
 
-    if (password !== confirmPassword) {
+      // Cek apakah username sudah digunakan
+      const usernameExists = response.data.some(
+        (account) => account.username === username,
+      );
+
+      if (usernameExists) {
+        alert("Username sudah terdaftar");
+        return;
+      }
+
+      if (!username || !password) {
+        alert("Username dan password wajib diisi");
+        return;
+      }
+
+      if (password !== confirmPassword) {
         alert("Konfirmasi password tidak sesuai");
         return;
+      }
+      setLoading(true);
+
+      const data = {
+        username,
+        password,
+      };
+
+      await Axios.post(import.meta.env.VITE_API_URL, data);
+
+      setNotification(true);
+
+      setUsername("");
+      setPassword("");
+      setConfirmPassword("");
+      setNotification(true);
+    } catch (error) {
+      console.error(error);
+      alert("Terjadi kesalahan saat mendaftar");
+    } finally {
+      setLoading(false);
     }
-
-    const data = {
-      username,
-      password,
-    };
-
-    await Axios.post(
-      import.meta.env.VITE_API_URL,
-      data,
-    );
-    
-    navigate("/login");
-
-    alert("Pendaftaran berhasil! Silakan masuk dengan akun Anda.");
   }
 
   return (
-    <div className="form">
-      <form onSubmit={daftar}>
-        <InputField
-          type="text"
-          name="username"
-          label="Username"
-          placeholder="Masukkan username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+    <>
+      {loading && <Loading />}
+      {notification && (
+        <Notification
+          message="Akun berhasil dibuat"
+          closing={closingNotification}
         />
-        <InputField
-          type="password"
-          name="password"
-          label="Kata Sandi"
-          placeholder="Masukkan kata sandi"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <InputField
-          type="password"
-          name="confirmPassword"
-          label="Konfirmasi Kata Sandi"
-          placeholder="Masukkan kembali kata sandi"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          
-        />
-        <QuestionRegister />
-        <ButtonRegister />
-      </form>
-    </div>
+      )}
+
+      <div className="form">
+        <form onSubmit={daftar}>
+          <InputField
+            type="text"
+            name="username"
+            label="Username"
+            placeholder="Masukkan username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <InputField
+            type="password"
+            name="password"
+            label="Kata Sandi"
+            placeholder="Masukkan kata sandi"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <InputField
+            type="password"
+            name="confirmPassword"
+            label="Konfirmasi Kata Sandi"
+            placeholder="Masukkan kembali kata sandi"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+          <QuestionRegister />
+          <ButtonRegister />
+        </form>
+      </div>
+    </>
   );
 }
 

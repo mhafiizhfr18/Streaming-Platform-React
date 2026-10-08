@@ -5,6 +5,7 @@ import InputField from "./InputField.jsx";
 import { NavLink, useNavigate } from "react-router";
 import { useState } from "react";
 import Axios from "axios";
+import Loading from "./Loading.jsx";
 
 export function LoginPage() {
   return (
@@ -31,6 +32,7 @@ function TitleForm(props) {
 function FormLogin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -41,6 +43,9 @@ function FormLogin() {
       alert("Username dan password wajib diisi");
       return;
     }
+
+    setLoading(true);
+
     try {
       const response = await Axios.get(import.meta.env.VITE_API_URL);
 
@@ -58,9 +63,15 @@ function FormLogin() {
       console.log(error);
       alert("Terjadi kesalahan saat menghubungi server");
     }
+    finally {
+      setLoading(false);
+    }
   }
 
   return (
+    <>
+      {loading && <Loading />}
+
     <div className="form">
       <form onSubmit={masuk}>
         <InputField
@@ -92,17 +103,25 @@ function FormLogin() {
         </div>
 
         <div>
-          <button className="login" type="submit">
-            Masuk
+          <button className="login" type="submit" disabled={loading}>
+            {loading ? (
+              <>
+                <span className="spinner"></span>
+                Memuat... 
+              </>
+            )
+            : ("Masuk")}
           </button>
 
           <p className="choose">Atau</p>
-          <button className="login google-login" type="button">
+          <button className="login google-login" type="button" disabled={loading}>
             <img src={GoogleLogo} alt="Google Logo"></img>
             Masuk dengan Google
           </button>
         </div>
       </form>
     </div>
+    </>
   );
+  
 }
