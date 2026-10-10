@@ -61,6 +61,32 @@ function FormRegister() {
   async function daftar(event) {
     event.preventDefault();
 
+    if (!username.trim() || !password.trim() || !email.trim()) {
+      setNotification({
+        message: "Semua kolom wajib diisi",
+        type: "error",
+      });
+      return;
+    }
+
+    if (password.length < 8) {
+      setNotification({
+        message: "Kata sandi baru minimal 8 karakter",
+        type: "error",
+      });
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setNotification({
+        message: "Konfirmasi password tidak sesuai",
+        type: "error",
+      });
+      return;
+    }
+
+    setLoading(true);
+
     try {
       // Ambil semua akun yang sudah terdaftar
       const response = await Axios.get(import.meta.env.VITE_API_URL);
@@ -80,30 +106,18 @@ function FormRegister() {
         return;
       }
 
-      if (!username.trim() || !password.trim()  || !email.trim() ) {
-        setNotification({
-          message: "Semua kolom wajib diisi",
-          type: "error",
-        });
-        return;
-      }
+      const emailExists = response.data.some(
+        (account) =>
+          account.email?.trim().toLowerCase() === email.trim().toLowerCase(),
+      );
 
-      if (password && password.length < 8) {
+      if (emailExists) {
         setNotification({
-          message: "Kata sandi baru minimal 8 karakter",
+          message: "Email sudah terdaftar",
           type: "error",
         });
         return;
       }
-
-      if (password !== confirmPassword) {
-        setNotification({
-          message: "Konfirmasi password tidak sesuai",
-          type: "error",
-        });
-        return;
-      }
-      setLoading(true);
 
       const data = {
         username: username.trim(),
