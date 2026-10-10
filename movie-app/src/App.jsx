@@ -1,7 +1,7 @@
 import './App.css'
 import './index.css'
 
-import { RegisterPage } from './Register.jsx'
+import { RegisterPage } from './pages/Register.jsx'
 
 
 function App () {

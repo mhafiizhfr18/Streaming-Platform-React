@@ -1,12 +1,12 @@
-import "./index.css";
-import Logo from "./assets/Logo/Logo.png";
-import GoogleLogo from "./assets/Logo/Google.svg";
-import InputField from "./InputField.jsx";
+import "../index.css";
+import Logo from "../assets/Logo/Logo.png";
+import GoogleLogo from "../assets/Logo/Google.svg";
+import InputField from "../components/InputField.jsx";
 import { NavLink } from "react-router";
 import { useState, useEffect } from "react";
 import Axios from "axios";
-import Loading from "./Loading.jsx";
-import Notification from "./Notification.jsx";
+import Loading from "../components/Loading.jsx";
+import Notification from "../components/Notification.jsx";
 
 export function RegisterPage() {
   return (
@@ -36,21 +36,25 @@ function FormRegister() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [notification, setNotification] = useState(false);
+  const [notification, setNotification] = useState(null);
   const [closingNotification, setClosingNotification] = useState(false);
 
   useEffect(() => {
     if (!notification) return;
-    const timer = setTimeout(() => {
-      setClosingNotification(true);
 
-      setTimeout(() => {
-        setNotification(false);
-        setClosingNotification(false);
-      }, 300);
+    const closeTimer = setTimeout(() => {
+      setClosingNotification(true);
     }, 2700);
 
-    return () => clearTimeout(timer);
+    const removeTimer = setTimeout(() => {
+      setNotification(null);
+      setClosingNotification(false);
+    }, 3000);
+
+    return () => {
+      clearTimeout(closeTimer);
+      clearTimeout(removeTimer);
+    };
   }, [notification]);
 
   async function daftar(event) {
@@ -62,21 +66,32 @@ function FormRegister() {
 
       // Cek apakah username sudah digunakan
       const usernameExists = response.data.some(
-        (account) => account.username === username,
+        (account) =>
+          account.username?.trim().toLowerCase() ===
+          username.trim().toLowerCase(),
       );
 
       if (usernameExists) {
-        alert("Username sudah terdaftar");
+        setNotification({
+          message: "Username sudah terdaftar",
+          type: "error"
+        });
         return;
       }
 
       if (!username || !password) {
-        alert("Username dan password wajib diisi");
+        setNotification({
+          message: "Username dan password wajib diisi",
+          type: "error"
+        });
         return;
       }
 
       if (password !== confirmPassword) {
-        alert("Konfirmasi password tidak sesuai");
+        setNotification({
+          message: "Konfirmasi password tidak sesuai",
+          type: "error"
+        });
         return;
       }
       setLoading(true);
@@ -88,15 +103,20 @@ function FormRegister() {
 
       await Axios.post(import.meta.env.VITE_API_URL, data);
 
-      setNotification(true);
-
       setUsername("");
       setPassword("");
       setConfirmPassword("");
-      setNotification(true);
+
+      setNotification({
+        message: "Akun berhasil dibuat",
+        type: "success"
+      });
     } catch (error) {
       console.error(error);
-      alert("Terjadi kesalahan saat mendaftar");
+      setNotification({
+        message: "Terjadi kesalahan saat mendaftar",
+        type: "error"
+      });
     } finally {
       setLoading(false);
     }
@@ -107,7 +127,8 @@ function FormRegister() {
       {loading && <Loading />}
       {notification && (
         <Notification
-          message="Akun berhasil dibuat"
+          message={notification.message}
+          type={notification.type}
           closing={closingNotification}
         />
       )}

@@ -1,11 +1,12 @@
-import "./index.css";
-import Logo from "./assets/Logo/Logo.png";
-import GoogleLogo from "./assets/Logo/Google.svg";
-import InputField from "./InputField.jsx";
+import "../index.css";
+import Logo from "../assets/Logo/Logo.png";
+import GoogleLogo from "../assets/Logo/Google.svg";
+import InputField from "../components/InputField.jsx";
 import { NavLink, useNavigate } from "react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Axios from "axios";
-import Loading from "./Loading.jsx";
+import Loading from "../components/Loading.jsx";
+import Notification from "../components/Notification.jsx";
 
 export function LoginPage() {
   return (
@@ -33,14 +34,37 @@ function FormLogin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [notification, setNotification] = useState(null);
+  const [closingNotification, setClosingNotification] = useState(false);
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+      if (!notification) return;
+  
+      const closeTimer = setTimeout(() => {
+        setClosingNotification(true);
+      }, 2700);
+  
+      const removeTimer = setTimeout(() => {
+        setNotification(null);
+        setClosingNotification(false);
+      }, 3000);
+  
+      return () => {
+        clearTimeout(closeTimer);
+        clearTimeout(removeTimer);
+      };
+    }, [notification]);
+
   async function masuk(event) {
     event.preventDefault();
-
+    
     if (!username || !password) {
-      alert("Username dan password wajib diisi");
+      setNotification({
+        type: "error",
+        message: "Username dan password harus diisi",
+      });
       return;
     }
 
@@ -57,11 +81,17 @@ function FormLogin() {
         localStorage.setItem("isLoggedIn", "true");
         navigate("/home");
       } else {
-        alert("Username atau password salah");
+        setNotification({
+          type: "error",
+          message: "Username atau password salah",
+        });
       }
     } catch (error) {
       console.log(error);
-      alert("Terjadi kesalahan saat menghubungi server");
+      setNotification({
+        type: "error",
+        message: "Terjadi kesalahan saat menghubungi server",
+      });
     }
     finally {
       setLoading(false);
@@ -71,6 +101,13 @@ function FormLogin() {
   return (
     <>
       {loading && <Loading />}
+      {notification && (
+        <Notification
+          type={notification.type}
+          message={notification.message}
+          closing={closingNotification}
+        />
+      )}
 
     <div className="form">
       <form onSubmit={masuk}>

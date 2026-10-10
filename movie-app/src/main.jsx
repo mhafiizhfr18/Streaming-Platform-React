@@ -3,10 +3,14 @@ import './index.css'
 import './App.css'
 
 import App from './App.jsx'
-import { LoginPage } from './Login.jsx'
-import { RegisterPage } from './Register.jsx'
-import { HomePage, SeriesPage, MoviesPage, MyList } from './Home-Page.jsx'
-import { ErrorPage } from './ErrorPage.jsx'
+import { LoginPage } from './pages/Login-Page.jsx'
+import { RegisterPage } from './pages/Register.jsx'
+import { HomePage } from './pages/Home-Page.jsx'
+import MoviesPage from './pages/Movies-Page.jsx'
+import SeriesPage from './pages/Series-Page.jsx'
+import MyList from './pages/MovieList-Page.jsx'
+import ProfilePage from './pages/Profile-Page.jsx'
+import { ErrorPage } from './pages/Error-Page.jsx'
 
 import {createBrowserRouter} from 'react-router'
 import {RouterProvider} from 'react-router/dom'
@@ -53,6 +57,10 @@ const router = createBrowserRouter([
             {
               path: "mylist",
               Component: MyList
+            },
+            {
+              path: "profile",
+              Component: ProfilePage
             },
         ]}
     ]

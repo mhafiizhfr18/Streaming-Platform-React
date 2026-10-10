@@ -1,5 +1,5 @@
-import "./index.css";
-import errorpage from "./assets/Image/error-image.png";
+import "../index.css";
+import errorpage from "../assets/Image/error-image.png";
 import { useNavigate } from "react-router";
 
 

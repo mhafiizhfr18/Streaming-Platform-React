@@ -1,0 +1,146 @@
+
+.profile-box{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    margin: 40px 24px 24px 24px;
+}
+.profile-wrapper{
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 48px;
+    padding: 24px 0;
+    align-items: start;
+}
+.profile-left{
+    color: white;
+}
+
+.photo-profile .photo{
+    width: 140px;
+    height: 140px;
+    border-radius: 120px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.photo-profile {
+    display: flex;
+    gap: 24px;
+}
+.photo-change {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
+.btn-upload{
+    display: inline-block;
+    color: #3254FF;
+    background-color: transparent;
+    border: 1px solid #3254FF;
+    border-radius: 48px;
+    padding: 10px 22px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.photo-change button:hover{
+    background-color: #3254FF;
+    color: white;
+}
+.photo-edit img{
+    width: 24px;
+    height: 24px;
+}
+.profile-right{
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    color: white;
+    gap: 20px;
+    background-color: #3D4142;
+    border-radius: 12px;
+    height: fit-content;
+    box-sizing: border-box;
+}
+.subscribe{
+    display: flex;
+    gap: 16px;
+    align-items: start;
+}
+.subscribe > img{
+    width: 78px;
+    height: 78px;
+    object-fit: contain;
+}
+.subscribe-info{
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.profile-right h5{
+    margin: 0;
+    font-size: 20px;
+    line-height: 1.4;
+}
+.profile-right p{
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.4;
+
+}
+.profile-right button{
+    align-self: flex-end;
+    font-size: 14px;
+    border: none;
+    border-radius: 48px;
+    color: white;
+    padding: 8px 22px;
+    background-color: #2F3334;
+    gap: 8px;
+    cursor: pointer;
+}
+.profile-right button:hover{
+    background-color: #52595b;
+}
+
+
+
+@media (max-width: 768px) {
+    .profile-wrapper {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 16px 0;
+    }
+
+    .profile-left,
+    .profile-right {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .profile-right {
+        padding: 20px;
+    }
+}
+@media (max-width: 440px) {
+    .profile-wrapper{
+        display: flex;
+        flex-direction: column;
+    }
+    .photo-change button,
+    .photo-change span{
+        font-size: 14px;
+    }
+    .subscribe-info h5{
+        font-size: 16px;
+    }
+    .subscribe-info p{
+        font-size: 14px;
+    }
+    .profile-right button{
+        font-size: 14px;
+    }
+}

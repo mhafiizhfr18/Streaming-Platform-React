@@ -1,7 +1,6 @@
-import "./App.css";
-import { imagesBanner, imagesCard } from "./Images.jsx";
-import { NavLink } from "react-router";
-import VolumeOff from "./assets/Icon/volume_off.svg";
+import "../App.css";
+import { imagesBanner, imagesCard } from "../components/Images.jsx";
+import VolumeOff from "../assets/Icon/volume_off.svg";
 
 export function MovieCardLandscape(props) {
   return (
@@ -106,7 +105,6 @@ export function MovieCardPortrait(props) {
     </div>
   );
 }
-
 function CardHover(props) {
   return (
     <div className="movie-hover">
@@ -154,36 +152,6 @@ function CardHover(props) {
     </div>
   );
 }
-
-export function BannerHover() {
-  return (
-    <div className="genre-button">
-      <div className="genre-header">
-        <span>Genre</span>
-        <span className="material-symbols-outlined">keyboard_arrow_down</span>
-      </div>
-
-      <div className="genre-menu">
-        <NavLink to="/mylist">Aksi</NavLink>
-        <NavLink to="/mylist">Anak-anak</NavLink>
-        <NavLink to="/mylist">Anime</NavLink>
-        <NavLink to="/mylist">Britania</NavLink>
-        <NavLink to="/mylist">Drama</NavLink>
-        <NavLink to="/mylist">Fantasi Ilmiah & Fantasi</NavLink>
-        <NavLink to="/mylist">Kejahatan</NavLink>
-
-        <NavLink to="/mylist">KDrama</NavLink>
-        <NavLink to="/mylist">Komedi</NavLink>
-        <NavLink to="/mylist">Petualangan</NavLink>
-        <NavLink to="/mylist">Perang</NavLink>
-        <NavLink to="/mylist">Romantis</NavLink>
-        <NavLink to="/mylist">Sains & Alam</NavLink>
-        <NavLink to="/mylist">Thriller</NavLink>
-      </div>
-    </div>
-  );
-}
-
 export function MoviePopUp({
   folder,
   id,

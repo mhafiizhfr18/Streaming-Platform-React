@@ -280,10 +280,16 @@ body {
 .movie-section {
   margin: 50px 20px;
   color: white;
-  
 }
-.movie-section h3 {
+.movie-section .title{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 20px;
+}
+.movie-section a{
+  text-decoration: none;
+  color: white;
 }
 .movie-list{
   box-sizing: border-box;
@@ -789,12 +795,30 @@ body {
 
 .notification span {
   font-size: 22px;
+  flex-shrink: 0;
 }
 
 .notification p {
   margin: 0;
   font-size: 14px;
   font-weight: 500;
+}
+/* SUCCESS */
+.notification.success span {
+  color: #16803d;
+}
+
+.notification.success .notification-progress {
+  background-color: #16803d;
+}
+
+/* ERROR */
+.notification.error span {
+  color: #c62828;
+}
+
+.notification.error .notification-progress {
+  background-color: #c62828;
 }
 
 /* Progress bar */
@@ -900,6 +924,11 @@ body {
   display:flex;
   justify-content:space-between;
   align-items:center;
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
 }
 
 .footer-title p{
