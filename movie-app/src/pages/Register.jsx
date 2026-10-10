@@ -34,6 +34,7 @@ function TitleForm(props) {
 function FormRegister() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [notification, setNotification] = useState(null);
@@ -74,15 +75,23 @@ function FormRegister() {
       if (usernameExists) {
         setNotification({
           message: "Username sudah terdaftar",
-          type: "error"
+          type: "error",
         });
         return;
       }
 
-      if (!username || !password) {
+      if (!username.trim() || !password.trim()  || !email.trim() ) {
         setNotification({
-          message: "Username dan password wajib diisi",
-          type: "error"
+          message: "Semua kolom wajib diisi",
+          type: "error",
+        });
+        return;
+      }
+
+      if (password && password.length < 8) {
+        setNotification({
+          message: "Kata sandi baru minimal 8 karakter",
+          type: "error",
         });
         return;
       }
@@ -90,32 +99,34 @@ function FormRegister() {
       if (password !== confirmPassword) {
         setNotification({
           message: "Konfirmasi password tidak sesuai",
-          type: "error"
+          type: "error",
         });
         return;
       }
       setLoading(true);
 
       const data = {
-        username,
+        username: username.trim(),
         password,
+        email: email.trim(),
       };
 
       await Axios.post(import.meta.env.VITE_API_URL, data);
 
       setUsername("");
       setPassword("");
+      setEmail("");
       setConfirmPassword("");
 
       setNotification({
         message: "Akun berhasil dibuat",
-        type: "success"
+        type: "success",
       });
     } catch (error) {
       console.error(error);
       setNotification({
         message: "Terjadi kesalahan saat mendaftar",
-        type: "error"
+        type: "error",
       });
     } finally {
       setLoading(false);
@@ -142,6 +153,14 @@ function FormRegister() {
             placeholder="Masukkan username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+          />
+          <InputField
+            type="email"
+            name="email"
+            label="Email"
+            placeholder="Masukkan email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <InputField
             type="password"

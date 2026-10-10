@@ -105,14 +105,17 @@ function ProfileMenu() {
     async function handleSaveProfile() {
         const accountId = localStorage.getItem("accountId");
 
+        // 1. Validasi identitas akun
         if (!accountId) {
             setNotification({
-                message: "Identitas akun tidak ditemukan",
+                message:
+                    "Identitas akun tidak ditemukan. Silakan login kembali.",
                 type: "error",
             });
             return;
         }
 
+        // 2. Validasi username dan email
         if (!username.trim() || !email.trim()) {
             setNotification({
                 message: "Nama pengguna dan email wajib diisi",
@@ -121,23 +124,57 @@ function ProfileMenu() {
             return;
         }
 
+        // 3. Validasi password jika pengguna ingin menggantinya
+        if (password && password.length < 8) {
+            setNotification({
+                message: "Kata sandi baru minimal 8 karakter",
+                type: "error",
+            });
+            return;
+        }
+
         setSaving(true);
 
         try {
-            await Axios.put(`${import.meta.env.VITE_API_URL}/${accountId}`, {
+            // 4. Ambil data akun yang tersimpan saat ini
+            const response = await Axios.get(
+                `${import.meta.env.VITE_API_URL}/${accountId}`,
+            );
+
+            const currentAccount = response.data;
+
+            // 5. Siapkan data yang akan diperbarui
+            const updatedAccount = {
+                ...currentAccount,
                 username: username.trim(),
                 email: email.trim(),
-            });
+            };
+
+            // Password hanya diperbarui jika pengguna mengisinya
+            if (password) {
+                updatedAccount.password = password;
+            }
+
+            // 6. Simpan perubahan ke MockAPI
+            await Axios.put(
+                `${import.meta.env.VITE_API_URL}/${accountId}`,
+                updatedAccount,
+            );
+
+            // 7. Kosongkan field password setelah berhasil
+            setPassword("");
 
             setNotification({
-                message: "Profil berhasil diperbarui",
+                message: password
+                    ? "Profil dan kata sandi berhasil diperbarui"
+                    : "Profil berhasil diperbarui",
                 type: "success",
             });
         } catch (error) {
-            console.error("Gagal menyimpan profil:", error);
+            console.error("Gagal memperbarui profil:", error);
 
             setNotification({
-                message: "Gagal menyimpan profil",
+                message: "Gagal memperbarui profil. Silakan coba lagi.",
                 type: "error",
             });
         } finally {
@@ -287,7 +324,9 @@ function ProfileMenu() {
                                     htmlFor="profile-photo"
                                     className="btn-upload"
                                 >
-                                    {uploadingPhoto ? "Mengunggah..." : "Ubah Foto"}
+                                    {uploadingPhoto
+                                        ? "Mengunggah..."
+                                        : "Ubah Foto"}
                                 </label>
                                 <span>
                                     <img src={UploadFile} alt=""></img>
@@ -314,7 +353,7 @@ function ProfileMenu() {
                             />
                             <InputField
                                 type="password"
-                                name="confirmPassword"
+                                name="newpassword"
                                 label="Ganti Sandi"
                                 placeholder="Masukkan kata sandi baru"
                                 value={password}
