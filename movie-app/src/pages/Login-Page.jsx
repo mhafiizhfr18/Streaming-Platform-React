@@ -79,6 +79,7 @@ function FormLogin() {
       
       if (account) {
         localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("accountId", account.id);
         navigate("/home");
       } else {
         setNotification({

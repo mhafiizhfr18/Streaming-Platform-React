@@ -35,7 +35,8 @@
     justify-content: center;
     align-items: center;
 }
-.btn-upload{
+.btn-upload,
+.form-change button{
     display: inline-block;
     color: #3254FF;
     background-color: transparent;
@@ -45,7 +46,11 @@
     cursor: pointer;
     font-size: 16px;
 }
-.photo-change button:hover{
+.form-change button{
+    margin-top: 20px;
+}
+.btn-upload:hover,
+.form-change button:hover{
     background-color: #3254FF;
     color: white;
 }
@@ -105,7 +110,6 @@
 .profile-right button:hover{
     background-color: #52595b;
 }
-
 
 
 @media (max-width: 768px) {
