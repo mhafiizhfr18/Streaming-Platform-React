@@ -5,7 +5,7 @@ import { MovieMyList } from "./MovieList-Page";
 import { useState } from "react";
 import Footer from "../components/Footer";
 import InputField from "../components/InputField";
-import PhotoProfile from "../assets/Image/Profile.png";
+import PhotoProfile from "../assets/Image/profile.png";
 import UploadFile from "../assets/Icon/upload.svg";
 import Warning from "../assets/Icon/Warning.svg";
 
