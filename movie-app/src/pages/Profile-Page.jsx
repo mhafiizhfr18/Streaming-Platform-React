@@ -33,6 +33,8 @@ function ProfileMenu() {
     const [saving, setSaving] = useState(false);
     const [notification, setNotification] = useState(null);
     const [closingNotification, setClosingNotification] = useState(false);
+    const [avatar, setAvatar] = useState(PhotoProfile);
+    const [uploadingPhoto, setUploadingPhoto] = useState(false);
 
     // Changes Notification
     useEffect(() => {
@@ -75,6 +77,7 @@ function ProfileMenu() {
 
                 setUsername(account.username ?? "");
                 setEmail(account.email ?? "");
+                setAvatar(account.avatar || PhotoProfile);
             } catch (error) {
                 console.error("Gagal mengambil profil:", error);
                 setProfileError("Gagal memuat profil. Silakan coba lagi.");
@@ -142,6 +145,114 @@ function ProfileMenu() {
         }
     }
 
+    // Upload foto profil
+    async function handlePhotoChange(event) {
+        const file = event.target.files[0];
+
+        // Jika pengguna tidak memilih file, hentikan proses
+        if (!file) return;
+
+        // Validasi format foto
+        const allowedTypes = ["image/png", "image/jpeg"];
+
+        if (!allowedTypes.includes(file.type)) {
+            setNotification({
+                message: "Format foto harus JPG, JPEG, atau PNG",
+                type: "error",
+            });
+
+            event.target.value = "";
+            return;
+        }
+
+        // Validasi ukuran foto: maksimal 2 MB
+        if (file.size > 2 * 1024 * 1024) {
+            setNotification({
+                message: "Ukuran foto maksimal 2 MB",
+                type: "error",
+            });
+
+            event.target.value = "";
+            return;
+        }
+
+        const accountId = localStorage.getItem("accountId");
+
+        if (!accountId) {
+            setNotification({
+                message:
+                    "Identitas akun tidak ditemukan. Silakan login kembali.",
+                type: "error",
+            });
+
+            event.target.value = "";
+            return;
+        }
+
+        // Simpan foto sebelumnya untuk mengembalikannya jika upload gagal
+        const previousAvatar = avatar;
+
+        // Tampilkan preview foto yang dipilih
+        const previewUrl = URL.createObjectURL(file);
+        setAvatar(previewUrl);
+
+        setUploadingPhoto(true);
+
+        try {
+            // 1. Siapkan file untuk dikirim ke Cloudinary
+            const formData = new FormData();
+
+            formData.append("file", file);
+            formData.append(
+                "upload_preset",
+                import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET,
+            );
+
+            // 2. Upload foto ke Cloudinary
+            const cloudinaryResponse = await Axios.post(
+                `https://api.cloudinary.com/v1_1/${
+                    import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
+                }/image/upload`,
+                formData,
+            );
+
+            // 3. Ambil URL foto dari Cloudinary
+            const imageUrl = cloudinaryResponse.data.secure_url;
+
+            // 4. Simpan URL foto ke akun pengguna di MockAPI
+            await Axios.put(`${import.meta.env.VITE_API_URL}/${accountId}`, {
+                avatar: imageUrl,
+            });
+
+            // 5. Gunakan URL Cloudinary sebagai foto profil
+            setAvatar(imageUrl);
+            localStorage.setItem("avatar", imageUrl);
+
+            setNotification({
+                message: "Foto profil berhasil diperbarui",
+                type: "success",
+            });
+
+            // Preview lokal tidak diperlukan lagi
+            URL.revokeObjectURL(previewUrl);
+        } catch (error) {
+            console.error("Gagal mengunggah foto profil:", error);
+
+            // Kembalikan foto sebelumnya jika proses gagal
+            setAvatar(previousAvatar);
+
+            URL.revokeObjectURL(previewUrl);
+
+            setNotification({
+                message: "Gagal mengunggah foto profil. Silakan coba lagi.",
+                type: "error",
+            });
+        } finally {
+            setUploadingPhoto(false);
+            event.target.value = "";
+        }
+    }
+
     return (
         <>
             {notification && (
@@ -159,7 +270,7 @@ function ProfileMenu() {
                             <div>
                                 <img
                                     className="photo"
-                                    src={PhotoProfile}
+                                    src={avatar}
                                     alt="Foto Profil"
                                 ></img>
                             </div>
@@ -168,13 +279,15 @@ function ProfileMenu() {
                                     type="file"
                                     id="profile-photo"
                                     accept="image/png,image/jpeg,image/jpg"
+                                    onChange={handlePhotoChange}
+                                    disabled={uploadingPhoto}
                                     hidden
                                 />
                                 <label
                                     htmlFor="profile-photo"
                                     className="btn-upload"
                                 >
-                                    Ubah Foto
+                                    {uploadingPhoto ? "Mengunggah..." : "Ubah Foto"}
                                 </label>
                                 <span>
                                     <img src={UploadFile} alt=""></img>
