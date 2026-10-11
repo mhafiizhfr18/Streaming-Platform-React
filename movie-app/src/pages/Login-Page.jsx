@@ -8,7 +8,7 @@ import Axios from "axios";
 import Loading from "../components/Loading.jsx";
 import Notification from "../components/Notification.jsx";
 
-export function LoginPage() {
+function LoginPage() {
   return (
     <div id="login-page">
       <div className="box">
@@ -29,6 +29,7 @@ function TitleForm(props) {
     </div>
   );
 }
+export default LoginPage
 
 function FormLogin() {
   const [username, setUsername] = useState("");

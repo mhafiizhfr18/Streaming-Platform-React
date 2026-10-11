@@ -3,7 +3,7 @@ import errorpage from "../assets/Image/error-image.png";
 import { useNavigate } from "react-router";
 
 
-export function ErrorPage() {
+function ErrorPage() {
     const navigate = useNavigate();
 
     const handleGoHome = () => {
@@ -19,3 +19,4 @@ export function ErrorPage() {
         </div>
     );
 }
+export default ErrorPage

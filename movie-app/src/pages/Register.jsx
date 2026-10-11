@@ -8,7 +8,7 @@ import Axios from "axios";
 import Loading from "../components/Loading.jsx";
 import Notification from "../components/Notification.jsx";
 
-export function RegisterPage() {
+function RegisterPage() {
   return (
     <div id="register-page">
       <div className="box">
@@ -21,6 +21,7 @@ export function RegisterPage() {
     </div>
   );
 }
+export default RegisterPage
 
 function TitleForm(props) {
   return (

@@ -11,6 +11,7 @@ import UploadFile from "../assets/Icon/upload.svg";
 import Warning from "../assets/Icon/Warning.svg";
 import Notification from "../components/Notification";
 import Loading from "../components/Loading";
+import { useNavigate } from "react-router";
 
 function ProfilePage() {
     return (
@@ -35,7 +36,7 @@ function ProfileMenu() {
     const [closingNotification, setClosingNotification] = useState(false);
     const [avatar, setAvatar] = useState(PhotoProfile);
     const [uploadingPhoto, setUploadingPhoto] = useState(false);
-
+    const navigate = useNavigate();
     // Changes Notification
     useEffect(() => {
         if (!notification) return;
@@ -380,7 +381,7 @@ function ProfileMenu() {
                                 </p>
                             </div>
                         </div>
-                        <button>Mulai Berlangganan</button>
+                        <button onClick={() => navigate("/Subscribe")}>Mulai Berlangganan</button>
                     </div>
                 </div>
             </div>

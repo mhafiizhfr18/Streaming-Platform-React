@@ -9,7 +9,7 @@ import { MovieContinue } from "./Movies-Page.jsx";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 
-export function HomePage() {
+function HomePage() {
   return (
     <>
       <Navbar />
@@ -28,6 +28,7 @@ export function HomePage() {
     </>
   );
 }
+export default HomePage
 
 export function MovieRow({ children }) {
   const scrollRef = useRef(null);

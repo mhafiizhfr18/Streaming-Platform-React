@@ -1,0 +1,141 @@
+.subscribe-box{
+    box-sizing: border-box;
+}
+
+/* UPPER */
+.subscribe-wrapper-top,
+.subscribe-wrapper-bottom{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 40px 80px;
+    gap: 80px;
+}
+.subscribe-top,
+.subscribe-bottom{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+.subscribe-top h3{
+    margin: 0;
+}
+.subscribe-desc{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+.item-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    text-align: center;
+}
+
+/* BOTTOM */
+.subscribe-wrapper-bottom{
+    background-color: #22282A;
+}
+.subscribe-card{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    padding: 30px;
+    text-align: left;
+    font-size: 14px;
+    align-items: stretch;
+}
+.card-info{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px;
+    border-radius: 12px;
+    background: linear-gradient(to right, #5370D4 10%, #192DB7 90%);
+    height: 100%;
+    box-sizing: border-box;
+}
+.card-info h6{
+    background-color: #22282A;
+    padding: 10px 20px;
+    border-radius: 24px;
+    width: fit-content;
+}
+.benefits-info{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 140px;
+}
+.benefits-item{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.subscribe-button{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: center;
+    margin-top: autos;
+    width: 100%;
+    gap: 4px;
+    border-top: 1px solid grey;
+    padding-top: 15px;
+}
+.subscribe-button button{
+    padding: 10px 24px;
+    border-radius: 24px;
+    border: none;
+}
+.subscribe-button button:hover{
+    background-color: #294196;
+    color: white;
+    cursor: pointer;
+}
+.subscribe-button span{
+        font-size: 11px;
+        font-weight: 300;
+    }
+
+@media (max-width: 440px) {
+    .subscribe-card{
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 20px;
+    .subscribe-button span{
+        font-size: 10px;
+    }
+    .benefits-info{
+        min-height: 0;
+}
+}
+}
+@media (max-width: 768px) {
+    .subscribe-desc{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        padding: 20px;
+        text-align: left;
+        font-size: 14px;
+    }
+    .subscribe-button span{
+        font-size: 11px;
+    }
+    .subscribe-wrapper-bottom{
+        padding: 20px 30px;
+    }
+}

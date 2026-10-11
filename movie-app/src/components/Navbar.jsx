@@ -91,7 +91,7 @@ function Navbar() {
               <span>Profil Saya</span>
             </button>
 
-            <button onClick={() => navigate("/upgrade")}>
+            <button onClick={() => navigate("/Subscribe")}>
               <span className="material-symbols-outlined">star</span>
               <span>Ubah Premium</span>
             </button>
