@@ -13,7 +13,6 @@
     align-items: center;
     width: 100%;
     padding: 40px 80px;
-    gap: 80px;
 }
 .subscribe-top,
 .subscribe-bottom{
@@ -22,10 +21,9 @@
     align-items: center;
     text-align: center;
     width: 100%;
+    gap: 30px;
 }
-.subscribe-top h3{
-    margin: 0;
-}
+
 .subscribe-desc{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -98,6 +96,8 @@
     padding: 10px 24px;
     border-radius: 24px;
     border: none;
+    color: #294196;
+    font-size: 14px;
 }
 .subscribe-button button:hover{
     background-color: #294196;
