@@ -3,11 +3,13 @@ import "../css/Subscribe-Page.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import NoAds from "../assets/Icon/noads.svg";
+import ListView from "../store/redux/listView";
 
 function SubscribePage() {
     return (
         <>
             <Navbar />
+            <ListView />
             <Subscribe />
             <Footer />
         </>

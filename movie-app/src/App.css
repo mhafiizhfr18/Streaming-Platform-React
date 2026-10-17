@@ -542,14 +542,14 @@ body {
   color:white;
   cursor:pointer;
   z-index:10;
-  opacity:1;
+  opacity: 0;
   transition:.3s;
 }
-.css-arrow .left{
+.css-arrow.left{
   left: 0px;
 }
 
-.css-arrow .right{
+.css-arrow.right{
   right: 0px;
 }
 .movie-wrapper:hover .css-arrow{
@@ -874,6 +874,17 @@ body {
     opacity: 0;
     transform: translate(-50%, -20px);
   }
+}
+
+.api-movie-list {
+    padding: 24px;
+    color: white;
+}
+
+.api-movie-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
 }
 
 /* FOOTER */

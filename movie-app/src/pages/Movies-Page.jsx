@@ -1,7 +1,8 @@
 import "../App.css"
 import Navbar from "../components/Navbar";
-import { MovieChill, MovieTopRated, MovieTrending, MovieNewRelease, MovieRow } from "./Home-Page";
-import { MovieCardLandscape } from "../components/Movie-Card";
+import { MovieTopRated, MovieTrending, MovieNewRelease } from "./Home-Page";
+import { MovieContinue, MovieRow } from "../pages/Home-Page"
+import { MovieCardPortrait } from "../components/Movie-Card";
 import MovieBanner from "../components/Movie-Banner";
 import Footer from "../components/Footer";
 
@@ -27,112 +28,23 @@ function MoviesPage() {
 }
 export default MoviesPage
 
-export function MovieContinue() {
+export function MovieChill(props) {
   return (
     <section className="movie-section">
-      <h3>Melanjutkan Tonton Film</h3>
+      <h3>{props.type} Persembahan Chill</h3>
+
       <MovieRow>
-        <MovieCardLandscape
-          folder="imagesBanner"
-          id="dontlookup"
-          type="film"
-          title="Don't Look Up"
-          rating="4.5"
-          progress={60}
-          duration="2j 18m"
-          genre1="Dark Comedy"
-          genre2="Fantasy"
-          genre3="Drama"
-          year="2021"
-          totalepisode="2j 18m"
-          fullage="18+"
-          description="Kate Dibiasky (Jennifer Lawrence), seorang mahasiswa pascasarjana astronomi, dan profesornya, Dr. Randall Mindy (Leonardo DiCaprio). Mereka berdua menemukan sebuah komet raksasa berukuran sebesar Gunung Everest yang sedang bergerak menuju Bumi."
-          cast="Leonardo DiCaprio, Jennifer Lawrence, Meryl Streep, Cate Blanchett, Jonah Hill, Timothée Chalamet, dan Ariana Grande"
-          pembuatfilm="Adam McKay"
-        />
-        <MovieCardLandscape
-          folder="imagesBanner"
-          id="bluelock"
-          type="film"
-          title="Blue Lock"
-          progress={69}
-          duration="1j 31m"
-          rating="4.9"
-          genre1="Olahraga"
-          genre2="Drama"
-          genre3="Aksi"
-          year="2024"
-          totalepisode="1j 31m"
-          fullage="PG-13"
-          description="Sebelum memasuki fasilitas Blue Lock, Nagi adalah seorang siswa SMA pemalas yang tidak tertarik pada apa pun. Potensi jeniusnya kemudian ditemukan oleh Reo Mikage, yang mengajaknya bermain sepak bola bersama."
-          cast="Seishiro Nagi: Nobunaga Shimazaki, Reo Mikage: Yuma Uchida, Zantetsu, dan lain-lain"
-          pembuatfilm="Shunsuke Ishikawa, Taku Kishimoto, Eightbit (8bit)"
-        />
-        <MovieCardLandscape
-          folder="imagesBanner"
-          id="shazam"
-          type="film"
-          title="Shazam"
-          rating="4.2"
-          progress={55}
-          duration="2j 12m"
-          genre1="Action"
-          genre2="Comedy"
-          genre3="Pahlawan Super"
-          year="2018"
-          totalepisode="2j 11m"
-          fullage="PG-13"
-          description="Billy Batson adalah seorang anak yatim piatu berusia 14 tahun yang sering kabur dari panti asuhan demi mencari ibu kandungnya. Suatu hari, ia terpilih oleh seorang penyihir kuno misterius untuk mewarisi kekuatan sihir yang luar biasa. Hanya dengan meneriakkan kata 'SHAZAM!', Billy dapat bertransformasi seketika menjadi sosok pahlawan super dewasa yang memiliki kekuatan dewa."
-          cast="Zachary Levi, Asher Angel, Mark Strong, dan lain-lain"
-          pembuatfilm="David F. Sandberg, Peter Safran, Henry Gayden"
-        />
-        <MovieCardLandscape
-          folder="imagesBanner"
-          id="avatar"
-          type="film"
-          title="Avatar"
-          rating="4.8"
-          progress={29}
-          duration="2j 41m"
-          genre1="Sci-Fi"
-          genre2="Action"
-          genre3="Adventure"
-          year="2022"
-          totalepisode="3j 12m"
-          fullage="PG-13"
-          description="Set decades after the events of the first film, the story follows the Na'vi people and their struggle for survival against human invaders."
-          cast="Sam Worthington, Zoe Saldaña, Stephen Lang, dan lain-lain"
-          pembuatfilm="James Cameron, Rick Jaffa, Amanda Silver, Jon Landau"
-        />
-        <MovieCardLandscape
-          folder="imagesBanner"
-          id="fastx"
-          type="film"
-          title="Fast Furious X"
-          rating="4.7"
-          progress={29}
-          duration="2j 21m"
-          genre1="Aksi"
-          genre2="Petualangan"
-          genre3="Kriminal"
-          year="2023"
-          totalepisode="2j 21m"
-          fullage="PG-13"
-          description="Dominic Toretto dan keluarganya kembali menjadi target ancaman mematikan dari masa lalu. Kali ini mereka harus menghadapi Dante Reyes, anak dari gembong narkoba Hernan Reyes (musuh yang mereka kalahkan di Fast Five)."
-          cast="Vin Diesel, Michelle Rodriguez, Jason Momoa, dan lain-lain"
-          pembuatfilm=""
-        />
-        <MovieCardLandscape
-          folder="imagesBanner"
+        <MovieCardPortrait
+          folder="imagesCard"
           id="thelittlemermaid"
           type="film"
-          title="Little Mermaid"
-          rating="4.6"
-          progress={29}
-          duration="2j 15m"
+          premium="Premium"
+          age="13+"
+          episode="8 Musim"
           genre1="Musikal"
           genre2="Fantasi"
           genre3="Keluarga"
+          title="The Little Mermaid"
           year="2023"
           totalepisode="2j 15m"
           fullage="PG-SU"
@@ -140,21 +52,131 @@ export function MovieContinue() {
           cast="Halle Bailey (Ariel), Jonah Hauer-King (Pangeran Eric), Melissa McCarthy (Ursula), Javier Bardem (Raja Triton), dan lain-lain"
           pembuatfilm="Rob Marshall, David Magee"
         />
-        <MovieCardLandscape
-          folder="imagesBanner"
-          id="spiderman"
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="dutyafterschool"
           type="film"
-          progress={39}
-          duration="2j 20m"
+          premium="Premium"
+          age="13+"
+          episode="2j 2m"
+          genre1="Aksi"
+          genre2="Militer"
+          genre3="Fiksi Ilmiah"
+          title="Duty After School"
+          year="2023"
+          totalepisode="10 Episode"
+          fullage="18+"
+          description="Ketika bola-bola alien misterius berwarna ungu muncul di langit bumi dan mulai menyerang manusia dengan mematikan, militer Korea Selatan kewalahan. Demi menambah kekuatan tempur, pemerintah membatalkan ujian masuk universitas (CSAT) dan mewajibkan seluruh siswa kelas 12 SMA untuk mengikuti pelatihan militer setelah jam sekolah."
+          cast="Shin Hyun-soo, Lee Soon-won, Im Se-mi, dan lain-lain"
+          pembuatfilm="Sung Yong-il, Yoon Soo, Lee Nam-gyu"
+        />
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="bighero6"
+          type="film"
+          premium="Premium"
+          age="13+"
+          episode="2j 30m"
           genre1="Animasi"
-          genre2="Pahlawan Super"
-          genre3="Aksi"
-          year="2018"
-          totalepisode="1j 57m"
+          genre2="Aksi"
+          genre3="Keluarga"
+          title="Big Hero 6"
+          year="2014"
+          totalepisode="1j 42m"
           fullage="SU"
-          description="Miles Morales, seorang remaja biasa asal Brooklyn, mendapatkan kekuatan laba-laba setelah digigit oleh laba-laba radioaktif. Hidupnya berubah drastis ketika ia menyaksikan kematian Spider-Man di dunianya akibat rencana jahat Kingpin yang menggunakan mesin pelontar dimensi."
-          cast="Shameik Moore, Jake Johnson, Hailee Steinfeld, dan lain-lain"
-          pembuatfilm="Bob Persichetti, Peter Ramsey, Rodney Rothman, Phil Lord"
+          description="Berlatar di kota fiktif futuristik San Fransokyo, film ini mengisahkan Hiro Hamada, seorang remaja jenius di bidang robotik berusia 14 tahun. Setelah sebuah tragedi kebakaran misterius merenggut nyawa kakak lak-lakinya, Tadashi, Hiro menemukan kenyamanan dari Baymax, sebuah robot perawat kesehatan berwujud balon tiup yang diciptakan oleh kakaknya."
+          cast="Ryan Potter, Scott Adsit, Daniel Henney, dan lain-lain"
+          pembuatfilm="Don Hall, Chris Williams, Jordan Roberts, Robert L. Baird, dan Dan Gerson"
+        />
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="allofusdead"
+          type="series"
+          premium="Premium"
+          age="SU"
+          episode="2j 20m"
+          genre1="Dark Comedy"
+          genre2="Fantasy"
+          genre3="Drama"
+          title="All of Us are Dead"
+          year="2022"
+          totalepisode="12 Episode"
+          fullage="17+"
+          description="Sebuah SMA biasa (SMA Hyosan) mendadak menjadi titik nol penyebaran wabah virus zombie yang mematikan. Sekelompok siswa terjebak di dalam area sekolah tanpa pasokan makanan, air, maupun sinyal telepon"
+          cast="Park Ji-hu, Yoon Chan-young, Cho Yi-hyun, dan lain-lain"
+          pembuatfilm="Lee Jae-kyoo, Kim Nam-su, Chun Sung-il"
+        />
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="tedlasso"
+          type="series"
+          premium="Premium"
+          age="SU"
+          episode="2j 15m"
+          genre1="Komedi"
+          genre2="Drama"
+          genre3="Olahraga"
+          title="Ted Lasso"
+          year="2020"
+          totalepisode="10 Episode"
+          fullage="21+"
+          description="Pelatih sepak bola perguruan tinggi Amerika Ted Lasso pergi ke London untuk mengelola AFC Richmond, tim sepak bola Liga Utama Inggris yang kesulitan."
+          cast="Jason Sudeikis, Brett Goldstein, Brendan Hunt, Nick Mohammed, dan lain-lain"
+          pembuatfilm="Brendan Hunt, Joe Killy, Bill Lawrence"
+        />
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="aliceinborderland"
+          type="series"
+          new="New Episode"
+          age="13+"
+          episode="2j 6m"
+          genre1="Aksi"
+          genre2="Petualangan"
+          genre3="Survival"
+          title="Alice in Borderland"
+          year="2020"
+          totalepisode="3 musim"
+          fullage="18+"
+          description="Arisu, seorang pemuda pengangguran yang kecanduan video game, tiba-tiba mendapati kota Tokyo yang biasanya padat menjadi kosong melongpong dan sunyi dalam sekejap bersama dua sahabatnya."
+          cast="Kento Yamazaki, Tao Tsuchiya, Nijiro Murakami, dan lain-lain"
+          pembuatfilm="Shinsuke Sato, Yoshiki Watabe, Yasuko Kuramitsu, dan Shinsuke Sato"
+        />
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="doctorstrange"
+          type="film"
+          top="Top 10"
+          age="13+"
+          episode="2j 6m"
+          genre1="Aksi"
+          genre2="Petualangan"
+          genre3="Horor"
+          title="Doctor Strange in the Multiverse of Madness"
+          year="2022"
+          totalepisode="2j 6m"
+          fullage="PG-13"
+          description="Film ini mengisahkan tentang Doctor Stephen Strange yang harus melindungi America Chavez, seorang remaja misterius yang memiliki kekuatan unik untuk berpindah-pindah melintasi berbagai dimensi (multiverse). Kekuatan Chavez diincar oleh Wanda Maximoff (Scarlet Witch) yang terobsesi merebutnya demi bisa hidup bersama anak-anaknya di semesta alternatif."
+          cast="Benedict Cumberbatch, Elizabeth Olsen, dan lain-lain"
+          pembuatfilm="Sam Raimi, Michael Waldron, Kevin Feige (Marvel Studios)"
+        />
+
+        <MovieCardPortrait
+          folder="imagesCard"
+          id="thetomorrowwar"
+          type="film"
+          age="13+"
+          episode="2j 18m"
+          genre1="Aksi"
+          genre2="Fiksi Ilmiah"
+          genre3="Militer"
+          title="The Tomorrow War"
+          year="2021"
+          totalepisode="2j 18m"
+          fullage="PG-13"
+          description="Dunia dikejutkan oleh kedatangan sekelompok penjelajah waktu dari tahun 2051. Mereka membawa pesan darurat bahwa 30 tahun di masa depan, umat manusia berada di ambang kepunahan akibat kalah perang melawan spesies alien predator yang sangat mematikan bernama Whitespikes."
+          cast="Chris Pratt, Yvonne Strahovski"
+          pembuatfilm="Chris McKay, Sutradara: Chris McKay"
         />
       </MovieRow>
     </section>

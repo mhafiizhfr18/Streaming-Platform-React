@@ -1,6 +1,7 @@
 import "../App.css"
 import Navbar from "../components/Navbar";
-import { MovieChill, MovieTopRated, MovieTrending, MovieNewRelease, MovieRow } from "./Home-Page";
+import { MovieTopRated, MovieTrending, MovieNewRelease, MovieRow } from "./Home-Page";
+import { MovieChill } from "./Movies-Page";
 import { MovieCardLandscape } from "../components/Movie-Card";
 import MovieBanner from "../components/Movie-Banner";
 import Footer from "../components/Footer";

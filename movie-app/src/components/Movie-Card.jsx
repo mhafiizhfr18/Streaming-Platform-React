@@ -3,19 +3,15 @@ import { imagesBanner, imagesCard } from "../components/Images.jsx";
 import VolumeOff from "../assets/Icon/volume_off.svg";
 
 export function MovieCardLandscape(props) {
+  const movieImage = props.banner
+    ? props.banner
+    : props.folder === "imagesBanner"
+      ? imagesBanner[`${props.id}.png`]
+      : imagesCard[`${props.id}.png`];
+
   return (
-    <div
-      className="movie-card--landscape"
-      onClick={props.onClick}
-    >
-      <img
-        src={
-          props.folder === "imagesBanner"
-            ? imagesBanner[`${props.id}.png`]
-            : imagesCard[`${props.id}.png`]
-        }
-        alt=""
-      ></img>
+    <div className="movie-card--landscape" onClick={props.onClick}>
+      <img src={movieImage} alt={props.title || "Poster film"} />
 
       <div className="movie-label">
         <div>
@@ -46,7 +42,6 @@ export function MovieCardLandscape(props) {
         folder={props.folder}
         id={props.id}
         type={props.type}
-        age={props.age}
         progress={props.progress}
         duration={props.duration}
         episode={props.episode}
@@ -58,19 +53,15 @@ export function MovieCardLandscape(props) {
   );
 }
 export function MovieCardPortrait(props) {
+  const movieImage = props.image
+    ? props.image
+    : props.folder === "imagesBanner"
+      ? imagesBanner[`${props.id}.png`]
+      : imagesCard[`${props.id}.png`];
+
   return (
-    <div
-      className="movie-card--portrait"
-      onClick={props.onClick}
-    >
-      <img
-        src={
-          props.folder === "imagesBanner"
-            ? imagesBanner[`${props.id}.png`]
-            : imagesCard[`${props.id}.png`]
-        }
-        alt=""
-      />
+    <div className="movie-card--portrait" onClick={props.onClick}>
+      <img src={movieImage} alt={props.title || "Poster film"} />
       <div className="movie-label">
         <div>
           {props.top !== undefined && (
@@ -184,10 +175,7 @@ export function MoviePopUp({
         >
           close
         </button>
-        <div
-          className="hero"
-          style={{ backgroundImage: `url(${movieImage})` }}
-        >
+        <div className="hero" style={{ backgroundImage: `url(${movieImage})` }}>
           <div className="hero-content">
             <div className="hero-left">
               <h1>{title}</h1>
@@ -201,10 +189,7 @@ export function MoviePopUp({
 
             <div className="hero-right">
               <button className="btn-third">
-                <img
-                  src={VolumeOff}
-                  alt="Volume Off"
-                ></img>
+                <img src={VolumeOff} alt="Volume Off"></img>
               </button>
             </div>
           </div>
@@ -259,20 +244,11 @@ function RecommendationList() {
       <h3>Rekomendasi Serupa</h3>
 
       <div className="card-footer">
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="guardianofthegalaxy"
-        />
+        <MovieCardPortrait folder="imagesCard" id="guardianofthegalaxy" />
 
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="myheroacademia"
-        />
+        <MovieCardPortrait folder="imagesCard" id="myheroacademia" />
 
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="antmanwasp"
-        />
+        <MovieCardPortrait folder="imagesCard" id="antmanwasp" />
       </div>
     </div>
   );
@@ -286,10 +262,7 @@ function EpisodeList() {
         <div className="episode-item">
           <span>1</span>
 
-          <img
-            src={imagesBanner["tedlasso3.png"]}
-            alt=""
-          />
+          <img src={imagesBanner["tedlasso3.png"]} alt="" />
 
           <div className="episode-info">
             <div className="title">
@@ -306,10 +279,7 @@ function EpisodeList() {
         <div className="episode-item">
           <span>2</span>
 
-          <img
-            src={imagesBanner["tedlasso4.png"]}
-            alt=""
-          />
+          <img src={imagesBanner["tedlasso4.png"]} alt="" />
 
           <div className="episode-info">
             <div className="title">
@@ -323,15 +293,12 @@ function EpisodeList() {
         <div className="episode-item">
           <span>3</span>
 
-          <img
-            src={imagesBanner["tedlasso5.png"]}
-            alt=""
-          />
+          <img src={imagesBanner["tedlasso5.png"]} alt="" />
 
           <div className="episode-info">
             <div className="title">
               <h5>Trent Crimm: Independent</h5>
-            <span>30 min</span>
+              <span>30 min</span>
             </div>
 
             <p>

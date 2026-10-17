@@ -4,11 +4,20 @@ import { imagesBanner } from "../components/Images.jsx";
 import { NavLink } from "react-router";
 
 
-function MovieBanner({ banner, title, description, showGenre }) {
+function MovieBanner({ 
+  banner,
+  image,
+  title,
+  description,
+  showGenre
+}) {
+  
+  const bannerImage = image || imagesBanner[banner];
+
   return (
     <div
       className="hero"
-      style={{ backgroundImage: `url(${imagesBanner[banner]})` }}
+      style={{ backgroundImage: `url(${bannerImage})` }}
     >
       {showGenre && <BannerHover />}
 
