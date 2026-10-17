@@ -8,7 +8,7 @@ import ProtectedRoute from "./ProtectedRoute.jsx";
 
 import { Provider } from "react-redux";
 import { store } from "./store/redux/store";
-import ListLoader from "./store/redux/ListLoader.jsx";
+import ListLoader from "./store/redux/listLoader.jsx";
 
 import App from "./App.jsx";
 import LoginPage from "./pages/Login-Page.jsx";
