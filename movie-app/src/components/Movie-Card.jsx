@@ -1,4 +1,6 @@
 import "../App.css";
+import { useSelector } from "react-redux";
+
 import { imagesBanner, imagesCard } from "../components/Images.jsx";
 import VolumeOff from "../assets/Icon/volume_off.svg";
 
@@ -42,6 +44,7 @@ export function MovieCardLandscape(props) {
         folder={props.folder}
         id={props.id}
         type={props.type}
+        age={props.age}
         progress={props.progress}
         duration={props.duration}
         episode={props.episode}
@@ -64,20 +67,28 @@ export function MovieCardPortrait(props) {
       <img src={movieImage} alt={props.title || "Poster film"} />
       <div className="movie-label">
         <div>
-          {props.top !== undefined && (
-            <span className="top-label">{props.top}</span>
+          {props.premium !== undefined && (
+            <span className="premium-label">{props.premium}</span>
           )}
         </div>
 
         <div>
           {props.new !== undefined && (
-            <span className="episode-label">{props.new}</span>
+            <span
+              className={
+                props.premium !== undefined
+                  ? "episode-label episode-label-below"
+                  : "episode-label"
+              }
+            >
+              {props.new}
+            </span>
           )}
         </div>
 
         <div>
-          {props.premium !== undefined && (
-            <span className="premium-label">{props.premium}</span>
+          {props.top !== undefined && (
+            <span className="top-label">{props.top}</span>
           )}
         </div>
       </div>
@@ -102,7 +113,7 @@ function CardHover(props) {
       <div className="hover-buttons">
         <div className="hover-buttons-left">
           <button className="material-symbols-outlined play">play_arrow</button>
-          <button className="material-symbols-outlined">check</button>
+          <button className="material-symbols-outlined">add</button>
         </div>
         <button className="material-symbols-outlined">
           keyboard_arrow_down
@@ -146,6 +157,7 @@ function CardHover(props) {
 export function MoviePopUp({
   folder,
   id,
+  banner,
   type,
   title,
   description,
@@ -161,9 +173,10 @@ export function MoviePopUp({
   isClosing,
 }) {
   const movieImage =
-    folder === "imagesBanner"
+    banner ||
+    (folder === "imagesBanner"
       ? imagesBanner[`${id}.png`]
-      : imagesCard[`${id}.png`];
+      : imagesCard[`${id}.png`]);
 
   return (
     <div className={`popup-overlay ${isClosing ? "closing" : ""}`}>
@@ -233,22 +246,67 @@ export function MoviePopUp({
           </div>
         </div>
 
-        {type === "series" ? <EpisodeList /> : <RecommendationList />}
+        {type === "series" ? (
+          <EpisodeList />
+        ) : (
+          <RecommendationList
+            currentTitle={title}
+            genre1={genre1}
+            genre2={genre2}
+            genre3={genre3}
+          />
+        )}
       </div>
     </div>
   );
 }
-function RecommendationList() {
+function RecommendationList({ currentTitle, genre1, genre2, genre3 }) {
+  const movies = useSelector((state) => state.list.data);
+
+  const currentGenres = [genre1, genre2, genre3].filter(Boolean);
+
+  const recommendedMovies = movies
+    .filter((movie) => {
+      const sameGenre = [movie.genre1, movie.genre2, movie.genre3].some(
+        (genre) => currentGenres.includes(genre),
+      );
+
+      return movie.title !== currentTitle && sameGenre;
+    })
+    .slice(0, 3);
+
   return (
     <div className="popup-footer">
       <h3>Rekomendasi Serupa</h3>
 
       <div className="card-footer">
-        <MovieCardPortrait folder="imagesCard" id="guardianofthegalaxy" />
-
-        <MovieCardPortrait folder="imagesCard" id="myheroacademia" />
-
-        <MovieCardPortrait folder="imagesCard" id="antmanwasp" />
+        {recommendedMovies.map((movie) => (
+          <MovieCardPortrait
+            key={movie.title}
+            id={movie.id}
+            image={movie.image}
+            banner={movie.banner}
+            type={movie.type}
+            title={movie.title}
+            rating={movie.rating}
+            progress={movie.progress}
+            duration={movie.duration}
+            genre1={movie.genre1}
+            genre2={movie.genre2}
+            genre3={movie.genre3}
+            year={movie.year}
+            totalepisode={movie.totalepisode}
+            episode={movie.episode}
+            fullage={movie.fullage}
+            age={movie.age}
+            description={movie.description}
+            cast={movie.cast}
+            pembuatfilm={movie.pembuatfilm}
+            top={movie.top}
+            new={movie.new}
+            premium={movie.premium}
+          />
+        ))}
       </div>
     </div>
   );

@@ -111,19 +111,53 @@ export function MovieRow({ children }) {
 export function MovieContinue() {
   const movies = useSelector((state) => state.list.data);
 
-  const continueMovies = movies.filter((movie) => movie.progress > 0);
-  console.log(
-    "Movie IDs:",
-    continueMovies.map((movie) => movie.id),
+  const continueMovies = movies.filter(
+    (movie) => (movie.progress > 0) && (movie.type === "film"),
   );
-  console.log("Data film pertama:", movies[0]);
-  console.log("Semua properti film:", Object.keys(movies[0] || {}));
+
   return (
     <section className="movie-section">
       <h3>Melanjutkan Tonton Film</h3>
       <MovieRow>
         {continueMovies.map((movie) => (
           <MovieCardLandscape
+            key={movie.title}
+            id={movie.id}
+            image={movie.image}
+            banner={movie.banner}
+            type={movie.type}
+            title={movie.title}
+            rating={movie.rating}
+            progress={movie.progress}
+            duration={movie.duration}
+            genre1={movie.genre1}
+            genre2={movie.genre2}
+            genre3={movie.genre3}
+            year={movie.year}
+            totalepisode={movie.totalepisode}
+            episode={movie.episode}
+            fullage={movie.fullage}
+            age={movie.age}
+            description={movie.description}
+            cast={movie.cast}
+            pembuatfilm={movie.pembuatfilm}
+            top={movie.top}
+          />
+        ))}
+      </MovieRow>
+    </section>
+  );
+}
+export function MovieTopRated(props) {
+  const movies = useSelector((state) => state.list.data);
+
+  const topRatedMovies = movies.filter((movie) => movie.top);
+  return (
+    <section className="movie-section">
+      <h3>Top Rating {props.type} Hari Ini</h3>
+      <MovieRow>
+        {topRatedMovies.map((movie) => (
+          <MovieCardPortrait
             key={movie.title}
             id={movie.id}
             image={movie.image}
@@ -153,454 +187,82 @@ export function MovieContinue() {
     </section>
   );
 }
-export function MovieTopRated(props) {
-  return (
-    <section className="movie-section">
-      <h3>Top Rating {props.type} Hari Ini</h3>
-      <MovieRow>
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="suzume"
-          type="film"
-          new="New Episode"
-          age="SU"
-          episode="2j 2m"
-          genre1="Petualangan"
-          genre2="Animasi"
-          genre3="Fantasi"
-          title="Suzume"
-          year="2022"
-          totalepisode="2j 2m"
-          fullage="SU"
-          description="Perjalanannya dimulai ketika ia bertemu dengan Souta Munakata, seorang pemuda misterius yang sedang mencari 'pintu'. Karena rasa penasaran, Suzume mengikuti Souta ke sebuah reruntuhan di gunung dan tanpa sengaja membuka sebuah pintu lapuk misterius."
-          cast="Nanoka Hara, Hokuto Matsumura, Eri Fukatsu, dan lain-lain"
-          pembuatfilm="Makoto Shinkai"
-        />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="thetomorrowwar"
-          type="film"
-          age="13+"
-          episode="2j 18m"
-          genre1="Aksi"
-          genre2="Fiksi Ilmiah"
-          genre3="Militer"
-          title="The Tomorrow War"
-          year="2021"
-          totalepisode="2j 18m"
-          fullage="PG-13"
-          description="Dunia dikejutkan oleh kedatangan sekelompok penjelajah waktu dari tahun 2051. Mereka membawa pesan darurat bahwa 30 tahun di masa depan, umat manusia berada di ambang kepunahan akibat kalah perang melawan spesies alien predator yang sangat mematikan bernama Whitespikes."
-          cast="Chris Pratt, Yvonne Strahovski"
-          pembuatfilm="Chris McKay, Sutradara: Chris McKay"
-        />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="thebatman"
-          type="film"
-          age="13+"
-          episode="2j 47m"
-          genre1="Aksi"
-          genre2="Kejahatan"
-          genre3="Drama"
-          title="The Batman"
-          year="2022"
-          totalepisode="2j 56m"
-          fullage="PG-13"
-          description="Memasuki tahun keduanya sebagai pemburu kriminal bertopeng di Gotham City, Bruce Wayne terseret jauh ke dalam bayang-bayang kota. Ketika seorang pembunuh berantai sadis yang menjuluki dirinya The Riddler mulai mengeksekusi tokoh-tokoh politik penting, ia meninggalkan teka-teki misterius yang ditujukan khusus untuk Batman."
-          cast="Robert Pattinson, Zoë Kravitz, Paul Dano, dan lain-lain"
-          pembuatfilm="Matt Reeves dan Peter Craig"
-        />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="amancalledotto"
-          type="film"
-          age="13+"
-          episode="2j 6m"
-          genre1="Drama"
-          genre2="Komedi"
-          genre3="Psikologikal"
-          title="A Man Called Otto"
-          year="2022"
-          totalepisode="2j 6m"
-          fullage="PG-13"
-          description="Film ini menceritakan tentang Otto Anderson, seorang lansia berusia 63 tahun yang terkenal sangat pemarah, kaku, dan gemar menghakimi tetangganya. Setelah kehilangan istri tercintanya, Sonya, dan dipaksa pensiun dari pekerjaannya, Otto kehilangan tujuan hidup dan berencana untuk mengakhiri hidupnya."
-          cast="Tom Hanks, Mariana Treviño, Rachel Keller, dan lain-lain"
-          pembuatfilm="Marc Forster, David Magee"
-        />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="bighero6"
-          type="film"
-          age="13+"
-          episode="1j 42m"
-          genre1="Animasi"
-          genre2="Aksi"
-          genre3="Keluarga"
-          title="Big Hero 6"
-          year="2014"
-          totalepisode="1j 42m"
-          fullage="SU"
-          description="Berlatar di kota fiktif futuristik San Fransokyo, film ini mengisahkan Hiro Hamada, seorang remaja jenius di bidang robotik berusia 14 tahun. Setelah sebuah tragedi kebakaran misterius merenggut nyawa kakak lak-lakinya, Tadashi, Hiro menemukan kenyamanan dari Baymax, sebuah robot perawat kesehatan berwujud balon tiup yang diciptakan oleh kakaknya."
-          cast="Ryan Potter, Scott Adsit, Daniel Henney, dan lain-lain"
-          pembuatfilm="Don Hall, Chris Williams, Jordan Roberts, Robert L. Baird, dan Dan Gerson"
-        />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="doctorstrange"
-          type="film"
-          age="13+"
-          episode="2j 6m"
-          genre1="Aksi"
-          genre2="Petualangan"
-          genre3="Horor"
-          title="Doctor Strange in the Multiverse of Madness"
-          year="2022"
-          totalepisode="2j 6m"
-          fullage="PG-13"
-          description="Film ini mengisahkan tentang Doctor Stephen Strange yang harus melindungi America Chavez, seorang remaja misterius yang memiliki kekuatan unik untuk berpindah-pindah melintasi berbagai dimensi (multiverse). Kekuatan Chavez diincar oleh Wanda Maximoff (Scarlet Witch) yang terobsesi merebutnya demi bisa hidup bersama anak-anaknya di semesta alternatif."
-          cast="Benedict Cumberbatch, Elizabeth Olsen, dan lain-lain"
-          pembuatfilm="Sam Raimi, Michael Waldron, Kevin Feige (Marvel Studios)"
-        />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="antmanwasp"
-          type="film"
-          age="13+"
-          episode="2j 4m"
-          genre1="Petualangan"
-          genre2="Pahlawan Super"
-          genre3="Aksi"
-          title="Ant-Man and the Wasp : Quantumania"
-          year="2018"
-          totalepisode="1j 58m"
-          fullage="PG-13"
-          description="Setelah peristiwa Captain America: Civil War, Scott Lang harus menjalani tahanan rumah dan berjuang menyeimbangkan hidupnya sebagai seorang ayah sekaligus pahlawan. Namun, ia kembali direkrut oleh Dr. Hank Pym dan Hope van Dyne untuk sebuah misi mendesak."
-          cast="Paul Rudd, Evangeline Lilly, Michael Douglas, dan lain-lain"
-          pembuatfilm="Peyton Reed, Chris McKenna, Erik Sommers, Paul Rudd, Andrew Barrer, dan Gabriel"
-        />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="myheroacademia"
-          type="series"
-          age="13+"
-          episode="8 Musim"
-          genre1="Aksi"
-          genre2="Fantasi"
-          genre3="Pahlawan Super"
-          title="My Hero Academia"
-          year="2016"
-          totalepisode="8 Season"
-          fullage="PG-13"
-          description="Di dunia tempat 80% populasi manusia lahir dengan kekuatan super yang disebut Quirk, seorang anak laki-laki bernama Izuku Midoriya justru terlahir normal tanpa kekuatan sama sekali. Meski sering dirundung, ia tetap berambisi menjadi pahlawan nomor satu seperti idolanya, All Might."
-          cast="Daiki Yamashita, Kenta Miyake, Nobuhiko Okamoto, dan lain-lain"
-          pembuatfilm="Kōhei Horikoshi, Kenji Nagasaki, Kenji Nagasaki, Yōsuke Kuroda"
-        />
-      </MovieRow>
-    </section>
-  );
-}
 export function MovieTrending(props) {
+  const movies = useSelector((state) => state.list.data);
+
+  const trendingMovies = movies.filter((movie) => movie.label === "Trending");
   return (
     <section className="movie-section">
       <h3>{props.type} Trending</h3>
       <MovieRow>
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="doctorstrange"
-          type="film"
-          top="Top 10"
-          age="13+"
-          episode="2j 6m"
-          genre1="Aksi"
-          genre2="Petualangan"
-          genre3="Horor"
-          title="Doctor Strange in the Multiverse of Madness"
-          year="2022"
-          totalepisode="2j 6m"
-          fullage="PG-13"
-          description="Film ini mengisahkan tentang Doctor Stephen Strange yang harus melindungi America Chavez, seorang remaja misterius yang memiliki kekuatan unik untuk berpindah-pindah melintasi berbagai dimensi (multiverse). Kekuatan Chavez diincar oleh Wanda Maximoff (Scarlet Witch) yang terobsesi merebutnya demi bisa hidup bersama anak-anaknya di semesta alternatif."
-          cast="Benedict Cumberbatch, Elizabeth Olsen, dan lain-lain"
-          pembuatfilm="Sam Raimi, Michael Waldron, Kevin Feige (Marvel Studios)"
-        />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="blackadam"
-          type="film"
-          top="Top 10"
-          age="13+"
-          episode="2j 5m"
-          genre1="Petualangan"
-          genre2="Fantasi"
-          genre3="Aksi"
-          title="Black Adam"
-          year="2022"
-          totalepisode="2j 5m"
-          fullage="PG-13"
-          description="Hampir 5.000 tahun setelah dianugerahi kekuatan maha dahsyat dari para dewa kuno dan langsung dipenjara, Teth-Adam (Dwayne Johnson) akhirnya dibebaskan dari makam duniawinya oleh sekelompok arkeolog. Ia bangkit kembali di era modern di negara Kahndaq dengan membawa amarah besar dan rasa dendam."
-          cast="Dwayne Johnson, Aldis Hodge, Pierce Brosnan, dan lain lain"
-          pembuatfilm="Jaume Collet-Serra, Adam Sztykiel, Rory Haines, dan Sohrab Noshirvani"
-        />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="tedlasso"
-          type="series"
-          top="Top 10"
-          new="Episode Baru"
-          age="21+"
-          episode="3 Musim"
-          genre1="Komedi"
-          genre2="Drama"
-          genre3="Olahraga"
-          title="Ted Lasso"
-          year="2020"
-          totalepisode="10 Episode"
-          fullage="21+"
-          description="Pelatih sepak bola perguruan tinggi Amerika Ted Lasso pergi ke London untuk mengelola AFC Richmond, tim sepak bola Liga Utama Inggris yang kesulitan."
-          cast="Jason Sudeikis, Brett Goldstein, Brendan Hunt, Nick Mohammed, dan lain-lain"
-          pembuatfilm="Brendan Hunt, Joe Killy, Bill Lawrence"
-        />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="spiderman"
-          type="film"
-          top="Top 10"
-          age="SU"
-          episode="2j 20m"
-          genre1="Animasi"
-          genre2="Pahlawan Super"
-          genre3="Aksi"
-          title="Spider-Man: Into the Spider-Verse"
-          year="2018"
-          totalepisode="1j 57m"
-          fullage="SU"
-          description="Miles Morales, seorang remaja biasa asal Brooklyn, mendapatkan kekuatan laba-laba setelah digigit oleh laba-laba radioaktif. Hidupnya berubah drastis ketika ia menyaksikan kematian Spider-Man di dunianya akibat rencana jahat Kingpin yang menggunakan mesin pelontar dimensi."
-          cast="Shameik Moore, Jake Johnson, Hailee Steinfeld, dan lain-lain"
-          pembuatfilm="Bob Persichetti, Peter Ramsey, Rodney Rothman, Phil Lord"
-        />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="jurassicworld"
-          type="film"
-          top="Top 10"
-          age="13+"
-          episode="2j 26m"
-          genre1="Fiksi Ilmiah"
-          genre2="Petualangan"
-          genre3="Aksi"
-          title="Jurassic World : Dominion"
-          year="2022"
-          totalepisode="2j 27m"
-          fullage="PG-13"
-          description="Kini, dinosaurus hidup berdampingan dan berburu bersama manusia di seluruh penjuru dunia. Namun, keseimbangan rapuh ini memicu ancaman baru ketika sebuah perusahaan bioteknologi bernama Biosyn melakukan rekayasa genetika ilegal yang menciptakan wabah belalang raksasa pemakan tanaman pangan."
-          cast="Chris Pratt, Bryce Dallas Howard, Laura Dern, dan lain-lain"
-          pembuatfilm="Colin Trevorrow, Emily Carmichael, Colin Trevorrow, dan Derek Connolly"
-        />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="baymax"
-          type="film"
-          top="Top 10"
-          age="SU"
-          episode="1j 42m"
-          genre1="Petualangan"
-          genre2="Fiksi Sains"
-          genre3="Aksi"
-          title="Baymax"
-          year="2022"
-          totalepisode="6 Episode"
-          fullage="7+"
-          description="Serial ini berfokus pada petualangan solo Baymax yang berkeliling kota San Fransokyo untuk menjalankan fungsi aslinya sebagai robot pendamping kesehatan."
-          cast="Scott Adsit (Baymax), Ryan Potter (Hiro), Maya Rudolph (Cass), dan lain-lain"
-          pembuatfilm=""
-        />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="myheroacademia"
-          type="series"
-          top="Top 10"
-          age="13+"
-          episode="8 Musim"
-          genre1="Aksi"
-          genre2="Fantasi"
-          genre3="Pahlawan Super"
-          title="My Hero Academia"
-          year="2016"
-          totalepisode="8 Season"
-          fullage="PG-13"
-          description="Di dunia tempat 80% populasi manusia lahir dengan kekuatan super yang disebut Quirk, seorang anak laki-laki bernama Izuku Midoriya justru terlahir normal tanpa kekuatan sama sekali. Meski sering dirundung, ia tetap berambisi menjadi pahlawan nomor satu seperti idolanya, All Might."
-          cast="Daiki Yamashita, Kenta Miyake, Nobuhiko Okamoto, dan lain-lain"
-          pembuatfilm="Kōhei Horikoshi, Kenji Nagasaki, Kenji Nagasaki, Yōsuke Kuroda"
-        />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="thelittlemermaid"
-          type="film"
-          top="Top 10"
-          age="SU"
-          episode="2j 15m"
-          genre1="Musikal"
-          genre2="Fantasi"
-          genre3="Keluarga"
-          title="The Little Mermaid"
-          year="2023"
-          totalepisode="2j 15m"
-          fullage="PG-SU"
-          description="Memiliki jalan cerita yang serupa dengan versi animasinya, film ini mengikuti perjalanan Ariel yang berjiwa petualang dan haus akan pengetahuan tentang dunia manusia."
-          cast="Halle Bailey (Ariel), Jonah Hauer-King (Pangeran Eric), Melissa McCarthy (Ursula), Javier Bardem (Raja Triton), dan lain-lain"
-          pembuatfilm="Rob Marshall, David Magee"
-        />
+        {trendingMovies.map((movie) => (
+          <MovieCardPortrait
+            key={movie.title}
+            id={movie.id}
+            image={movie.image}
+            banner={movie.banner}
+            type={movie.type}
+            title={movie.title}
+            rating={movie.rating}
+            progress={movie.progress}
+            duration={movie.duration}
+            genre1={movie.genre1}
+            genre2={movie.genre2}
+            genre3={movie.genre3}
+            year={movie.year}
+            totalepisode={movie.totalepisode}
+            episode={movie.episode}
+            fullage={movie.fullage}
+            age={movie.age}
+            description={movie.description}
+            cast={movie.cast}
+            pembuatfilm={movie.pembuatfilm}
+            top={movie.top}
+            new={movie.new}
+            premium={movie.premium}
+          />
+        ))}
       </MovieRow>
     </section>
   );
 }
 export function MovieNewRelease() {
+  const movies = useSelector((state) => state.list.data);
+
+  const newReleaseMovie = movies.filter((movie) => movie.label === "New");
+
   return (
     <section className="movie-section">
       <h3>Rilis Baru</h3>
 
       <MovieRow>
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="myheroacademia"
-          type="series"
-          top="Top 10"
-          age="13+"
-          episode="8 Musim"
-          genre1="Aksi"
-          genre2="Fantasi"
-          genre3="Pahlawan Super"
-          title="My Hero Academia"
-          year="2016"
-          totalepisode="8 Season"
-          fullage="PG-13"
-          description="Di dunia tempat 80% populasi manusia lahir dengan kekuatan super yang disebut Quirk, seorang anak laki-laki bernama Izuku Midoriya justru terlahir normal tanpa kekuatan sama sekali. Meski sering dirundung, ia tetap berambisi menjadi pahlawan nomor satu seperti idolanya, All Might."
-          cast="Daiki Yamashita, Kenta Miyake, Nobuhiko Okamoto, dan lain-lain"
-          pembuatfilm="Kōhei Horikoshi, Kenji Nagasaki, Kenji Nagasaki, Yōsuke Kuroda"
-        />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="sonic2"
-          type="film"
-          age="13+"
-          episode="2j 2m"
-          genre1="Petualangan"
-          genre2="Komedi"
-          genre3="Aksi"
-          title="Sonic the Hedgehog 2"
-          year="2022"
-          totalepisode="2j 2m"
-          fullage="SU"
-          description="Setelah menetap di Green Hills, Sonic sangat ingin membuktikan bahwa ia memiliki apa yang diperlukan untuk menjadi seorang pahlawan sejati. Ujiannya tiba ketika musuh bebuyutannya, Dr. Robotnik, kembali ke Bumi bersama sekutu barunya, Knuckles sang Echidna."
-          cast="Ben Schwartz, Jim Carrey, Idris Elba, dan lain-lain"
-          pembuatfilm="Jeff Fowler, Pat Casey, Josh Miller, dan John Whittington"
-        />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="guardianofthegalaxy"
-          type="film"
-          age="13+"
-          episode="2j 30m"
-          genre1="Petualangan"
-          genre2="Fiksi Sains"
-          genre3="Aksi"
-          title="Guardians of the Galaxy Vol. 3"
-          year="2023"
-          totalepisode="2j 30m"
-          fullage="PG-13"
-          description="Kehidupan mereka mendadak kacau ketika masa lalu kelam Rocket Raccoon kembali menghantui mereka akibat ancaman dari penciptanya, The High Evolutionary. Peter Quill, yang masih berduka karena kehilangan Gamora, harus memimpin timnya dalam sebuah misi berbahaya demi menyelamatkan nyawa Rocket."
-          cast="Chris Pratt, Zoe Saldana, Dave Bautista, Karen Gillan, dan lain-lain"
-          pembuatfilm="James Gunn, Kevin Feige"
-        />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="spiderman"
-          type="film"
-          top="Top 10"
-          age="SU"
-          episode="2j 20m"
-          genre1="Animasi"
-          genre2="Pahlawan Super"
-          genre3="Aksi"
-          title="Spider-Man: Into the Spider-Verse"
-          year="2018"
-          totalepisode="1j 57m"
-          fullage="SU"
-          description="Miles Morales, seorang remaja biasa asal Brooklyn, mendapatkan kekuatan laba-laba setelah digigit oleh laba-laba radioaktif. Hidupnya berubah drastis ketika ia menyaksikan kematian Spider-Man di dunianya akibat rencana jahat Kingpin yang menggunakan mesin pelontar dimensi."
-          cast="Shameik Moore, Jake Johnson, Hailee Steinfeld, dan lain-lain"
-          pembuatfilm="Bob Persichetti, Peter Ramsey, Rodney Rothman, Phil Lord"
-        />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="thelittlemermaid"
-          type="film"
-          premium="Premium"
-          top="Top 10"
-          age="SU"
-          episode="2j 15m"
-          genre1="Musikal"
-          genre2="Fantasi"
-          genre3="Keluarga"
-          title="The Little Mermaid"
-          year="2023"
-          totalepisode="2j 15m"
-          fullage="PG-SU"
-          description="Memiliki jalan cerita yang serupa dengan versi animasinya, film ini mengikuti perjalanan Ariel yang berjiwa petualang dan haus akan pengetahuan tentang dunia manusia."
-          cast="Halle Bailey (Ariel), Jonah Hauer-King (Pangeran Eric), Melissa McCarthy (Ursula), Javier Bardem (Raja Triton), dan lain-lain"
-          pembuatfilm="Rob Marshall, David Magee"
-        />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="amancalledotto"
-          type="film"
-          age="13+"
-          episode="2j 6m"
-          genre1="Drama"
-          genre2="Komedi"
-          genre3="Psikologikal"
-          title="A Man Called Otto"
-          year="2022"
-          totalepisode="2j 6m"
-          fullage="PG-13"
-          description="Film ini menceritakan tentang Otto Anderson, seorang lansia berusia 63 tahun yang terkenal sangat pemarah, kaku, dan gemar menghakimi tetangganya. Setelah kehilangan istri tercintanya, Sonya, dan dipaksa pensiun dari pekerjaannya, Otto kehilangan tujuan hidup dan berencana untuk mengakhiri hidupnya."
-          cast="Tom Hanks, Mariana Treviño, Rachel Keller, dan lain-lain"
-          pembuatfilm="Marc Forster, David Magee"
-        />
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="doctorstrange"
-          type="film"
-          top="Top 10"
-          age="13+"
-          episode="2j 6m"
-          genre1="Aksi"
-          genre2="Petualangan"
-          genre3="Horor"
-          title="Doctor Strange in the Multiverse of Madness"
-          year="2022"
-          totalepisode="2j 6m"
-          fullage="PG-13"
-          description="Film ini mengisahkan tentang Doctor Stephen Strange yang harus melindungi America Chavez, seorang remaja misterius yang memiliki kekuatan unik untuk berpindah-pindah melintasi berbagai dimensi (multiverse). Kekuatan Chavez diincar oleh Wanda Maximoff (Scarlet Witch) yang terobsesi merebutnya demi bisa hidup bersama anak-anaknya di semesta alternatif."
-          cast="Benedict Cumberbatch, Elizabeth Olsen, dan lain-lain"
-          pembuatfilm="Sam Raimi, Michael Waldron, Kevin Feige (Marvel Studios)"
-        />
-
-        <MovieCardPortrait
-          folder="imagesCard"
-          id="thetomorrowwar"
-          type="film"
-          age="13+"
-          episode="2j 18m"
-          genre1="Aksi"
-          genre2="Fiksi Ilmiah"
-          genre3="Militer"
-          title="The Tomorrow War"
-          year="2021"
-          totalepisode="2j 18m"
-          fullage="PG-13"
-          description="Dunia dikejutkan oleh kedatangan sekelompok penjelajah waktu dari tahun 2051. Mereka membawa pesan darurat bahwa 30 tahun di masa depan, umat manusia berada di ambang kepunahan akibat kalah perang melawan spesies alien predator yang sangat mematikan bernama Whitespikes."
-          cast="Chris Pratt, Yvonne Strahovski"
-          pembuatfilm="Chris McKay, Sutradara: Chris McKay"
-        />
+        {newReleaseMovie.map((movie) => (
+          <MovieCardPortrait
+            key={movie.title}
+            id={movie.id}
+            image={movie.image}
+            banner={movie.banner}
+            type={movie.type}
+            title={movie.title}
+            rating={movie.rating}
+            progress={movie.progress}
+            duration={movie.duration}
+            genre1={movie.genre1}
+            genre2={movie.genre2}
+            genre3={movie.genre3}
+            year={movie.year}
+            totalepisode={movie.totalepisode}
+            episode={movie.episode}
+            fullage={movie.fullage}
+            age={movie.age}
+            description={movie.description}
+            cast={movie.cast}
+            pembuatfilm={movie.pembuatfilm}
+            top={movie.top}
+            new={movie.new}
+            premium={movie.premium}
+          />
+        ))}
       </MovieRow>
     </section>
   );
