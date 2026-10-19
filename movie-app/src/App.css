@@ -456,6 +456,32 @@ body {
       transparent
   );
 }
+
+/* Watchlist Kosong */
+.empty-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 200px;
+  padding: 24px;
+  color: #bdbdbd;
+}
+
+.empty-list p {
+  margin: 0 0 10px;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.empty-list span {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Delete Action */
 .delete-card {
   position: absolute;
   top: 10px;

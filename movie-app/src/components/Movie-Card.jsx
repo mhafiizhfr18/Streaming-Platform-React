@@ -40,7 +40,9 @@ export function MovieCardLandscape(props) {
         <span>★ {props.rating}/5</span>
       </div>
 
-      <CardHover {...props} movieImage={movieImage} />
+      <CardHover {...props} movieImage={movieImage} showAge={false}
+      showEpisode={false}
+      />
     </div>
   );
 }
@@ -95,11 +97,15 @@ export function MovieCardPortrait(props) {
           )}
         </div>
       </div>
-      <CardHover {...props} movieImage={movieImage} />
+      <CardHover {...props} movieImage={movieImage} showAge={true}
+      showEpisode={true} />
     </div>
   );
 }
 function CardHover(props) {
+  const showAge = props.showAge !== false;
+  const showEpisode = props.showEpisode !== false;
+
   const dispatch = useDispatch();
 
   const myList = useSelector((state) => state.list.myList);
@@ -151,10 +157,8 @@ function CardHover(props) {
 
       {(props.age !== undefined || props.episode !== undefined) && (
         <div className="hover-info">
-          {props.age !== undefined && (
-            <span className="hover-age">{props.age}</span>
-          )}
-          {props.episode !== undefined && <span>{props.episode}</span>}
+          {showAge && <span>{props.age}</span>}
+          {showEpisode && <span>{props.episode}</span>}
         </div>
       )}
 

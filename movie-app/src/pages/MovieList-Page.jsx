@@ -33,18 +33,27 @@ export function MovieMyList() {
           </button>{" "}
         </div>
         <div className="movie-list">
-          <div className="movie-card">
-            {myList.map((movie) => (
-              <MovieCardPortrait
-                key={movie.title}
-                {...movie}
-                onDelete={() => handleDelete(movie.title)}
-              />
-            ))}
-          </div>
+          {myList.length > 0 ? (
+            <div className="movie-card">
+              {myList.map((movie) => (
+                <MovieCardPortrait
+                  key={movie.title}
+                  {...movie}
+                  onDelete={() => handleDelete(movie.title)}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="empty-list">
+              <p>Belum ada movie/series favorit.</p>
+              <span>
+                Tambahkan film atau series favoritmu dengan menekan ikon +
+              </span>
+            </div>
+          )}
         </div>
       </section>
-      
+
       {showConfirm && (
         <div className="confirm-overlay" onClick={() => setShowConfirm(false)}>
           <div
