@@ -86,7 +86,7 @@
     flex-direction: column;
     justify-content: flex-end;
     text-align: center;
-    margin-top: autos;
+    margin-top: auto;
     width: 100%;
     gap: 4px;
     border-top: 1px solid grey;
@@ -95,12 +95,14 @@
 .subscribe-button button{
     padding: 10px 24px;
     border-radius: 24px;
-    border: none;
+    border: 1px solid #3e65f1;
     color: #294196;
     font-size: 14px;
+    background-color: white;
+    transition: background-color 0.2s;
 }
 .subscribe-button button:hover{
-    background-color: #294196;
+    background-color: #3e65f1;
     color: white;
     cursor: pointer;
 }
