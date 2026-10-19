@@ -1,24 +1,12 @@
-import "../App.css"
-import VolumeOff from "../assets/Icon/volume_off.svg";
+import "../App.css";
 import { imagesBanner } from "../components/Images.jsx";
 import { NavLink } from "react-router";
 
-
-function MovieBanner({ 
-  banner,
-  image,
-  title,
-  description,
-  showGenre
-}) {
-  
+function MovieBanner({ banner, image, title, description, showGenre }) {
   const bannerImage = image || imagesBanner[banner];
 
   return (
-    <div
-      className="hero"
-      style={{ backgroundImage: `url(${bannerImage})` }}
-    >
+    <div className="hero" style={{ backgroundImage: `url(${bannerImage})` }}>
       {showGenre && <BannerHover />}
 
       <div className="hero-content">
@@ -32,15 +20,15 @@ function MovieBanner({
           </div>
         </div>
         <div className="hero-right">
-          <button className="btn-third">
-            <img src={VolumeOff} alt="Volume Off"></img>
+          <button className="material-symbols-outlined volume-off">
+            volume_off
           </button>
         </div>
       </div>
     </div>
   );
 }
-export default MovieBanner
+export default MovieBanner;
 
 export function BannerHover() {
   return (

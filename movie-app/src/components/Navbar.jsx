@@ -60,7 +60,7 @@ function Navbar() {
             <img className="logo-mobile" src={Logo2} alt="CHILL"></img>
           </NavLink>
 
-          <ul className="nav-menu">
+          <ul className="nav-menu active">
             <li>
               <NavLink to="/series">Series</NavLink>
             </li>

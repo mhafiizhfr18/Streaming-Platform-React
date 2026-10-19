@@ -1,4 +1,6 @@
 import "../App.css";
+import "../css/Responsive-Mobile.css"
+import "../css/Responsive-Mid.css"
 import { useSelector } from "react-redux";
 
 import React, { useRef, useState } from "react";

@@ -4,6 +4,7 @@ const initialState = {
     data: [],
     loading: false,
     error: null,
+    myList: [],
 };
 
 const listSlice = createSlice({
@@ -19,9 +20,25 @@ const listSlice = createSlice({
         setError: (state, action) => {
             state.error = action.payload;
         },
+        addToMyList: (state, action) => {
+            const movie = action.payload;
+
+            const alreadyExists = state.myList.some(
+                (item) => item.title === movie.title,
+            );
+
+            if (!alreadyExists) {
+                state.myList.push(movie);
+            }
+        },
+        removeFromMyList: (state, action) => {
+            state.myList = state.myList.filter(
+                (movie) => movie.title !== action.payload,
+            );
+        },
     },
 });
 
-export const { setData, setLoading, setError } = listSlice.actions;
+export const { setData, setLoading, setError, addToMyList, removeFromMyList, } = listSlice.actions;
 
 export default listSlice.reducer;

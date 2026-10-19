@@ -1,8 +1,8 @@
 import "../App.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addToMyList, removeFromMyList } from "../store/redux/listSlice.js";
 
 import { imagesBanner, imagesCard } from "../components/Images.jsx";
-import VolumeOff from "../assets/Icon/volume_off.svg";
 
 export function MovieCardLandscape(props) {
   const movieImage = props.banner
@@ -40,18 +40,7 @@ export function MovieCardLandscape(props) {
         <span>★ {props.rating}/5</span>
       </div>
 
-      <CardHover
-        folder={props.folder}
-        id={props.id}
-        type={props.type}
-        age={props.age}
-        progress={props.progress}
-        duration={props.duration}
-        episode={props.episode}
-        genre1={props.genre1}
-        genre2={props.genre2}
-        genre3={props.genre3}
-      />
+      <CardHover {...props} movieImage={movieImage} />
     </div>
   );
 }
@@ -65,6 +54,20 @@ export function MovieCardPortrait(props) {
   return (
     <div className="movie-card--portrait" onClick={props.onClick}>
       <img src={movieImage} alt={props.title || "Poster film"} />
+
+      {props.onDelete && (
+        <button
+          className="material-symbols-outlined delete-card"
+          type="button"
+          title={`Hapus ${props.title} dari Daftar Saya`}
+          onClick={(event) => {
+            event.stopPropagation();
+            props.onDelete();
+          }}
+        >
+          delete
+        </button>
+      )}
       <div className="movie-label">
         <div>
           {props.premium !== undefined && (
@@ -92,30 +95,50 @@ export function MovieCardPortrait(props) {
           )}
         </div>
       </div>
-      <CardHover
-        folder={props.folder}
-        id={props.id}
-        type={props.type}
-        age={props.age}
-        progress={props.progress}
-        duration={props.duration}
-        episode={props.episode}
-        genre1={props.genre1}
-        genre2={props.genre2}
-        genre3={props.genre3}
-      />
+      <CardHover {...props} movieImage={movieImage} />
     </div>
   );
 }
 function CardHover(props) {
+  const dispatch = useDispatch();
+
+  const myList = useSelector((state) => state.list.myList);
+
+  const isAdded = myList.some((movie) => movie.title === props.title);
+
+  const handleAddToMyList = (event) => {
+    event.stopPropagation();
+
+    if (isAdded) {
+      dispatch(removeFromMyList(props.title));
+      return;
+    }
+
+    dispatch(
+      addToMyList({
+        ...props,
+        image: props.image || props.movieImage,
+      }),
+    );
+  };
+
   return (
     <div className="movie-hover">
       <div className="hover-buttons">
         <div className="hover-buttons-left">
           <button className="material-symbols-outlined play">play_arrow</button>
-          <button className="material-symbols-outlined">add</button>
+          <button
+            className="material-symbols-outlined add"
+            onClick={handleAddToMyList}
+            type="button"
+            title={
+              isAdded ? "Hapus dari Daftar Saya" : "Tambahkan ke Daftar Saya"
+            }
+          >
+            {isAdded ? "check" : "add"}
+          </button>
         </div>
-        <button className="material-symbols-outlined">
+        <button className="material-symbols-outlined toggle">
           keyboard_arrow_down
         </button>
       </div>
@@ -157,6 +180,7 @@ function CardHover(props) {
 export function MoviePopUp({
   folder,
   id,
+  image,
   banner,
   type,
   title,
@@ -178,6 +202,40 @@ export function MoviePopUp({
       ? imagesBanner[`${id}.png`]
       : imagesCard[`${id}.png`]);
 
+  const dispatch = useDispatch();
+
+  const myList = useSelector((state) => state.list.myList);
+
+  const isAdded = myList.some((movie) => movie.title === title);
+
+  const handleAddToMyList = (event) => {
+    event.stopPropagation();
+
+    if (isAdded) {
+      dispatch(removeFromMyList(title));
+      return;
+    }
+    dispatch(
+      addToMyList({
+        folder,
+        id,
+        image,
+        banner,
+        type,
+        title,
+        description,
+        year,
+        totalepisode,
+        fullage,
+        cast,
+        genre1,
+        genre2,
+        genre3,
+        pembuatfilm,
+      }),
+    );
+  };
+
   return (
     <div className={`popup-overlay ${isClosing ? "closing" : ""}`}>
       {" "}
@@ -194,15 +252,24 @@ export function MoviePopUp({
               <h1>{title}</h1>
               <div className="hero-button">
                 <button className="btn-primary">Mulai</button>
-                <button className="btn-third material-symbols-outlined">
-                  Add
+                <button
+                  className="material-symbols-outlined add"
+                  onClick={handleAddToMyList}
+                  type="button"
+                  title={
+                    isAdded
+                      ? "Hapus dari Daftar Saya"
+                      : "Tambahkan ke Daftar Saya"
+                  }
+                >
+                  {isAdded ? "check" : "add"}
                 </button>
               </div>
             </div>
 
             <div className="hero-right">
-              <button className="btn-third">
-                <img src={VolumeOff} alt="Volume Off"></img>
+              <button className="material-symbols-outlined volume-off">
+                volume_off
               </button>
             </div>
           </div>
@@ -298,7 +365,6 @@ function RecommendationList({ currentTitle, genre1, genre2, genre3 }) {
             totalepisode={movie.totalepisode}
             episode={movie.episode}
             fullage={movie.fullage}
-            age={movie.age}
             description={movie.description}
             cast={movie.cast}
             pembuatfilm={movie.pembuatfilm}

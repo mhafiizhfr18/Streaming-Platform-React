@@ -115,15 +115,15 @@
         grid-template-columns: 1fr;
         gap: 20px;
         padding: 20px;
+    }
     .subscribe-button span{
         font-size: 10px;
     }
     .benefits-info{
         min-height: 0;
+    }
 }
-}
-}
-@media (max-width: 768px) {
+@media (min-width: 441px) {
     .subscribe-desc{
         display: grid;
         grid-template-columns: repeat(3, 1fr);
