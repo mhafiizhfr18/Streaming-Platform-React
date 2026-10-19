@@ -1,6 +1,6 @@
 import "../App.css";
-import "../css/Responsive-Mobile.css"
-import "../css/Responsive-Mid.css"
+import "../css/Responsive-Mobile.css";
+import "../css/Responsive-Mid.css";
 import { useSelector } from "react-redux";
 
 import React, { useRef, useState } from "react";
@@ -12,12 +12,15 @@ import Footer from "../components/Footer.jsx";
 
 function HomePage() {
   const movies = useSelector((state) => state.list.data);
-  const featuredMovie = movies.find(
-    (movie) => movie.title === "Avatar: The Way of Water",
-  );
+
+  const featuredMovie = Array.isArray(movies)
+    ? movies.find((movie) => movie.title === "Avatar: The Way of Water")
+    : undefined;
 
   console.log("Movies:", movies);
+  console.log("Is movies an array?", Array.isArray(movies));
   console.log("Featured movie:", featuredMovie);
+
   return (
     <>
       <Navbar />
@@ -25,7 +28,7 @@ function HomePage() {
       {featuredMovie && (
         <MovieBanner
           image={featuredMovie.banner}
-          title="Avatar: The Way of Water"
+          title={featuredMovie.title}
           description={featuredMovie.description}
         />
       )}
@@ -114,7 +117,7 @@ export function MovieContinue() {
   const movies = useSelector((state) => state.list.data);
 
   const continueMovies = movies.filter(
-    (movie) => (movie.progress > 0) && (movie.type === "film"),
+    (movie) => movie.progress > 0 && movie.type === "film",
   );
 
   return (

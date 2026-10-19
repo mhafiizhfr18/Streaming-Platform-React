@@ -114,10 +114,16 @@ function CardHover(props) {
       return;
     }
 
+    const movieData = { ...props };
+
+    delete movieData.onClick;
+    delete movieData.onDelete;
+    delete movieData.movieImage;
+
     dispatch(
       addToMyList({
-        ...props,
-        image: props.image || props.movieImage,
+        ...movieData,
+        image: props.image || movieImage,
       }),
     );
   };
