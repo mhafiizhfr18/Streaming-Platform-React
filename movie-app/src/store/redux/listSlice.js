@@ -1,10 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const getInitialMyList = () => {
+    try {
+        const savedList = localStorage.getItem("myList");
+
+        return savedList ? JSON.parse(savedList) : [];
+    } catch (error) {
+        console.error("Gagal membaca My List dari localStorage:", error);
+        return [];
+    }
+};
+
 const initialState = {
     data: [],
     loading: false,
     error: null,
-    myList: [],
+    myList: getInitialMyList(),
 };
 
 const listSlice = createSlice({
